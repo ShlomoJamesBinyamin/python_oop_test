@@ -1,10 +1,8 @@
 from iquerry import IQuerry
-from logger import log
 import sqlite3
 
-class InsertQuery(IQuerry):
-    def __init__(self, db_name):
-        super().__init__(db_name)
+
+class CreateQuery(IQuerry):
 
     def create_connection(self):
         self.conn = sqlite3.connect(self.db_name)
@@ -15,9 +13,9 @@ class InsertQuery(IQuerry):
         print("cursor established")
 
     def commit(self, query):
-        self.rows= self.cursor.execute(query)
+        self.cursor.execute(query)
         self.conn.commit()
-        print(f"query {query} executed.")
+        print(f"Query {query} executed successfully")
 
     def fetch_results(self):
         pass

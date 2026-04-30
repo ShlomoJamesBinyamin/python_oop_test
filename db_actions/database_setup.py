@@ -1,8 +1,7 @@
-import sqlite3
 from insert_query import InsertQuery
 from select_query import SelectQuery
 from create_query import CreateQuery
-from logger import log
+from log_files.logger import log
 
 
 def table_customers_create():
@@ -138,5 +137,5 @@ def select_order():
 # select_customer()
 # insert_item()
 # select_item()
-insert_order()
-select_order()
+# insert_order()
+# select_order()

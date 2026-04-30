@@ -1,4 +1,5 @@
-from logger import log
+from classes.class_IGift import IGift
+from log_files.logger import log
 class Customers:
 
     def __init__(self,first_name, last_name, email, delivery_address, account_type, discount, favorite_items, gift):
@@ -11,10 +12,22 @@ class Customers:
         self.discount = discount
         self.favorite_items = favorite_items
         self.gifted = gift
+        self.saved_payment = None
 
     def __str__(self):
         return (f"────> Customer Details:\n   id:{self.id}\n   name: {self.first_name} {self.last_name}\n   email: {self.email}\n   address: {self.delivery_address}"
-                f"\n   {self.account_type} ({self.discount})\n   gifts: {self.favorite_items}\n   favorite list: {self.favorite_items}")
+                f"\n   {self.account_type} ({self.discount})\n   gifts: {self.gifted}\n   favorite list: {self.favorite_items}")
+
+    def get_gift(self, gift:IGift):
+        self.gifted = gift
+        print(f"Hey {self.first_name}! You got a new gift! ")
+
+    def open_gift(self):
+        if self.gifted is None:
+            print("Sorry, you don't have any gifts")
+            return
+        self.gifted.open_gift()
+        self.gifted = None
 
     @property
     def id(self):
@@ -86,7 +99,14 @@ class Customers:
     @gifted.setter
     def gifted(self,x):
         self.__gifted = x
+        log.info(f"customer gifted set {x}")
 
-
+    @property
+    def saved_payment(self):
+        return self.__saved_payment
+    @saved_payment.setter
+    def saved_payment(self,x):
+        self.__saved_payment = x
+        log.info(f"customer saved payment: {x}")
 
 

@@ -10,6 +10,6 @@ def handler(filename, level):
     handler.setFormatter(logging.Formatter(format))
     return handler
 
-log.addHandler(handler('app.logfile',logging.INFO))
-log.addHandler(handler('app.errorfile',logging.ERROR))
+log.addHandler(handler('app.logfile', logging.INFO))
+log.addHandler(handler('app.errorfile', logging.ERROR))
 # log.error('===============start of log stream')

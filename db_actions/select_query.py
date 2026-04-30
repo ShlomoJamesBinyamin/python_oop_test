@@ -1,26 +1,28 @@
 import sqlite3
 from iquerry import IQuerry
+from log_files.logger import log
 
 class SelectQuery(IQuerry):
 
     def create_connection(self):
         self.conn = sqlite3.connect(self.db_name)
-        print(f"connection specified.")
+        log.info(f"connection specified.")
 
     def connect(self):
         self.cursor = self.conn.cursor()
-        print(f"connection cursor applied.")
+        log.info(f"connection cursor applied.")
 
     def commit(self, query):
-        print(f"running query...")
+        log.info(f"running query...")
         self.rows= self.cursor.execute(query)
 
     def fetch_results(self):
-        print("\nresults:")
+        log.info("\nresults:")
         self.results = []
         for row in self.rows:
             self.results.append(row)
             print(row)
+        return self.results if self.results else None
 
     def close_connection(self):
         self.cursor.close()

@@ -1,8 +1,8 @@
 class Items():
-    def __init__(self):
-        self.__id =''
-        self.__name = ''
-        self.__price = ''
+    def __init__(self, name, price):
+        self.__id = None
+        self.__name = name
+        self.__price = price
 
     def __str__(self):
         return f"────> item details:\n   id: {self.__id}\n   name: {self.__name}\n   price: {self.__price}"

@@ -20,21 +20,21 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
-  "lastFilter": {
-    "state": "OPEN",
-    "assignee": "ShlomoJamesBinyamin"
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;ShlomoJamesBinyamin&quot;
   }
-}]]></component>
-  <component name="GithubPullRequestsUISettings"><![CDATA[{
-  "selectedUrlAndAccountId": {
-    "url": "https://github.com/ShlomoJamesBinyamin/python_oop_test.git",
-    "accountId": "42ad49b8-d1f8-4cf6-ae87-3d2ae22d4a12"
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/ShlomoJamesBinyamin/python_oop_test.git&quot;,
+    &quot;accountId&quot;: &quot;42ad49b8-d1f8-4cf6-ae87-3d2ae22d4a12&quot;
   }
-}]]></component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 7
-}]]></component>
+}</component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 7
+}</component>
   <component name="ProjectId" id="3CtRrChVbBpycvQfDLMBcCMtfJA" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -55,10 +55,23 @@
     "com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1": "true",
     "git-widget-placeholder": "main",
     "junie.onboarding.icon.badge.shown": "true",
+    "last_opened_file_path": "C:/Users/shlom/PycharmProjects/oop_project",
     "run.code.analysis.last.selected.profile": "pProject Default",
     "to.speed.mode.migration.done": "true"
   }
 }]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\shlom\PycharmProjects\oop_project" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\shlom\PycharmProjects\oop_project\main_functions" />
+      <recent name="C:\Users\shlom\PycharmProjects\oop_project\db_actions" />
+      <recent name="C:\Users\shlom\PycharmProjects\oop_project" />
+      <recent name="C:\Users\shlom\PycharmProjects\oop_project\db_files" />
+      <recent name="C:\Users\shlom\PycharmProjects\oop_project\log_files" />
+    </key>
+  </component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>

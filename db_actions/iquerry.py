@@ -1,5 +1,5 @@
 from abc import ABC, abstractmethod
-from logger import log
+from log_files.logger import log
 
 class IQuerry(ABC):
     def __init__(self, db_name):
