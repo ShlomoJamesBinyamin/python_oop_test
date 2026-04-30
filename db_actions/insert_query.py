@@ -1,5 +1,6 @@
 from iquerry import IQuerry
 import sqlite3
+from log_files.logger import log
 
 class InsertQuery(IQuerry):
     def __init__(self, db_name):
@@ -7,16 +8,16 @@ class InsertQuery(IQuerry):
 
     def create_connection(self):
         self.conn = sqlite3.connect(self.db_name)
-        print("connection established")
+        log.info("connection established")
 
     def connect(self):
         self.cursor = self.conn.cursor()
-        print("cursor established")
+        log.info("cursor established")
 
-    def commit(self, query):
-        self.rows= self.cursor.execute(query)
+    def commit(self, query, params=None):
+        self.rows= self.cursor.execute(query, params)
         self.conn.commit()
-        print(f"query {query} executed.")
+        log.info(f"running insert query...")
 
     def fetch_results(self):
         pass
@@ -24,4 +25,4 @@ class InsertQuery(IQuerry):
     def close_connection(self):
         self.cursor.close()
         self.conn.close()
-        print("connection closed")
+        log.info("connection closed")

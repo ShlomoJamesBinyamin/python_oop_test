@@ -12,9 +12,9 @@ class SelectQuery(IQuerry):
         self.cursor = self.conn.cursor()
         log.info(f"connection cursor applied.")
 
-    def commit(self, query):
-        log.info(f"running query...")
-        self.rows= self.cursor.execute(query)
+    def commit(self, query, params=None):
+        log.info(f"running select query...")
+        self.rows= self.cursor.execute(query, params)
 
     def fetch_results(self):
         log.info("\nresults:")

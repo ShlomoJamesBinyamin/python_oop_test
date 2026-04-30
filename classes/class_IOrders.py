@@ -9,10 +9,8 @@ class IOrders(ABC):
         self.delivery_address = delivery_address
         self.items = []
         self.customer = customer
-        self.total_price = 0
         self.payment_method = payment_method
         self.date = dt.datetime.now().strftime('%Y|%m|%d %I:%M:%S %p')
-        self.items_to_favorite()
 
 
     def __str__(self):
@@ -24,13 +22,14 @@ class IOrders(ABC):
 
     def add_item(self, item):
         self.items.append(item)
+        self.items_to_favorite()
 
     def items_to_favorite(self):
         existing_items = [item.name for item in self.customer.favorite_items]
         for item in self.items:
             if item.name not in existing_items:
                 self.customer.favorite_items.append(item)
-        log.info(f"{len(self.customer.favorite_items) - len(existing_items)} Items Added To {self.customer.name} Fav List ")
+        log.info(f"{len(self.customer.favorite_items) - len(existing_items)} Items Added To {self.customer.first_name} {self.customer.last_name} Fav List ")
 
     @property
     def id(self):
@@ -74,7 +73,7 @@ class IOrders(ABC):
 
     @payment_method.setter
     def payment_method(self, x: str):
-        self.__payment_method = (x if x == 'cash' else x if x == 'bitcoin' else x if x == 'check' else "None")
+        self.__payment_method = (x if x == 'cash' else x if x == 'card' else x if x == 'check' else "None")
         pass
 
     @property
@@ -82,7 +81,7 @@ class IOrders(ABC):
         return self.__date
 
     @date.setter
-    def date(self, ):
+    def date(self,x ):
         self.__date = dt.datetime.now().strftime('%Y|%m|%d %I:%M:%S %p')
         pass
 
@@ -98,8 +97,3 @@ class IOrders(ABC):
     @property
     def total_price(self):
         return self.calc_total_price()
-
-    @total_price.setter
-    def total_price(self, x):
-        self.__total_price = x
-        pass

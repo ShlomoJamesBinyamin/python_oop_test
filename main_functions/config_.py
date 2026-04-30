@@ -21,14 +21,14 @@ def new_config(user):
         'saved_payments': f'{user.saved_payment}' if user.saved_payment else None,
         'saved_gift': f'{user.gifted}' if user.gifted else None
     }
-    print(f"\n————————| New Saved User {user.name} {user.last_name}")
+    print(f"\n————————| New Saved User {user.first_name} {user.last_name}")
     with io.open('preferences.ini', 'w', encoding='utf-8') as configfile: config.write(configfile)
 
 
 def get_saved_user_info():
     try:
         config.read('preferences.ini')
-        first_name   : str = config["user_information"]["saved_name"]
+        first_name   : str = config["user_information"]["saved_first_name"]
         last_name : str = config["user_information"]["saved_last_name"]
         email  : str = config["user_information"]["saved_email"]
         fav_list : str = config["user_information"]["saved_fav_list"]

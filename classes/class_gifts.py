@@ -9,8 +9,8 @@ class ToyGift(IGift):
 
     def __str__(self):
         if self.message:
-            return f"Gift Includes: {self.item.name}\n And A Message: {self.message}"
-        return f"Gift Includes: {self.item.name}"
+            return f"Gift Includes: {self.item}\n And A Message: {self.message}"
+        return f"Gift Includes: {self.item}"
 
     def open_gift(self):
         print("Congratulations! you got a new gift! Enjoy!")

@@ -7,14 +7,14 @@ def check_name(input_str: str) -> bool:
     """
     input_str = input_str.strip()
     return 2 <= len(input_str) <= 12 and \
-            [not char.isdigit() or not char == '_' or not char.isspace() for char in input_str]
+            all( char.isalpha() or char == "-'" or not char.isspace() for char in input_str)
 # ——————————————————————————————————Address—————————————————————————————————————————
 def check_address(address:str) -> bool:
     """
     checks the address context.
     """
     return 8 <= len(address) <= 30 and \
-        not all(char.isdigit() or char.isspace for char in address)
+        not all(char.isdigit() or char.isspace() for char in address)
 
 # ———————————————————————————————————Email———————————————————————————————————————————
 def check_email(email: str) -> bool:

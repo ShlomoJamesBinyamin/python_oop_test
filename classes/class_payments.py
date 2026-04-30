@@ -46,14 +46,16 @@ def check_card_number(card):
     """
     this to validate the card details for real interfaces
     """
-    if len(card.card_number) == 16:
-        try:
+
+    try:
+        if len(card.card_number) == 16:
             exp_date = datetime.strptime(card.expiration_date, "%m/%y").date()
             if exp_date > datetime.today().date():
-                return True
-        except ValueError:
-            log.error("Payment Denied: Invalid Card Date")
-            return False
+                if len(card.cvv) in (3,4):
+                    return True
+    except ValueError:
+        log.error("Payment Denied: Invalid Card Date")
+        return False
     log.error(f"Payment Denied: Invalid Card Number")
     return False
 

@@ -1,21 +1,21 @@
 from iquerry import IQuerry
 import sqlite3
-
+from log_files.logger import log
 
 class CreateQuery(IQuerry):
 
     def create_connection(self):
         self.conn = sqlite3.connect(self.db_name)
-        print("connection established")
+        log.info("connection established")
 
     def connect(self):
         self.cursor = self.conn.cursor()
-        print("cursor established")
+        log.info("cursor established")
 
-    def commit(self, query):
-        self.cursor.execute(query)
+    def commit(self, query, params=None):
+        self.cursor.execute(query , params)
         self.conn.commit()
-        print(f"Query {query} executed successfully")
+        log.info(f"running create query...")
 
     def fetch_results(self):
         pass
@@ -23,4 +23,4 @@ class CreateQuery(IQuerry):
     def close_connection(self):
         self.cursor.close()
         self.conn.close()
-        print("connection closed")
+        log.info("connection closed")
