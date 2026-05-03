@@ -1,7 +1,8 @@
 from datetime import datetime
-from typing import override, reveal_type
-from class_IPayment import IPayment
-from log_files.logger import log
+from typing import override
+from classes.class_IPayment import IPayment
+from log_files.logger import log, failure, notify
+
 
 class CASH(IPayment):
 
@@ -38,19 +39,42 @@ class CHECK(IPayment):
         else: raise ValueError("Invalid Check")
 
 
+# class_payments.py — add:
+class OTHER(IPayment):
+    def __init__(self, description: str):
+        self.description = description
+
+    def pay(self, amount: float):
+        print(f"Paid: {amount:.2f} Via {self.description}")
+        log.info(f"{amount:.2f} BY OTHER: {self.description}")
+
+
+
+
+
+
 def check_card_number(card):
     """this to validate the card details for real interfaces"""
     try:
-        if len(card.card_number) == 16:
-            exp_date = datetime.strptime(card.expiration_date, "%m/%y").date()
-            if exp_date > datetime.today().date():
-                if len(card.cvv) in (3,4):
-                    return True
+        if not len(card.card_number.strip()) == 16:
+            print(f"{card.card_number} is not valid")
+            log.error(f"{card.card_number} is not valid")
+            return False
+        exp_date = datetime.strptime(card.expiration_date, "%m/%y").date()
+        if not exp_date > datetime.today().date():
+            print(f"{exp_date} is not valid")
+            log.error(f"{exp_date} is not valid")
+            return False
+        if not len(card.cvv) in (3, 4):
+            print(f"{card.cvv} is not valid")
+            log.error(f"{card.cvv} is not valid")
+            return False
     except ValueError:
-        log.error("PAYMENT DENIED: INVALID EXPIRATION DATE")
+        log.error("PAYMENT DENIED: INVALID CARD DETAILS")
+        print(f"{notify} Card Details Not Valid")
         return False
-    log.error(f"PAYMENT DENIED: INVALID CARD NUMBER")
-    return False
+    return True
+
 
 def check_check(check):
     """this to verify the check details for real interface"""

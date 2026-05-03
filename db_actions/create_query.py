@@ -1,11 +1,12 @@
-from iquerry import IQuerry
+from db_actions.iquery import IQuery
 import sqlite3
 from log_files.logger import log
 
-class CreateQuery(IQuerry):
+class CreateQuery(IQuery):
 
     def create_connection(self):
         self.conn = sqlite3.connect(self.db_name)
+        self.conn.execute("PRAGMA foreign_keys = ON")
         log.info("CONNECTION ESTABLISHED")
 
     def connect(self):
@@ -13,7 +14,7 @@ class CreateQuery(IQuerry):
         log.info("CURSOR APPLIED")
 
     def commit(self, query, params=None):
-        self.cursor.execute(query , params)
+        self.cursor.execute(query , params or ())
         self.conn.commit()
         log.info(f"RAN QUERY")
 

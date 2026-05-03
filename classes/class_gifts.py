@@ -1,6 +1,6 @@
-from class_IGift import IGift
-from class_items import Items
-from log_files.logger import log, line,arrow,notify,success,failure
+from classes.class_IGift import IGift
+from classes.class_items import Items
+from log_files.logger import arrow
 
 class ToyGift(IGift):
     def __init__(self, item:Items, message):

@@ -1,0 +1,1935 @@
+2026-05-03 20:00:18,005 | (INFO)->| SOFTWARE START |
+2026-05-03 20:00:18,006 | (INFO)->| CONNECTION ESTABLISHED |
+2026-05-03 20:00:18,006 | (INFO)->| CURSOR APPLIED |
+2026-05-03 20:00:18,006 | (INFO)->| RAN QUERY |
+2026-05-03 20:00:18,006 | (INFO)->| CONNECTION CLOSED |
+2026-05-03 20:00:18,006 | (INFO)->| QUERY: 
+
+        CREATE TABLE IF NOT EXISTS items (
+            id          INTEGER PRIMARY KEY AUTOINCREMENT,
+            name        TEXT    NOT NULL,
+            price       REAL    NOT NULL        
+        );
+    
+ RAN SUCCESSFULLY |
+2026-05-03 20:00:18,006 | (INFO)->| TABLE items CREATED |
+2026-05-03 20:00:18,006 | (INFO)->| CONNECTION ESTABLISHED |
+2026-05-03 20:00:18,006 | (INFO)->| CURSOR APPLIED |
+2026-05-03 20:00:18,007 | (INFO)->| RAN QUERY |
+2026-05-03 20:00:18,007 | (INFO)->| CONNECTION CLOSED |
+2026-05-03 20:00:18,007 | (INFO)->| QUERY: 
+
+        CREATE TABLE IF NOT EXISTS customers (
+            id                  INTEGER PRIMARY KEY AUTOINCREMENT,
+            first_name          TEXT    NOT NULL,
+            last_name           TEXT    NOT NULL,
+            email               TEXT    NOT NULL UNIQUE,
+            delivery_address    TEXT    NOT NULL,
+            account_type        TEXT    NOT NULL DEFAULT 'reg',
+            discount            REAL             DEFAULT 0,
+            gifted              TEXT             DEFAULT '[]'  
+        );
+    
+ RAN SUCCESSFULLY |
+2026-05-03 20:00:18,007 | (INFO)->| TABLE customers CREATED |
+2026-05-03 20:00:18,008 | (INFO)->| CONNECTION ESTABLISHED |
+2026-05-03 20:00:18,008 | (INFO)->| CURSOR APPLIED |
+2026-05-03 20:00:18,008 | (INFO)->| RAN QUERY |
+2026-05-03 20:00:18,008 | (INFO)->| CONNECTION CLOSED |
+2026-05-03 20:00:18,008 | (INFO)->| QUERY: 
+
+        CREATE TABLE IF NOT EXISTS orders (
+            id                  INTEGER PRIMARY KEY AUTOINCREMENT,
+            name                TEXT    NOT NULL,
+            delivery_address    TEXT    NOT NULL,
+            items               TEXT    NOT NULL DEFAULT '[]',
+            customer_id         INTEGER NOT NULL,
+            total_price         REAL    NOT NULL,
+            payment_method      TEXT    NOT NULL,
+            date                TEXT    NOT NULL,
+            order_type          TEXT    NOT NULL DEFAULT 'reg',
+            FOREIGN KEY (customer_id) REFERENCES customers(id)
+        );
+    
+ RAN SUCCESSFULLY |
+2026-05-03 20:00:18,008 | (INFO)->| TABLE orders CREATED |
+2026-05-03 20:00:18,008 | (INFO)->| CONNECTION ESTABLISHED |
+2026-05-03 20:00:18,008 | (INFO)->| CURSOR APPLIED |
+2026-05-03 20:00:18,008 | (INFO)->| RAN QUERY |
+2026-05-03 20:00:18,008 | (INFO)->| CONNECTION CLOSED |
+2026-05-03 20:00:18,008 | (INFO)->| QUERY: 
+
+        CREATE TABLE IF NOT EXISTS customer_favorites (
+            id          INTEGER PRIMARY KEY AUTOINCREMENT,
+            customer_id INTEGER NOT NULL,
+            item_id     INTEGER NOT NULL,
+            UNIQUE(customer_id, item_id),           -- no duplicates
+            FOREIGN KEY (customer_id) REFERENCES customers(id),
+            FOREIGN KEY (item_id)     REFERENCES items(id)
+        );
+    
+ RAN SUCCESSFULLY |
+2026-05-03 20:00:18,008 | (INFO)->| TABLE customer_favorites CREATED |
+2026-05-03 20:00:18,008 | (INFO)->| DATABASE SETUP COMPLETE |
+2026-05-03 20:00:30,629 | (INFO)->| CHECKING NAME CONTEXT FOR shlomo |
+2026-05-03 20:00:30,630 | (INFO)->| CHECKING NAME CONTEXT FOR binyamin |
+2026-05-03 20:00:30,630 | (INFO)->| CHECKING NAME CONTEXT FOR shlomo |
+2026-05-03 20:00:30,630 | (INFO)->| CHECKING NAME CONTEXT FOR binyamin |
+2026-05-03 20:00:30,630 | (INFO)->| C:\Users\shlom\PycharmProjects\oop_project\db_actions\db_act.py,db_actions.db_act
+ TRYING: RETRIEVE CUSTOMER BY NAME |
+2026-05-03 20:00:30,631 | (INFO)->| CONNECTION ESTABLISHED |
+2026-05-03 20:00:30,632 | (INFO)->| APPLIED CURSOR |
+2026-05-03 20:00:30,633 | (INFO)->| RAN QUERY |
+2026-05-03 20:00:30,633 | (INFO)->| QUERY FETCHED RESULTS |
+2026-05-03 20:00:30,633 | (INFO)->| 
+CONNECTION CLOSED |
+2026-05-03 20:00:30,633 | (INFO)->| QUERY: 
+
+            SELECT * FROM customers WHERE first_name = ? AND last_name = ?
+            
+ RAN SUCCESSFULLY |
+2026-05-03 20:00:30,633 | (ERROR)->| ROW TO CUSTOMER FAILED: 'Customers' object has no attribute '_Customers__first_name' |
+2026-05-03 20:00:30,633 | (ERROR)->| FAILED TO SPECIFY USER FROM DB. NONE RETRIEVED |
+2026-05-03 20:01:37,786 | (INFO)->| SOFTWARE START |
+2026-05-03 20:01:37,787 | (INFO)->| CONNECTION ESTABLISHED |
+2026-05-03 20:01:37,787 | (INFO)->| CURSOR APPLIED |
+2026-05-03 20:01:37,787 | (INFO)->| RAN QUERY |
+2026-05-03 20:01:37,787 | (INFO)->| CONNECTION CLOSED |
+2026-05-03 20:01:37,787 | (INFO)->| QUERY: 
+
+        CREATE TABLE IF NOT EXISTS items (
+            id          INTEGER PRIMARY KEY AUTOINCREMENT,
+            name        TEXT    NOT NULL,
+            price       REAL    NOT NULL        
+        );
+    
+ RAN SUCCESSFULLY |
+2026-05-03 20:01:37,787 | (INFO)->| TABLE items CREATED |
+2026-05-03 20:01:37,788 | (INFO)->| CONNECTION ESTABLISHED |
+2026-05-03 20:01:37,788 | (INFO)->| CURSOR APPLIED |
+2026-05-03 20:01:37,788 | (INFO)->| RAN QUERY |
+2026-05-03 20:01:37,788 | (INFO)->| CONNECTION CLOSED |
+2026-05-03 20:01:37,788 | (INFO)->| QUERY: 
+
+        CREATE TABLE IF NOT EXISTS customers (
+            id                  INTEGER PRIMARY KEY AUTOINCREMENT,
+            first_name          TEXT    NOT NULL,
+            last_name           TEXT    NOT NULL,
+            email               TEXT    NOT NULL UNIQUE,
+            delivery_address    TEXT    NOT NULL,
+            account_type        TEXT    NOT NULL DEFAULT 'reg',
+            discount            REAL             DEFAULT 0,
+            gifted              TEXT             DEFAULT '[]'  
+        );
+    
+ RAN SUCCESSFULLY |
+2026-05-03 20:01:37,788 | (INFO)->| TABLE customers CREATED |
+2026-05-03 20:01:37,789 | (INFO)->| CONNECTION ESTABLISHED |
+2026-05-03 20:01:37,789 | (INFO)->| CURSOR APPLIED |
+2026-05-03 20:01:37,790 | (INFO)->| RAN QUERY |
+2026-05-03 20:01:37,790 | (INFO)->| CONNECTION CLOSED |
+2026-05-03 20:01:37,790 | (INFO)->| QUERY: 
+
+        CREATE TABLE IF NOT EXISTS orders (
+            id                  INTEGER PRIMARY KEY AUTOINCREMENT,
+            name                TEXT    NOT NULL,
+            delivery_address    TEXT    NOT NULL,
+            items               TEXT    NOT NULL DEFAULT '[]',
+            customer_id         INTEGER NOT NULL,
+            total_price         REAL    NOT NULL,
+            payment_method      TEXT    NOT NULL,
+            date                TEXT    NOT NULL,
+            order_type          TEXT    NOT NULL DEFAULT 'reg',
+            FOREIGN KEY (customer_id) REFERENCES customers(id)
+        );
+    
+ RAN SUCCESSFULLY |
+2026-05-03 20:01:37,790 | (INFO)->| TABLE orders CREATED |
+2026-05-03 20:01:37,791 | (INFO)->| CONNECTION ESTABLISHED |
+2026-05-03 20:01:37,791 | (INFO)->| CURSOR APPLIED |
+2026-05-03 20:01:37,791 | (INFO)->| RAN QUERY |
+2026-05-03 20:01:37,791 | (INFO)->| CONNECTION CLOSED |
+2026-05-03 20:01:37,791 | (INFO)->| QUERY: 
+
+        CREATE TABLE IF NOT EXISTS customer_favorites (
+            id          INTEGER PRIMARY KEY AUTOINCREMENT,
+            customer_id INTEGER NOT NULL,
+            item_id     INTEGER NOT NULL,
+            UNIQUE(customer_id, item_id),           -- no duplicates
+            FOREIGN KEY (customer_id) REFERENCES customers(id),
+            FOREIGN KEY (item_id)     REFERENCES items(id)
+        );
+    
+ RAN SUCCESSFULLY |
+2026-05-03 20:01:37,791 | (INFO)->| TABLE customer_favorites CREATED |
+2026-05-03 20:01:37,792 | (INFO)->| DATABASE SETUP COMPLETE |
+2026-05-03 20:01:48,140 | (INFO)->| CHECKING NAME CONTEXT FOR shlomo |
+2026-05-03 20:01:48,141 | (INFO)->| CHECKING NAME CONTEXT FOR binyamin |
+2026-05-03 20:01:48,142 | (INFO)->| C:\Users\shlom\PycharmProjects\oop_project\db_actions\db_act.py,db_actions.db_act
+ TRYING: RETRIEVE CUSTOMER BY NAME |
+2026-05-03 20:01:48,144 | (INFO)->| CONNECTION ESTABLISHED |
+2026-05-03 20:01:48,144 | (INFO)->| APPLIED CURSOR |
+2026-05-03 20:01:48,144 | (INFO)->| RAN QUERY |
+2026-05-03 20:01:48,144 | (INFO)->| QUERY FETCHED RESULTS |
+2026-05-03 20:01:48,145 | (INFO)->| 
+CONNECTION CLOSED |
+2026-05-03 20:01:48,145 | (INFO)->| QUERY: 
+
+            SELECT * FROM customers WHERE first_name = ? AND last_name = ?
+            
+ RAN SUCCESSFULLY |
+2026-05-03 20:02:02,318 | (ERROR)->| ROW TO CUSTOMER FAILED: 'Customers' object has no attribute '_Customers__first_name' |
+2026-05-03 20:02:11,275 | (INFO)->| NEW CUSTOMER'S NAME: shlomo binyamin |
+2026-05-03 20:02:19,488 | (INFO)->| SOFTWARE START |
+2026-05-03 20:02:19,489 | (INFO)->| CONNECTION ESTABLISHED |
+2026-05-03 20:02:19,490 | (INFO)->| CURSOR APPLIED |
+2026-05-03 20:02:19,490 | (INFO)->| RAN QUERY |
+2026-05-03 20:02:19,490 | (INFO)->| CONNECTION CLOSED |
+2026-05-03 20:02:19,490 | (INFO)->| QUERY: 
+
+        CREATE TABLE IF NOT EXISTS items (
+            id          INTEGER PRIMARY KEY AUTOINCREMENT,
+            name        TEXT    NOT NULL,
+            price       REAL    NOT NULL        
+        );
+    
+ RAN SUCCESSFULLY |
+2026-05-03 20:02:19,490 | (INFO)->| TABLE items CREATED |
+2026-05-03 20:02:19,491 | (INFO)->| CONNECTION ESTABLISHED |
+2026-05-03 20:02:19,491 | (INFO)->| CURSOR APPLIED |
+2026-05-03 20:02:19,491 | (INFO)->| RAN QUERY |
+2026-05-03 20:02:19,492 | (INFO)->| CONNECTION CLOSED |
+2026-05-03 20:02:19,492 | (INFO)->| QUERY: 
+
+        CREATE TABLE IF NOT EXISTS customers (
+            id                  INTEGER PRIMARY KEY AUTOINCREMENT,
+            first_name          TEXT    NOT NULL,
+            last_name           TEXT    NOT NULL,
+            email               TEXT    NOT NULL UNIQUE,
+            delivery_address    TEXT    NOT NULL,
+            account_type        TEXT    NOT NULL DEFAULT 'reg',
+            discount            REAL             DEFAULT 0,
+            gifted              TEXT             DEFAULT '[]'  
+        );
+    
+ RAN SUCCESSFULLY |
+2026-05-03 20:02:19,492 | (INFO)->| TABLE customers CREATED |
+2026-05-03 20:02:19,493 | (INFO)->| CONNECTION ESTABLISHED |
+2026-05-03 20:02:19,493 | (INFO)->| CURSOR APPLIED |
+2026-05-03 20:02:19,493 | (INFO)->| RAN QUERY |
+2026-05-03 20:02:19,493 | (INFO)->| CONNECTION CLOSED |
+2026-05-03 20:02:19,493 | (INFO)->| QUERY: 
+
+        CREATE TABLE IF NOT EXISTS orders (
+            id                  INTEGER PRIMARY KEY AUTOINCREMENT,
+            name                TEXT    NOT NULL,
+            delivery_address    TEXT    NOT NULL,
+            items               TEXT    NOT NULL DEFAULT '[]',
+            customer_id         INTEGER NOT NULL,
+            total_price         REAL    NOT NULL,
+            payment_method      TEXT    NOT NULL,
+            date                TEXT    NOT NULL,
+            order_type          TEXT    NOT NULL DEFAULT 'reg',
+            FOREIGN KEY (customer_id) REFERENCES customers(id)
+        );
+    
+ RAN SUCCESSFULLY |
+2026-05-03 20:02:19,494 | (INFO)->| TABLE orders CREATED |
+2026-05-03 20:02:19,494 | (INFO)->| CONNECTION ESTABLISHED |
+2026-05-03 20:02:19,494 | (INFO)->| CURSOR APPLIED |
+2026-05-03 20:02:19,495 | (INFO)->| RAN QUERY |
+2026-05-03 20:02:19,495 | (INFO)->| CONNECTION CLOSED |
+2026-05-03 20:02:19,495 | (INFO)->| QUERY: 
+
+        CREATE TABLE IF NOT EXISTS customer_favorites (
+            id          INTEGER PRIMARY KEY AUTOINCREMENT,
+            customer_id INTEGER NOT NULL,
+            item_id     INTEGER NOT NULL,
+            UNIQUE(customer_id, item_id),           -- no duplicates
+            FOREIGN KEY (customer_id) REFERENCES customers(id),
+            FOREIGN KEY (item_id)     REFERENCES items(id)
+        );
+    
+ RAN SUCCESSFULLY |
+2026-05-03 20:02:19,495 | (INFO)->| TABLE customer_favorites CREATED |
+2026-05-03 20:02:19,495 | (INFO)->| DATABASE SETUP COMPLETE |
+2026-05-03 20:02:38,384 | (INFO)->| CHECKING NAME CONTEXT FOR shlomo |
+2026-05-03 20:02:38,384 | (INFO)->| CHECKING NAME CONTEXT FOR binyamin |
+2026-05-03 20:02:38,385 | (INFO)->| CHECKING NAME CONTEXT FOR shlomo |
+2026-05-03 20:02:38,385 | (INFO)->| CHECKING NAME CONTEXT FOR binyamin |
+2026-05-03 20:02:38,386 | (INFO)->| C:\Users\shlom\PycharmProjects\oop_project\db_actions\db_act.py,db_actions.db_act
+ TRYING: RETRIEVE CUSTOMER BY NAME |
+2026-05-03 20:02:38,387 | (INFO)->| CONNECTION ESTABLISHED |
+2026-05-03 20:02:38,387 | (INFO)->| APPLIED CURSOR |
+2026-05-03 20:02:38,387 | (INFO)->| RAN QUERY |
+2026-05-03 20:02:38,388 | (INFO)->| QUERY FETCHED RESULTS |
+2026-05-03 20:02:38,388 | (INFO)->| 
+CONNECTION CLOSED |
+2026-05-03 20:02:38,388 | (INFO)->| QUERY: 
+
+            SELECT * FROM customers WHERE first_name = ? AND last_name = ?
+            
+ RAN SUCCESSFULLY |
+2026-05-03 20:03:52,508 | (INFO)->| SOFTWARE START |
+2026-05-03 20:03:52,509 | (INFO)->| CONNECTION ESTABLISHED |
+2026-05-03 20:03:52,509 | (INFO)->| CURSOR APPLIED |
+2026-05-03 20:03:52,509 | (INFO)->| RAN QUERY |
+2026-05-03 20:03:52,509 | (INFO)->| CONNECTION CLOSED |
+2026-05-03 20:03:52,509 | (INFO)->| QUERY: 
+
+        CREATE TABLE IF NOT EXISTS items (
+            id          INTEGER PRIMARY KEY AUTOINCREMENT,
+            name        TEXT    NOT NULL,
+            price       REAL    NOT NULL        
+        );
+    
+ RAN SUCCESSFULLY |
+2026-05-03 20:03:52,509 | (INFO)->| TABLE items CREATED |
+2026-05-03 20:03:52,509 | (INFO)->| CONNECTION ESTABLISHED |
+2026-05-03 20:03:52,509 | (INFO)->| CURSOR APPLIED |
+2026-05-03 20:03:52,510 | (INFO)->| RAN QUERY |
+2026-05-03 20:03:52,510 | (INFO)->| CONNECTION CLOSED |
+2026-05-03 20:03:52,510 | (INFO)->| QUERY: 
+
+        CREATE TABLE IF NOT EXISTS customers (
+            id                  INTEGER PRIMARY KEY AUTOINCREMENT,
+            first_name          TEXT    NOT NULL,
+            last_name           TEXT    NOT NULL,
+            email               TEXT    NOT NULL UNIQUE,
+            delivery_address    TEXT    NOT NULL,
+            account_type        TEXT    NOT NULL DEFAULT 'reg',
+            discount            REAL             DEFAULT 0,
+            gifted              TEXT             DEFAULT '[]'  
+        );
+    
+ RAN SUCCESSFULLY |
+2026-05-03 20:03:52,510 | (INFO)->| TABLE customers CREATED |
+2026-05-03 20:03:52,510 | (INFO)->| CONNECTION ESTABLISHED |
+2026-05-03 20:03:52,510 | (INFO)->| CURSOR APPLIED |
+2026-05-03 20:03:52,510 | (INFO)->| RAN QUERY |
+2026-05-03 20:03:52,510 | (INFO)->| CONNECTION CLOSED |
+2026-05-03 20:03:52,510 | (INFO)->| QUERY: 
+
+        CREATE TABLE IF NOT EXISTS orders (
+            id                  INTEGER PRIMARY KEY AUTOINCREMENT,
+            name                TEXT    NOT NULL,
+            delivery_address    TEXT    NOT NULL,
+            items               TEXT    NOT NULL DEFAULT '[]',
+            customer_id         INTEGER NOT NULL,
+            total_price         REAL    NOT NULL,
+            payment_method      TEXT    NOT NULL,
+            date                TEXT    NOT NULL,
+            order_type          TEXT    NOT NULL DEFAULT 'reg',
+            FOREIGN KEY (customer_id) REFERENCES customers(id)
+        );
+    
+ RAN SUCCESSFULLY |
+2026-05-03 20:03:52,510 | (INFO)->| TABLE orders CREATED |
+2026-05-03 20:03:52,510 | (INFO)->| CONNECTION ESTABLISHED |
+2026-05-03 20:03:52,510 | (INFO)->| CURSOR APPLIED |
+2026-05-03 20:03:52,510 | (INFO)->| RAN QUERY |
+2026-05-03 20:03:52,510 | (INFO)->| CONNECTION CLOSED |
+2026-05-03 20:03:52,510 | (INFO)->| QUERY: 
+
+        CREATE TABLE IF NOT EXISTS customer_favorites (
+            id          INTEGER PRIMARY KEY AUTOINCREMENT,
+            customer_id INTEGER NOT NULL,
+            item_id     INTEGER NOT NULL,
+            UNIQUE(customer_id, item_id),           -- no duplicates
+            FOREIGN KEY (customer_id) REFERENCES customers(id),
+            FOREIGN KEY (item_id)     REFERENCES items(id)
+        );
+    
+ RAN SUCCESSFULLY |
+2026-05-03 20:03:52,510 | (INFO)->| TABLE customer_favorites CREATED |
+2026-05-03 20:03:52,510 | (INFO)->| DATABASE SETUP COMPLETE |
+2026-05-03 20:04:02,295 | (INFO)->| CHECKING NAME CONTEXT FOR shlomo |
+2026-05-03 20:04:02,296 | (INFO)->| CHECKING NAME CONTEXT FOR binyamin |
+2026-05-03 20:04:02,296 | (INFO)->| CHECKING NAME CONTEXT FOR shlomo |
+2026-05-03 20:04:02,296 | (INFO)->| CHECKING NAME CONTEXT FOR binyamin |
+2026-05-03 20:04:02,296 | (INFO)->| C:\Users\shlom\PycharmProjects\oop_project\db_actions\db_act.py,db_actions.db_act
+ TRYING: RETRIEVE CUSTOMER BY NAME |
+2026-05-03 20:04:02,297 | (INFO)->| CONNECTION ESTABLISHED |
+2026-05-03 20:04:02,297 | (INFO)->| APPLIED CURSOR |
+2026-05-03 20:04:02,297 | (INFO)->| RAN QUERY |
+2026-05-03 20:04:02,297 | (INFO)->| QUERY FETCHED RESULTS |
+2026-05-03 20:04:02,297 | (INFO)->| 
+CONNECTION CLOSED |
+2026-05-03 20:04:02,297 | (INFO)->| QUERY: 
+
+            SELECT * FROM customers WHERE first_name = ? AND last_name = ?
+            
+ RAN SUCCESSFULLY |
+2026-05-03 20:04:02,297 | (INFO)->| <bound method Customers.fullname of <classes.class_customers.Customers object at 0x00000186DC241A90>>'S ID SET TO: None |
+2026-05-03 20:04:02,297 | (INFO)->| FIRST NAME SET TO: shlomo |
+2026-05-03 20:04:02,297 | (INFO)->| LAST NAME SET TO: binyamin |
+2026-05-03 20:04:02,297 | (INFO)->| <bound method Customers.fullname of <classes.class_customers.Customers object at 0x00000186DC241A90>>'S EMAIL SET TO: shlomobinyamin2003@gmail.com |
+2026-05-03 20:04:02,297 | (INFO)->| <bound method Customers.fullname of <classes.class_customers.Customers object at 0x00000186DC241A90>>'S ADDRESS SET TO: weizman12 |
+2026-05-03 20:04:02,297 | (INFO)->| <bound method Customers.fullname of <classes.class_customers.Customers object at 0x00000186DC241A90>> TYPE SET TO: reg |
+2026-05-03 20:04:02,298 | (ERROR)->| CUSTOMER IS NOT VIP. CANNOT GIVE DISCOUNT |
+2026-05-03 20:04:02,298 | (INFO)->| <bound method Customers.fullname of <classes.class_customers.Customers object at 0x00000186DC241A90>>'S ITEMS LIST MODIFIED |
+2026-05-03 20:04:02,298 | (INFO)->| <bound method Customers.fullname of <classes.class_customers.Customers object at 0x00000186DC241A90>> WAS GIFTED |
+2026-05-03 20:04:02,298 | (INFO)->| <bound method Customers.fullname of <classes.class_customers.Customers object at 0x00000186DC241A90>> SAVED PAYMENT PaymentMethod: None |
+2026-05-03 20:04:02,298 | (INFO)->| <bound method Customers.fullname of <classes.class_customers.Customers object at 0x00000186DC241A90>>'S ID SET TO: 1 |
+2026-05-03 20:04:02,298 | (INFO)->| CONNECTION ESTABLISHED |
+2026-05-03 20:04:02,298 | (INFO)->| APPLIED CURSOR |
+2026-05-03 20:04:02,298 | (INFO)->| RAN QUERY |
+2026-05-03 20:04:02,298 | (INFO)->| NO FETCHED RESULTS |
+2026-05-03 20:04:02,298 | (INFO)->| 
+CONNECTION CLOSED |
+2026-05-03 20:04:02,298 | (INFO)->| QUERY: 
+
+        SELECT items.id, items.name, items.price
+        FROM customer_favorites
+        JOIN items ON customer_favorites.item_id = items.id
+        WHERE customer_favorites.customer_id = ?
+    
+ RAN SUCCESSFULLY |
+2026-05-03 20:04:02,298 | (INFO)->| <bound method Customers.fullname of <classes.class_customers.Customers object at 0x00000186DC241A90>>'S ITEMS LIST MODIFIED |
+2026-05-03 20:04:02,298 | (INFO)->| ROW MAPPED TO CUSTOMER: <bound method Customers.fullname of <classes.class_customers.Customers object at 0x00000186DC241A90>> |
+2026-05-03 20:04:02,298 | (INFO)->| MANAGED TO GET USER FROM DB |
+2026-05-03 20:04:02,299 | (INFO)->| SET NEW USER PREFERENCES |
+2026-05-03 20:04:02,306 | (INFO)->| Logged In: ————————> Customer Details:
+   id:1
+   name: <bound method Customers.fullname of <classes.class_customers.Customers object at 0x00000186DC241A90>>
+   email: shlomobinyamin2003@gmail.com
+   address: weizman12
+   reg (0)
+   gifts: []
+   favorite list: [] |
+2026-05-03 20:04:02,306 | (INFO)->| preferences.ini loaded |
+2026-05-03 20:04:41,730 | (INFO)->| C:\Users\shlom\PycharmProjects\oop_project\classes\class_sysfacade.py: classes.class_sysfacade: TRYING: PICKING ITEM |
+2026-05-03 20:04:44,606 | (INFO)->| ————————|< !!! > User Canceled Order. EXITING |
+2026-05-03 20:04:54,660 | (INFO)->| C:\Users\shlom\PycharmProjects\oop_project\classes\class_sysfacade.py: classes.class_sysfacade: TRYING: PICKING ITEM |
+2026-05-03 20:05:00,860 | (INFO)->| C:\Users\shlom\PycharmProjects\oop_project\db_actions\db_act.py,db_actions.db_act
+ TRYING: VIEW ITEMS |
+2026-05-03 20:05:00,861 | (INFO)->| CONNECTION ESTABLISHED |
+2026-05-03 20:05:00,862 | (INFO)->| APPLIED CURSOR |
+2026-05-03 20:05:00,862 | (INFO)->| RAN QUERY |
+2026-05-03 20:05:00,862 | (INFO)->| NO FETCHED RESULTS |
+2026-05-03 20:05:00,862 | (INFO)->| 
+CONNECTION CLOSED |
+2026-05-03 20:05:00,862 | (INFO)->| QUERY: 
+SELECT * FROM items
+ RAN SUCCESSFULLY |
+2026-05-03 20:05:03,407 | (INFO)->| ————————|< !!! > User Canceled Order. EXITING |
+2026-05-03 20:05:08,603 | (INFO)->| GIFTING STARTED |
+2026-05-03 20:05:14,160 | (INFO)->| GIFT MONEY SELECTED. |
+2026-05-03 20:05:14,160 | (INFO)->| C:\Users\shlom\PycharmProjects\oop_project\classes\class_sysfacade.py: classes.class_sysfacade: TRYING: GET CUSTOMER |
+2026-05-03 20:05:16,034 | (ERROR)->| C:\Users\shlom\PycharmProjects\oop_project\classes\class_sysfacade.py: classes.class_sysfacade: FAILED FINDING CUSTOMER. |
+2026-05-03 20:05:19,010 | (INFO)->| C:\Users\shlom\PycharmProjects\oop_project\classes\class_sysfacade.py: classes.class_sysfacade: TRYING: GET CUSTOMER |
+2026-05-03 20:05:21,259 | (ERROR)->| C:\Users\shlom\PycharmProjects\oop_project\classes\class_sysfacade.py: classes.class_sysfacade: FAILED FINDING CUSTOMER. |
+2026-05-03 20:05:25,966 | (INFO)->| C:\Users\shlom\PycharmProjects\oop_project\classes\class_sysfacade.py: classes.class_sysfacade: TRYING: GET CUSTOMER |
+2026-05-03 20:05:27,783 | (ERROR)->| C:\Users\shlom\PycharmProjects\oop_project\classes\class_sysfacade.py: classes.class_sysfacade: FAILED FINDING CUSTOMER. |
+2026-05-03 20:05:29,164 | (INFO)->| C:\Users\shlom\PycharmProjects\oop_project\classes\class_sysfacade.py: classes.class_sysfacade: TRYING: GET CUSTOMER |
+2026-05-03 20:05:29,329 | (ERROR)->| C:\Users\shlom\PycharmProjects\oop_project\classes\class_sysfacade.py: classes.class_sysfacade: FAILED FINDING CUSTOMER. |
+2026-05-03 20:05:30,063 | (INFO)->| C:\Users\shlom\PycharmProjects\oop_project\classes\class_sysfacade.py: classes.class_sysfacade: TRYING: GET CUSTOMER |
+2026-05-03 20:05:30,523 | (ERROR)->| C:\Users\shlom\PycharmProjects\oop_project\classes\class_sysfacade.py: classes.class_sysfacade: FAILED FINDING CUSTOMER. |
+2026-05-03 20:05:38,551 | (INFO)->| ORDER CANCELLED |
+2026-05-03 20:05:42,042 | (INFO)->| GIFTING STARTED |
+2026-05-03 20:05:45,345 | (INFO)->| GIFT MONEY SELECTED. |
+2026-05-03 20:05:45,345 | (INFO)->| C:\Users\shlom\PycharmProjects\oop_project\classes\class_sysfacade.py: classes.class_sysfacade: TRYING: GET CUSTOMER |
+2026-05-03 20:05:54,189 | (INFO)->| C:\Users\shlom\PycharmProjects\oop_project\db_actions\db_act.py,db_actions.db_act
+ TRYING: RETRIEVE CUSTOMER BY NAME |
+2026-05-03 20:05:54,190 | (INFO)->| CONNECTION ESTABLISHED |
+2026-05-03 20:05:54,190 | (INFO)->| APPLIED CURSOR |
+2026-05-03 20:05:54,191 | (INFO)->| RAN QUERY |
+2026-05-03 20:05:54,191 | (INFO)->| QUERY FETCHED RESULTS |
+2026-05-03 20:05:54,191 | (INFO)->| 
+CONNECTION CLOSED |
+2026-05-03 20:05:54,191 | (INFO)->| QUERY: 
+
+            SELECT * FROM customers WHERE first_name = ? AND last_name = ?
+            
+ RAN SUCCESSFULLY |
+2026-05-03 20:05:54,191 | (INFO)->| <bound method Customers.fullname of <classes.class_customers.Customers object at 0x00000186DC222990>>'S ID SET TO: None |
+2026-05-03 20:05:54,191 | (INFO)->| FIRST NAME SET TO: shlomo |
+2026-05-03 20:05:54,191 | (INFO)->| LAST NAME SET TO: binyamin |
+2026-05-03 20:05:54,191 | (INFO)->| <bound method Customers.fullname of <classes.class_customers.Customers object at 0x00000186DC222990>>'S EMAIL SET TO: shlomobinyamin2003@gmail.com |
+2026-05-03 20:05:54,191 | (INFO)->| <bound method Customers.fullname of <classes.class_customers.Customers object at 0x00000186DC222990>>'S ADDRESS SET TO: weizman12 |
+2026-05-03 20:05:54,191 | (INFO)->| <bound method Customers.fullname of <classes.class_customers.Customers object at 0x00000186DC222990>> TYPE SET TO: reg |
+2026-05-03 20:05:54,191 | (ERROR)->| CUSTOMER IS NOT VIP. CANNOT GIVE DISCOUNT |
+2026-05-03 20:05:54,191 | (INFO)->| <bound method Customers.fullname of <classes.class_customers.Customers object at 0x00000186DC222990>>'S ITEMS LIST MODIFIED |
+2026-05-03 20:05:54,191 | (INFO)->| <bound method Customers.fullname of <classes.class_customers.Customers object at 0x00000186DC222990>> WAS GIFTED |
+2026-05-03 20:05:54,191 | (INFO)->| <bound method Customers.fullname of <classes.class_customers.Customers object at 0x00000186DC222990>> SAVED PAYMENT PaymentMethod: None |
+2026-05-03 20:05:54,191 | (INFO)->| <bound method Customers.fullname of <classes.class_customers.Customers object at 0x00000186DC222990>>'S ID SET TO: 1 |
+2026-05-03 20:05:54,192 | (INFO)->| CONNECTION ESTABLISHED |
+2026-05-03 20:05:54,192 | (INFO)->| APPLIED CURSOR |
+2026-05-03 20:05:54,192 | (INFO)->| RAN QUERY |
+2026-05-03 20:05:54,192 | (INFO)->| NO FETCHED RESULTS |
+2026-05-03 20:05:54,192 | (INFO)->| 
+CONNECTION CLOSED |
+2026-05-03 20:05:54,192 | (INFO)->| QUERY: 
+
+        SELECT items.id, items.name, items.price
+        FROM customer_favorites
+        JOIN items ON customer_favorites.item_id = items.id
+        WHERE customer_favorites.customer_id = ?
+    
+ RAN SUCCESSFULLY |
+2026-05-03 20:05:54,192 | (INFO)->| <bound method Customers.fullname of <classes.class_customers.Customers object at 0x00000186DC222990>>'S ITEMS LIST MODIFIED |
+2026-05-03 20:05:54,192 | (INFO)->| ROW MAPPED TO CUSTOMER: <bound method Customers.fullname of <classes.class_customers.Customers object at 0x00000186DC222990>> |
+2026-05-03 20:05:54,192 | (INFO)->| C:\Users\shlom\PycharmProjects\oop_project\classes\class_sysfacade.py: classes.class_sysfacade: TRYING: GET AMOUNT |
+2026-05-03 20:06:10,009 | (INFO)->| PaymentMethod SET: <classes.class_payments.CASH object at 0x00000186DC241D30> |
+2026-05-03 20:06:10,009 | (INFO)->| <bound method Customers.fullname of <classes.class_customers.Customers object at 0x00000186DC241A90>> SAVED PAYMENT PaymentMethod: cash |
+2026-05-03 20:06:10,009 | (INFO)->|  100.00$ BY CHASH |
+2026-05-03 20:06:10,009 | (INFO)->| PAYMENT PAID: <classes.class_payments.CASH object at 0x00000186DC241D30> |
+2026-05-03 20:06:10,009 | (INFO)->| <bound method Customers.fullname of <classes.class_customers.Customers object at 0x00000186DC222990>> RECEIVED GIFT: ————————> Gift Includes -
+ 100.0 |
+2026-05-03 20:06:10,011 | (INFO)->| CONNECTION ESTABLISHED |
+2026-05-03 20:06:10,011 | (INFO)->| CURSOR APPLIED |
+2026-05-03 20:06:10,035 | (INFO)->| RAN QUERY |
+2026-05-03 20:06:10,035 | (INFO)->| CONNECTION CLOSED |
+2026-05-03 20:06:10,035 | (INFO)->| QUERY: 
+UPDATE customers SET gifted = ? WHERE id = ?
+ RAN SUCCESSFULLY |
+2026-05-03 20:06:10,035 | (INFO)->| GIFT TOY WAS SUCCESSFUL. |
+2026-05-03 20:10:02,087 | (INFO)->| SOFTWARE START |
+2026-05-03 20:10:02,087 | (INFO)->| CONNECTION ESTABLISHED |
+2026-05-03 20:10:02,087 | (INFO)->| CURSOR APPLIED |
+2026-05-03 20:10:02,088 | (INFO)->| RAN QUERY |
+2026-05-03 20:10:02,088 | (INFO)->| CONNECTION CLOSED |
+2026-05-03 20:10:02,088 | (INFO)->| QUERY: 
+
+        CREATE TABLE IF NOT EXISTS items (
+            id          INTEGER PRIMARY KEY AUTOINCREMENT,
+            name        TEXT    NOT NULL,
+            price       REAL    NOT NULL        
+        );
+    
+ RAN SUCCESSFULLY |
+2026-05-03 20:10:02,088 | (INFO)->| TABLE items CREATED |
+2026-05-03 20:10:02,088 | (INFO)->| CONNECTION ESTABLISHED |
+2026-05-03 20:10:02,088 | (INFO)->| CURSOR APPLIED |
+2026-05-03 20:10:02,088 | (INFO)->| RAN QUERY |
+2026-05-03 20:10:02,088 | (INFO)->| CONNECTION CLOSED |
+2026-05-03 20:10:02,088 | (INFO)->| QUERY: 
+
+        CREATE TABLE IF NOT EXISTS customers (
+            id                  INTEGER PRIMARY KEY AUTOINCREMENT,
+            first_name          TEXT    NOT NULL,
+            last_name           TEXT    NOT NULL,
+            email               TEXT    NOT NULL UNIQUE,
+            delivery_address    TEXT    NOT NULL,
+            account_type        TEXT    NOT NULL DEFAULT 'reg',
+            discount            REAL             DEFAULT 0,
+            gifted              TEXT             DEFAULT '[]'  
+        );
+    
+ RAN SUCCESSFULLY |
+2026-05-03 20:10:02,088 | (INFO)->| TABLE customers CREATED |
+2026-05-03 20:10:02,089 | (INFO)->| CONNECTION ESTABLISHED |
+2026-05-03 20:10:02,089 | (INFO)->| CURSOR APPLIED |
+2026-05-03 20:10:02,089 | (INFO)->| RAN QUERY |
+2026-05-03 20:10:02,089 | (INFO)->| CONNECTION CLOSED |
+2026-05-03 20:10:02,089 | (INFO)->| QUERY: 
+
+        CREATE TABLE IF NOT EXISTS orders (
+            id                  INTEGER PRIMARY KEY AUTOINCREMENT,
+            name                TEXT    NOT NULL,
+            delivery_address    TEXT    NOT NULL,
+            items               TEXT    NOT NULL DEFAULT '[]',
+            customer_id         INTEGER NOT NULL,
+            total_price         REAL    NOT NULL,
+            payment_method      TEXT    NOT NULL,
+            date                TEXT    NOT NULL,
+            order_type          TEXT    NOT NULL DEFAULT 'reg',
+            FOREIGN KEY (customer_id) REFERENCES customers(id)
+        );
+    
+ RAN SUCCESSFULLY |
+2026-05-03 20:10:02,089 | (INFO)->| TABLE orders CREATED |
+2026-05-03 20:10:02,089 | (INFO)->| CONNECTION ESTABLISHED |
+2026-05-03 20:10:02,089 | (INFO)->| CURSOR APPLIED |
+2026-05-03 20:10:02,089 | (INFO)->| RAN QUERY |
+2026-05-03 20:10:02,089 | (INFO)->| CONNECTION CLOSED |
+2026-05-03 20:10:02,089 | (INFO)->| QUERY: 
+
+        CREATE TABLE IF NOT EXISTS customer_favorites (
+            id          INTEGER PRIMARY KEY AUTOINCREMENT,
+            customer_id INTEGER NOT NULL,
+            item_id     INTEGER NOT NULL,
+            UNIQUE(customer_id, item_id),           -- no duplicates
+            FOREIGN KEY (customer_id) REFERENCES customers(id),
+            FOREIGN KEY (item_id)     REFERENCES items(id)
+        );
+    
+ RAN SUCCESSFULLY |
+2026-05-03 20:10:02,089 | (INFO)->| TABLE customer_favorites CREATED |
+2026-05-03 20:10:02,089 | (INFO)->| DATABASE SETUP COMPLETE |
+2026-05-03 20:10:06,709 | (INFO)->| CHECKING NAME CONTEXT FOR shlomo |
+2026-05-03 20:10:06,710 | (INFO)->| CHECKING NAME CONTEXT FOR binyamin |
+2026-05-03 20:10:06,710 | (INFO)->| CHECKING NAME CONTEXT FOR shlomo |
+2026-05-03 20:10:06,710 | (INFO)->| CHECKING NAME CONTEXT FOR binyamin |
+2026-05-03 20:10:06,710 | (INFO)->| C:\Users\shlom\PycharmProjects\oop_project\db_actions\db_act.py,db_actions.db_act
+ TRYING: RETRIEVE CUSTOMER BY NAME |
+2026-05-03 20:10:06,710 | (INFO)->| CONNECTION ESTABLISHED |
+2026-05-03 20:10:06,710 | (INFO)->| APPLIED CURSOR |
+2026-05-03 20:10:06,710 | (INFO)->| RAN QUERY |
+2026-05-03 20:10:06,710 | (INFO)->| QUERY FETCHED RESULTS |
+2026-05-03 20:10:06,710 | (INFO)->| 
+CONNECTION CLOSED |
+2026-05-03 20:10:06,710 | (INFO)->| QUERY: 
+
+            SELECT * FROM customers WHERE first_name = ? AND last_name = ?
+            
+ RAN SUCCESSFULLY |
+2026-05-03 20:10:06,711 | (INFO)->| <bound method Customers.fullname of <classes.class_customers.Customers object at 0x0000020A5C185A90>>'S ID SET TO: None |
+2026-05-03 20:10:06,711 | (INFO)->| FIRST NAME SET TO: shlomo |
+2026-05-03 20:10:06,711 | (INFO)->| LAST NAME SET TO: binyamin |
+2026-05-03 20:10:06,711 | (INFO)->| <bound method Customers.fullname of <classes.class_customers.Customers object at 0x0000020A5C185A90>>'S EMAIL SET TO: shlomobinyamin2003@gmail.com |
+2026-05-03 20:10:06,711 | (INFO)->| <bound method Customers.fullname of <classes.class_customers.Customers object at 0x0000020A5C185A90>>'S ADDRESS SET TO: weizman12 |
+2026-05-03 20:10:06,711 | (INFO)->| <bound method Customers.fullname of <classes.class_customers.Customers object at 0x0000020A5C185A90>> TYPE SET TO: reg |
+2026-05-03 20:10:06,711 | (ERROR)->| CUSTOMER IS NOT VIP. CANNOT GIVE DISCOUNT |
+2026-05-03 20:10:06,711 | (INFO)->| <bound method Customers.fullname of <classes.class_customers.Customers object at 0x0000020A5C185A90>>'S ITEMS LIST MODIFIED |
+2026-05-03 20:10:06,711 | (INFO)->| <bound method Customers.fullname of <classes.class_customers.Customers object at 0x0000020A5C185A90>> WAS GIFTED |
+2026-05-03 20:10:06,711 | (INFO)->| <bound method Customers.fullname of <classes.class_customers.Customers object at 0x0000020A5C185A90>> SAVED PAYMENT PaymentMethod: None |
+2026-05-03 20:10:06,711 | (INFO)->| <bound method Customers.fullname of <classes.class_customers.Customers object at 0x0000020A5C185A90>>'S ID SET TO: 1 |
+2026-05-03 20:10:06,712 | (INFO)->| CONNECTION ESTABLISHED |
+2026-05-03 20:10:06,712 | (INFO)->| APPLIED CURSOR |
+2026-05-03 20:10:06,712 | (INFO)->| RAN QUERY |
+2026-05-03 20:10:06,712 | (INFO)->| NO FETCHED RESULTS |
+2026-05-03 20:10:06,712 | (INFO)->| 
+CONNECTION CLOSED |
+2026-05-03 20:10:06,712 | (INFO)->| QUERY: 
+
+        SELECT items.id, items.name, items.price
+        FROM customer_favorites
+        JOIN items ON customer_favorites.item_id = items.id
+        WHERE customer_favorites.customer_id = ?
+    
+ RAN SUCCESSFULLY |
+2026-05-03 20:10:06,712 | (INFO)->| <bound method Customers.fullname of <classes.class_customers.Customers object at 0x0000020A5C185A90>>'S ITEMS LIST MODIFIED |
+2026-05-03 20:10:06,712 | (INFO)->| ROW MAPPED TO CUSTOMER: <bound method Customers.fullname of <classes.class_customers.Customers object at 0x0000020A5C185A90>> |
+2026-05-03 20:10:06,712 | (INFO)->| MANAGED TO GET USER FROM DB |
+2026-05-03 20:10:06,713 | (INFO)->| SET NEW USER PREFERENCES |
+2026-05-03 20:10:06,715 | (INFO)->| Logged In: ————————> Customer Details:
+   id:1
+   name: <bound method Customers.fullname of <classes.class_customers.Customers object at 0x0000020A5C185A90>>
+   email: shlomobinyamin2003@gmail.com
+   address: weizman12
+   reg (0)
+   gifts: [<classes.class_gifts.CashGift object at 0x0000020A5C185BE0>]
+   favorite list: [] |
+2026-05-03 20:10:06,715 | (INFO)->| preferences.ini loaded |
+2026-05-03 20:10:10,306 | (INFO)->| GIFTING STARTED |
+2026-05-03 20:10:13,926 | (INFO)->| GIFT MONEY SELECTED. |
+2026-05-03 20:10:13,926 | (INFO)->| C:\Users\shlom\PycharmProjects\oop_project\classes\class_sysfacade.py: classes.class_sysfacade: TRYING: GET CUSTOMER |
+2026-05-03 20:10:19,853 | (INFO)->| C:\Users\shlom\PycharmProjects\oop_project\db_actions\db_act.py,db_actions.db_act
+ TRYING: RETRIEVE CUSTOMER BY NAME |
+2026-05-03 20:10:19,854 | (INFO)->| CONNECTION ESTABLISHED |
+2026-05-03 20:10:19,854 | (INFO)->| APPLIED CURSOR |
+2026-05-03 20:10:19,855 | (INFO)->| RAN QUERY |
+2026-05-03 20:10:19,855 | (INFO)->| QUERY FETCHED RESULTS |
+2026-05-03 20:10:19,855 | (INFO)->| 
+CONNECTION CLOSED |
+2026-05-03 20:10:19,855 | (INFO)->| QUERY: 
+
+            SELECT * FROM customers WHERE first_name = ? AND last_name = ?
+            
+ RAN SUCCESSFULLY |
+2026-05-03 20:10:19,855 | (INFO)->| <bound method Customers.fullname of <classes.class_customers.Customers object at 0x0000020A5C162990>>'S ID SET TO: None |
+2026-05-03 20:10:19,855 | (INFO)->| FIRST NAME SET TO: shlomo |
+2026-05-03 20:10:19,855 | (INFO)->| LAST NAME SET TO: binyamin |
+2026-05-03 20:10:19,855 | (INFO)->| <bound method Customers.fullname of <classes.class_customers.Customers object at 0x0000020A5C162990>>'S EMAIL SET TO: shlomobinyamin2003@gmail.com |
+2026-05-03 20:10:19,855 | (INFO)->| <bound method Customers.fullname of <classes.class_customers.Customers object at 0x0000020A5C162990>>'S ADDRESS SET TO: weizman12 |
+2026-05-03 20:10:19,855 | (INFO)->| <bound method Customers.fullname of <classes.class_customers.Customers object at 0x0000020A5C162990>> TYPE SET TO: reg |
+2026-05-03 20:10:19,855 | (ERROR)->| CUSTOMER IS NOT VIP. CANNOT GIVE DISCOUNT |
+2026-05-03 20:10:19,855 | (INFO)->| <bound method Customers.fullname of <classes.class_customers.Customers object at 0x0000020A5C162990>>'S ITEMS LIST MODIFIED |
+2026-05-03 20:10:19,855 | (INFO)->| <bound method Customers.fullname of <classes.class_customers.Customers object at 0x0000020A5C162990>> WAS GIFTED |
+2026-05-03 20:10:19,856 | (INFO)->| <bound method Customers.fullname of <classes.class_customers.Customers object at 0x0000020A5C162990>> SAVED PAYMENT PaymentMethod: None |
+2026-05-03 20:10:19,856 | (INFO)->| <bound method Customers.fullname of <classes.class_customers.Customers object at 0x0000020A5C162990>>'S ID SET TO: 1 |
+2026-05-03 20:10:19,856 | (INFO)->| CONNECTION ESTABLISHED |
+2026-05-03 20:10:19,856 | (INFO)->| APPLIED CURSOR |
+2026-05-03 20:10:19,856 | (INFO)->| RAN QUERY |
+2026-05-03 20:10:19,856 | (INFO)->| NO FETCHED RESULTS |
+2026-05-03 20:10:19,856 | (INFO)->| 
+CONNECTION CLOSED |
+2026-05-03 20:10:19,856 | (INFO)->| QUERY: 
+
+        SELECT items.id, items.name, items.price
+        FROM customer_favorites
+        JOIN items ON customer_favorites.item_id = items.id
+        WHERE customer_favorites.customer_id = ?
+    
+ RAN SUCCESSFULLY |
+2026-05-03 20:10:19,856 | (INFO)->| <bound method Customers.fullname of <classes.class_customers.Customers object at 0x0000020A5C162990>>'S ITEMS LIST MODIFIED |
+2026-05-03 20:10:19,856 | (INFO)->| ROW MAPPED TO CUSTOMER: <bound method Customers.fullname of <classes.class_customers.Customers object at 0x0000020A5C162990>> |
+2026-05-03 20:10:19,856 | (INFO)->| C:\Users\shlom\PycharmProjects\oop_project\classes\class_sysfacade.py: classes.class_sysfacade: TRYING: GET AMOUNT |
+2026-05-03 20:10:35,782 | (INFO)->| PaymentMethod SET: <classes.class_payments.OTHER object at 0x0000020A5C185E80> |
+2026-05-03 20:10:35,782 | (INFO)->| <bound method Customers.fullname of <classes.class_customers.Customers object at 0x0000020A5C185A90>> SAVED PAYMENT PaymentMethod: other |
+2026-05-03 20:10:35,782 | (INFO)->| 100.00 BY OTHER: huge |
+2026-05-03 20:10:35,782 | (INFO)->| PAYMENT PAID: <classes.class_payments.OTHER object at 0x0000020A5C185E80> |
+2026-05-03 20:10:35,782 | (INFO)->| <bound method Customers.fullname of <classes.class_customers.Customers object at 0x0000020A5C162990>> RECEIVED GIFT: ————————> Gift Includes -
+ 100.0 |
+2026-05-03 20:10:35,783 | (INFO)->| CONNECTION ESTABLISHED |
+2026-05-03 20:10:35,783 | (INFO)->| CURSOR APPLIED |
+2026-05-03 20:10:35,812 | (INFO)->| RAN QUERY |
+2026-05-03 20:10:35,812 | (INFO)->| CONNECTION CLOSED |
+2026-05-03 20:10:35,812 | (INFO)->| QUERY: 
+UPDATE customers SET gifted = ? WHERE id = ?
+ RAN SUCCESSFULLY |
+2026-05-03 20:10:35,812 | (INFO)->| GIFT TOY WAS SUCCESSFUL. |
+2026-05-03 20:11:25,936 | (INFO)->| SOFTWARE START |
+2026-05-03 20:11:25,937 | (INFO)->| CONNECTION ESTABLISHED |
+2026-05-03 20:11:25,937 | (INFO)->| CURSOR APPLIED |
+2026-05-03 20:11:25,937 | (INFO)->| RAN QUERY |
+2026-05-03 20:11:25,937 | (INFO)->| CONNECTION CLOSED |
+2026-05-03 20:11:25,937 | (INFO)->| QUERY: 
+
+        CREATE TABLE IF NOT EXISTS items (
+            id          INTEGER PRIMARY KEY AUTOINCREMENT,
+            name        TEXT    NOT NULL,
+            price       REAL    NOT NULL        
+        );
+    
+ RAN SUCCESSFULLY |
+2026-05-03 20:11:25,937 | (INFO)->| TABLE items CREATED |
+2026-05-03 20:11:25,937 | (INFO)->| CONNECTION ESTABLISHED |
+2026-05-03 20:11:25,937 | (INFO)->| CURSOR APPLIED |
+2026-05-03 20:11:25,937 | (INFO)->| RAN QUERY |
+2026-05-03 20:11:25,937 | (INFO)->| CONNECTION CLOSED |
+2026-05-03 20:11:25,937 | (INFO)->| QUERY: 
+
+        CREATE TABLE IF NOT EXISTS customers (
+            id                  INTEGER PRIMARY KEY AUTOINCREMENT,
+            first_name          TEXT    NOT NULL,
+            last_name           TEXT    NOT NULL,
+            email               TEXT    NOT NULL UNIQUE,
+            delivery_address    TEXT    NOT NULL,
+            account_type        TEXT    NOT NULL DEFAULT 'reg',
+            discount            REAL             DEFAULT 0,
+            gifted              TEXT             DEFAULT '[]'  
+        );
+    
+ RAN SUCCESSFULLY |
+2026-05-03 20:11:25,937 | (INFO)->| TABLE customers CREATED |
+2026-05-03 20:11:25,938 | (INFO)->| CONNECTION ESTABLISHED |
+2026-05-03 20:11:25,938 | (INFO)->| CURSOR APPLIED |
+2026-05-03 20:11:25,938 | (INFO)->| RAN QUERY |
+2026-05-03 20:11:25,938 | (INFO)->| CONNECTION CLOSED |
+2026-05-03 20:11:25,938 | (INFO)->| QUERY: 
+
+        CREATE TABLE IF NOT EXISTS orders (
+            id                  INTEGER PRIMARY KEY AUTOINCREMENT,
+            name                TEXT    NOT NULL,
+            delivery_address    TEXT    NOT NULL,
+            items               TEXT    NOT NULL DEFAULT '[]',
+            customer_id         INTEGER NOT NULL,
+            total_price         REAL    NOT NULL,
+            payment_method      TEXT    NOT NULL,
+            date                TEXT    NOT NULL,
+            order_type          TEXT    NOT NULL DEFAULT 'reg',
+            FOREIGN KEY (customer_id) REFERENCES customers(id)
+        );
+    
+ RAN SUCCESSFULLY |
+2026-05-03 20:11:25,938 | (INFO)->| TABLE orders CREATED |
+2026-05-03 20:11:25,938 | (INFO)->| CONNECTION ESTABLISHED |
+2026-05-03 20:11:25,938 | (INFO)->| CURSOR APPLIED |
+2026-05-03 20:11:25,938 | (INFO)->| RAN QUERY |
+2026-05-03 20:11:25,938 | (INFO)->| CONNECTION CLOSED |
+2026-05-03 20:11:25,938 | (INFO)->| QUERY: 
+
+        CREATE TABLE IF NOT EXISTS customer_favorites (
+            id          INTEGER PRIMARY KEY AUTOINCREMENT,
+            customer_id INTEGER NOT NULL,
+            item_id     INTEGER NOT NULL,
+            UNIQUE(customer_id, item_id),           -- no duplicates
+            FOREIGN KEY (customer_id) REFERENCES customers(id),
+            FOREIGN KEY (item_id)     REFERENCES items(id)
+        );
+    
+ RAN SUCCESSFULLY |
+2026-05-03 20:11:25,938 | (INFO)->| TABLE customer_favorites CREATED |
+2026-05-03 20:11:25,938 | (INFO)->| DATABASE SETUP COMPLETE |
+2026-05-03 20:11:34,715 | (INFO)->| CHECKING NAME CONTEXT FOR shlomo |
+2026-05-03 20:11:34,715 | (INFO)->| CHECKING NAME CONTEXT FOR binyamin |
+2026-05-03 20:11:34,715 | (INFO)->| CHECKING NAME CONTEXT FOR shlomo |
+2026-05-03 20:11:34,715 | (INFO)->| CHECKING NAME CONTEXT FOR binyamin |
+2026-05-03 20:11:34,715 | (INFO)->| C:\Users\shlom\PycharmProjects\oop_project\db_actions\db_act.py,db_actions.db_act
+ TRYING: RETRIEVE CUSTOMER BY NAME |
+2026-05-03 20:11:34,716 | (INFO)->| CONNECTION ESTABLISHED |
+2026-05-03 20:11:34,716 | (INFO)->| APPLIED CURSOR |
+2026-05-03 20:11:34,716 | (INFO)->| RAN QUERY |
+2026-05-03 20:11:34,716 | (INFO)->| QUERY FETCHED RESULTS |
+2026-05-03 20:11:34,716 | (INFO)->| 
+CONNECTION CLOSED |
+2026-05-03 20:11:34,716 | (INFO)->| QUERY: 
+
+            SELECT * FROM customers WHERE first_name = ? AND last_name = ?
+            
+ RAN SUCCESSFULLY |
+2026-05-03 20:11:34,717 | (INFO)->| <bound method Customers.fullname of <classes.class_customers.Customers object at 0x000001C6A9DE5A90>>'S ID SET TO: None |
+2026-05-03 20:11:34,717 | (INFO)->| FIRST NAME SET TO: shlomo |
+2026-05-03 20:11:34,717 | (INFO)->| LAST NAME SET TO: binyamin |
+2026-05-03 20:11:34,717 | (INFO)->| <bound method Customers.fullname of <classes.class_customers.Customers object at 0x000001C6A9DE5A90>>'S EMAIL SET TO: shlomobinyamin2003@gmail.com |
+2026-05-03 20:11:34,717 | (INFO)->| <bound method Customers.fullname of <classes.class_customers.Customers object at 0x000001C6A9DE5A90>>'S ADDRESS SET TO: weizman12 |
+2026-05-03 20:11:34,717 | (INFO)->| <bound method Customers.fullname of <classes.class_customers.Customers object at 0x000001C6A9DE5A90>> TYPE SET TO: reg |
+2026-05-03 20:11:34,717 | (ERROR)->| CUSTOMER IS NOT VIP. CANNOT GIVE DISCOUNT |
+2026-05-03 20:11:34,717 | (INFO)->| <bound method Customers.fullname of <classes.class_customers.Customers object at 0x000001C6A9DE5A90>>'S ITEMS LIST MODIFIED |
+2026-05-03 20:11:34,717 | (INFO)->| <bound method Customers.fullname of <classes.class_customers.Customers object at 0x000001C6A9DE5A90>> WAS GIFTED |
+2026-05-03 20:11:34,717 | (INFO)->| <bound method Customers.fullname of <classes.class_customers.Customers object at 0x000001C6A9DE5A90>> SAVED PAYMENT PaymentMethod: None |
+2026-05-03 20:11:34,718 | (INFO)->| <bound method Customers.fullname of <classes.class_customers.Customers object at 0x000001C6A9DE5A90>>'S ID SET TO: 1 |
+2026-05-03 20:11:34,719 | (INFO)->| CONNECTION ESTABLISHED |
+2026-05-03 20:11:34,719 | (INFO)->| APPLIED CURSOR |
+2026-05-03 20:11:34,719 | (INFO)->| RAN QUERY |
+2026-05-03 20:11:34,719 | (INFO)->| NO FETCHED RESULTS |
+2026-05-03 20:11:34,719 | (INFO)->| 
+CONNECTION CLOSED |
+2026-05-03 20:11:34,719 | (INFO)->| QUERY: 
+
+        SELECT items.id, items.name, items.price
+        FROM customer_favorites
+        JOIN items ON customer_favorites.item_id = items.id
+        WHERE customer_favorites.customer_id = ?
+    
+ RAN SUCCESSFULLY |
+2026-05-03 20:11:34,719 | (INFO)->| <bound method Customers.fullname of <classes.class_customers.Customers object at 0x000001C6A9DE5A90>>'S ITEMS LIST MODIFIED |
+2026-05-03 20:11:34,719 | (INFO)->| ROW MAPPED TO CUSTOMER: <bound method Customers.fullname of <classes.class_customers.Customers object at 0x000001C6A9DE5A90>> |
+2026-05-03 20:11:34,719 | (INFO)->| MANAGED TO GET USER FROM DB |
+2026-05-03 20:11:34,720 | (INFO)->| SET NEW USER PREFERENCES |
+2026-05-03 20:11:34,722 | (INFO)->| Logged In: ————————> Customer Details:
+   id:1
+   name: <bound method Customers.fullname of <classes.class_customers.Customers object at 0x000001C6A9DE5A90>>
+   email: shlomobinyamin2003@gmail.com
+   address: weizman12
+   reg (0)
+   gifts: [<classes.class_gifts.CashGift object at 0x000001C6A9DE5BE0>, <classes.class_gifts.CashGift object at 0x000001C6A9DA96D0>]
+   favorite list: [] |
+2026-05-03 20:11:34,722 | (INFO)->| preferences.ini loaded |
+2026-05-03 20:11:37,837 | (INFO)->| GIFTING STARTED |
+2026-05-03 20:11:39,956 | (INFO)->| GIFT MONEY SELECTED. |
+2026-05-03 20:11:39,956 | (INFO)->| C:\Users\shlom\PycharmProjects\oop_project\classes\class_sysfacade.py: classes.class_sysfacade: TRYING: GET CUSTOMER |
+2026-05-03 20:11:48,673 | (INFO)->| C:\Users\shlom\PycharmProjects\oop_project\db_actions\db_act.py,db_actions.db_act
+ TRYING: RETRIEVE CUSTOMER BY NAME |
+2026-05-03 20:11:48,675 | (INFO)->| CONNECTION ESTABLISHED |
+2026-05-03 20:11:48,675 | (INFO)->| APPLIED CURSOR |
+2026-05-03 20:11:48,676 | (INFO)->| RAN QUERY |
+2026-05-03 20:11:48,676 | (INFO)->| QUERY FETCHED RESULTS |
+2026-05-03 20:11:48,676 | (INFO)->| 
+CONNECTION CLOSED |
+2026-05-03 20:11:48,676 | (INFO)->| QUERY: 
+
+            SELECT * FROM customers WHERE first_name = ? AND last_name = ?
+            
+ RAN SUCCESSFULLY |
+2026-05-03 20:11:48,677 | (INFO)->| <bound method Customers.fullname of <classes.class_customers.Customers object at 0x000001C6A9DAA5D0>>'S ID SET TO: None |
+2026-05-03 20:11:48,677 | (INFO)->| FIRST NAME SET TO: shlomo |
+2026-05-03 20:11:48,677 | (INFO)->| LAST NAME SET TO: binyamin |
+2026-05-03 20:11:48,677 | (INFO)->| <bound method Customers.fullname of <classes.class_customers.Customers object at 0x000001C6A9DAA5D0>>'S EMAIL SET TO: shlomobinyamin2003@gmail.com |
+2026-05-03 20:11:48,677 | (INFO)->| <bound method Customers.fullname of <classes.class_customers.Customers object at 0x000001C6A9DAA5D0>>'S ADDRESS SET TO: weizman12 |
+2026-05-03 20:11:48,677 | (INFO)->| <bound method Customers.fullname of <classes.class_customers.Customers object at 0x000001C6A9DAA5D0>> TYPE SET TO: reg |
+2026-05-03 20:11:48,677 | (ERROR)->| CUSTOMER IS NOT VIP. CANNOT GIVE DISCOUNT |
+2026-05-03 20:11:48,677 | (INFO)->| <bound method Customers.fullname of <classes.class_customers.Customers object at 0x000001C6A9DAA5D0>>'S ITEMS LIST MODIFIED |
+2026-05-03 20:11:48,677 | (INFO)->| <bound method Customers.fullname of <classes.class_customers.Customers object at 0x000001C6A9DAA5D0>> WAS GIFTED |
+2026-05-03 20:11:48,677 | (INFO)->| <bound method Customers.fullname of <classes.class_customers.Customers object at 0x000001C6A9DAA5D0>> SAVED PAYMENT PaymentMethod: None |
+2026-05-03 20:11:48,677 | (INFO)->| <bound method Customers.fullname of <classes.class_customers.Customers object at 0x000001C6A9DAA5D0>>'S ID SET TO: 1 |
+2026-05-03 20:11:48,677 | (INFO)->| CONNECTION ESTABLISHED |
+2026-05-03 20:11:48,677 | (INFO)->| APPLIED CURSOR |
+2026-05-03 20:11:48,677 | (INFO)->| RAN QUERY |
+2026-05-03 20:11:48,677 | (INFO)->| NO FETCHED RESULTS |
+2026-05-03 20:11:48,677 | (INFO)->| 
+CONNECTION CLOSED |
+2026-05-03 20:11:48,677 | (INFO)->| QUERY: 
+
+        SELECT items.id, items.name, items.price
+        FROM customer_favorites
+        JOIN items ON customer_favorites.item_id = items.id
+        WHERE customer_favorites.customer_id = ?
+    
+ RAN SUCCESSFULLY |
+2026-05-03 20:11:48,677 | (INFO)->| <bound method Customers.fullname of <classes.class_customers.Customers object at 0x000001C6A9DAA5D0>>'S ITEMS LIST MODIFIED |
+2026-05-03 20:11:48,677 | (INFO)->| ROW MAPPED TO CUSTOMER: <bound method Customers.fullname of <classes.class_customers.Customers object at 0x000001C6A9DAA5D0>> |
+2026-05-03 20:11:48,677 | (INFO)->| C:\Users\shlom\PycharmProjects\oop_project\classes\class_sysfacade.py: classes.class_sysfacade: TRYING: GET AMOUNT |
+2026-05-03 20:12:27,713 | (ERROR)->| PAYMENT DENIED: INVALID CARD NUMBER |
+2026-05-03 20:12:48,920 | (ERROR)->| PAYMENT DENIED: INVALID CARD NUMBER |
+2026-05-03 20:12:55,596 | (INFO)->| PaymentMethod SET: None |
+2026-05-03 20:12:55,596 | (INFO)->| <bound method Customers.fullname of <classes.class_customers.Customers object at 0x000001C6A9DE5A90>> SAVED PAYMENT PaymentMethod: credit |
+2026-05-03 20:15:44,362 | (INFO)->| SOFTWARE START |
+2026-05-03 20:15:44,363 | (INFO)->| CONNECTION ESTABLISHED |
+2026-05-03 20:15:44,363 | (INFO)->| CURSOR APPLIED |
+2026-05-03 20:15:44,363 | (INFO)->| RAN QUERY |
+2026-05-03 20:15:44,363 | (INFO)->| CONNECTION CLOSED |
+2026-05-03 20:15:44,363 | (INFO)->| QUERY: 
+
+        CREATE TABLE IF NOT EXISTS items (
+            id          INTEGER PRIMARY KEY AUTOINCREMENT,
+            name        TEXT    NOT NULL,
+            price       REAL    NOT NULL        
+        );
+    
+ RAN SUCCESSFULLY |
+2026-05-03 20:15:44,363 | (INFO)->| TABLE items CREATED |
+2026-05-03 20:15:44,363 | (INFO)->| CONNECTION ESTABLISHED |
+2026-05-03 20:15:44,363 | (INFO)->| CURSOR APPLIED |
+2026-05-03 20:15:44,364 | (INFO)->| RAN QUERY |
+2026-05-03 20:15:44,364 | (INFO)->| CONNECTION CLOSED |
+2026-05-03 20:15:44,364 | (INFO)->| QUERY: 
+
+        CREATE TABLE IF NOT EXISTS customers (
+            id                  INTEGER PRIMARY KEY AUTOINCREMENT,
+            first_name          TEXT    NOT NULL,
+            last_name           TEXT    NOT NULL,
+            email               TEXT    NOT NULL UNIQUE,
+            delivery_address    TEXT    NOT NULL,
+            account_type        TEXT    NOT NULL DEFAULT 'reg',
+            discount            REAL             DEFAULT 0,
+            gifted              TEXT             DEFAULT '[]'  
+        );
+    
+ RAN SUCCESSFULLY |
+2026-05-03 20:15:44,364 | (INFO)->| TABLE customers CREATED |
+2026-05-03 20:15:44,364 | (INFO)->| CONNECTION ESTABLISHED |
+2026-05-03 20:15:44,364 | (INFO)->| CURSOR APPLIED |
+2026-05-03 20:15:44,364 | (INFO)->| RAN QUERY |
+2026-05-03 20:15:44,364 | (INFO)->| CONNECTION CLOSED |
+2026-05-03 20:15:44,364 | (INFO)->| QUERY: 
+
+        CREATE TABLE IF NOT EXISTS orders (
+            id                  INTEGER PRIMARY KEY AUTOINCREMENT,
+            name                TEXT    NOT NULL,
+            delivery_address    TEXT    NOT NULL,
+            items               TEXT    NOT NULL DEFAULT '[]',
+            customer_id         INTEGER NOT NULL,
+            total_price         REAL    NOT NULL,
+            payment_method      TEXT    NOT NULL,
+            date                TEXT    NOT NULL,
+            order_type          TEXT    NOT NULL DEFAULT 'reg',
+            FOREIGN KEY (customer_id) REFERENCES customers(id)
+        );
+    
+ RAN SUCCESSFULLY |
+2026-05-03 20:15:44,364 | (INFO)->| TABLE orders CREATED |
+2026-05-03 20:15:44,364 | (INFO)->| CONNECTION ESTABLISHED |
+2026-05-03 20:15:44,364 | (INFO)->| CURSOR APPLIED |
+2026-05-03 20:15:44,365 | (INFO)->| RAN QUERY |
+2026-05-03 20:15:44,365 | (INFO)->| CONNECTION CLOSED |
+2026-05-03 20:15:44,365 | (INFO)->| QUERY: 
+
+        CREATE TABLE IF NOT EXISTS customer_favorites (
+            id          INTEGER PRIMARY KEY AUTOINCREMENT,
+            customer_id INTEGER NOT NULL,
+            item_id     INTEGER NOT NULL,
+            UNIQUE(customer_id, item_id),           -- no duplicates
+            FOREIGN KEY (customer_id) REFERENCES customers(id),
+            FOREIGN KEY (item_id)     REFERENCES items(id)
+        );
+    
+ RAN SUCCESSFULLY |
+2026-05-03 20:15:44,365 | (INFO)->| TABLE customer_favorites CREATED |
+2026-05-03 20:15:44,365 | (INFO)->| DATABASE SETUP COMPLETE |
+2026-05-03 20:15:51,117 | (INFO)->| CHECKING NAME CONTEXT FOR shlomo |
+2026-05-03 20:15:51,117 | (INFO)->| CHECKING NAME CONTEXT FOR binyamin |
+2026-05-03 20:15:51,117 | (INFO)->| CHECKING NAME CONTEXT FOR shlomo |
+2026-05-03 20:15:51,117 | (INFO)->| CHECKING NAME CONTEXT FOR binyamin |
+2026-05-03 20:15:51,117 | (INFO)->| C:\Users\shlom\PycharmProjects\oop_project\db_actions\db_act.py,db_actions.db_act
+ TRYING: RETRIEVE CUSTOMER BY NAME |
+2026-05-03 20:15:51,118 | (INFO)->| CONNECTION ESTABLISHED |
+2026-05-03 20:15:51,118 | (INFO)->| APPLIED CURSOR |
+2026-05-03 20:15:51,118 | (INFO)->| RAN QUERY |
+2026-05-03 20:15:51,118 | (INFO)->| QUERY FETCHED RESULTS |
+2026-05-03 20:15:51,118 | (INFO)->| 
+CONNECTION CLOSED |
+2026-05-03 20:15:51,118 | (INFO)->| QUERY: 
+
+            SELECT * FROM customers WHERE first_name = ? AND last_name = ?
+            
+ RAN SUCCESSFULLY |
+2026-05-03 20:15:51,118 | (INFO)->| <bound method Customers.fullname of <classes.class_customers.Customers object at 0x000001AB603D5A90>>'S ID SET TO: None |
+2026-05-03 20:15:51,118 | (INFO)->| FIRST NAME SET TO: shlomo |
+2026-05-03 20:15:51,118 | (INFO)->| LAST NAME SET TO: binyamin |
+2026-05-03 20:15:51,118 | (INFO)->| <bound method Customers.fullname of <classes.class_customers.Customers object at 0x000001AB603D5A90>>'S EMAIL SET TO: shlomobinyamin2003@gmail.com |
+2026-05-03 20:15:51,118 | (INFO)->| <bound method Customers.fullname of <classes.class_customers.Customers object at 0x000001AB603D5A90>>'S ADDRESS SET TO: weizman12 |
+2026-05-03 20:15:51,118 | (INFO)->| <bound method Customers.fullname of <classes.class_customers.Customers object at 0x000001AB603D5A90>> TYPE SET TO: reg |
+2026-05-03 20:15:51,118 | (ERROR)->| CUSTOMER IS NOT VIP. CANNOT GIVE DISCOUNT |
+2026-05-03 20:15:51,118 | (INFO)->| <bound method Customers.fullname of <classes.class_customers.Customers object at 0x000001AB603D5A90>>'S ITEMS LIST MODIFIED |
+2026-05-03 20:15:51,118 | (INFO)->| <bound method Customers.fullname of <classes.class_customers.Customers object at 0x000001AB603D5A90>> WAS GIFTED |
+2026-05-03 20:15:51,118 | (INFO)->| <bound method Customers.fullname of <classes.class_customers.Customers object at 0x000001AB603D5A90>> SAVED PAYMENT PaymentMethod: None |
+2026-05-03 20:15:51,119 | (INFO)->| <bound method Customers.fullname of <classes.class_customers.Customers object at 0x000001AB603D5A90>>'S ID SET TO: 1 |
+2026-05-03 20:15:51,119 | (INFO)->| CONNECTION ESTABLISHED |
+2026-05-03 20:15:51,119 | (INFO)->| APPLIED CURSOR |
+2026-05-03 20:15:51,119 | (INFO)->| RAN QUERY |
+2026-05-03 20:15:51,119 | (INFO)->| NO FETCHED RESULTS |
+2026-05-03 20:15:51,119 | (INFO)->| 
+CONNECTION CLOSED |
+2026-05-03 20:15:51,119 | (INFO)->| QUERY: 
+
+        SELECT items.id, items.name, items.price
+        FROM customer_favorites
+        JOIN items ON customer_favorites.item_id = items.id
+        WHERE customer_favorites.customer_id = ?
+    
+ RAN SUCCESSFULLY |
+2026-05-03 20:15:51,119 | (INFO)->| <bound method Customers.fullname of <classes.class_customers.Customers object at 0x000001AB603D5A90>>'S ITEMS LIST MODIFIED |
+2026-05-03 20:15:51,119 | (INFO)->| ROW MAPPED TO CUSTOMER: <bound method Customers.fullname of <classes.class_customers.Customers object at 0x000001AB603D5A90>> |
+2026-05-03 20:15:51,119 | (INFO)->| MANAGED TO GET USER FROM DB |
+2026-05-03 20:15:51,120 | (INFO)->| SET NEW USER PREFERENCES |
+2026-05-03 20:15:51,121 | (INFO)->| Logged In: ————————> Customer Details:
+   id:1
+   name: <bound method Customers.fullname of <classes.class_customers.Customers object at 0x000001AB603D5A90>>
+   email: shlomobinyamin2003@gmail.com
+   address: weizman12
+   reg (0)
+   gifts: [<classes.class_gifts.CashGift object at 0x000001AB603D5BE0>, <classes.class_gifts.CashGift object at 0x000001AB60399810>]
+   favorite list: [] |
+2026-05-03 20:15:51,121 | (INFO)->| preferences.ini loaded |
+2026-05-03 20:15:53,536 | (INFO)->| GIFTING STARTED |
+2026-05-03 20:15:55,585 | (INFO)->| GIFT MONEY SELECTED. |
+2026-05-03 20:15:55,586 | (INFO)->| C:\Users\shlom\PycharmProjects\oop_project\classes\class_sysfacade.py: classes.class_sysfacade: TRYING: GET CUSTOMER |
+2026-05-03 20:15:59,232 | (INFO)->| C:\Users\shlom\PycharmProjects\oop_project\db_actions\db_act.py,db_actions.db_act
+ TRYING: RETRIEVE CUSTOMER BY NAME |
+2026-05-03 20:15:59,233 | (INFO)->| CONNECTION ESTABLISHED |
+2026-05-03 20:15:59,233 | (INFO)->| APPLIED CURSOR |
+2026-05-03 20:15:59,233 | (INFO)->| RAN QUERY |
+2026-05-03 20:15:59,233 | (INFO)->| QUERY FETCHED RESULTS |
+2026-05-03 20:15:59,233 | (INFO)->| 
+CONNECTION CLOSED |
+2026-05-03 20:15:59,233 | (INFO)->| QUERY: 
+
+            SELECT * FROM customers WHERE first_name = ? AND last_name = ?
+            
+ RAN SUCCESSFULLY |
+2026-05-03 20:15:59,233 | (INFO)->| <bound method Customers.fullname of <classes.class_customers.Customers object at 0x000001AB6039A710>>'S ID SET TO: None |
+2026-05-03 20:15:59,233 | (INFO)->| FIRST NAME SET TO: shlomo |
+2026-05-03 20:15:59,233 | (INFO)->| LAST NAME SET TO: binyamin |
+2026-05-03 20:15:59,233 | (INFO)->| <bound method Customers.fullname of <classes.class_customers.Customers object at 0x000001AB6039A710>>'S EMAIL SET TO: shlomobinyamin2003@gmail.com |
+2026-05-03 20:15:59,234 | (INFO)->| <bound method Customers.fullname of <classes.class_customers.Customers object at 0x000001AB6039A710>>'S ADDRESS SET TO: weizman12 |
+2026-05-03 20:15:59,234 | (INFO)->| <bound method Customers.fullname of <classes.class_customers.Customers object at 0x000001AB6039A710>> TYPE SET TO: reg |
+2026-05-03 20:15:59,234 | (ERROR)->| CUSTOMER IS NOT VIP. CANNOT GIVE DISCOUNT |
+2026-05-03 20:15:59,234 | (INFO)->| <bound method Customers.fullname of <classes.class_customers.Customers object at 0x000001AB6039A710>>'S ITEMS LIST MODIFIED |
+2026-05-03 20:15:59,234 | (INFO)->| <bound method Customers.fullname of <classes.class_customers.Customers object at 0x000001AB6039A710>> WAS GIFTED |
+2026-05-03 20:15:59,234 | (INFO)->| <bound method Customers.fullname of <classes.class_customers.Customers object at 0x000001AB6039A710>> SAVED PAYMENT PaymentMethod: None |
+2026-05-03 20:15:59,234 | (INFO)->| <bound method Customers.fullname of <classes.class_customers.Customers object at 0x000001AB6039A710>>'S ID SET TO: 1 |
+2026-05-03 20:15:59,234 | (INFO)->| CONNECTION ESTABLISHED |
+2026-05-03 20:15:59,234 | (INFO)->| APPLIED CURSOR |
+2026-05-03 20:15:59,234 | (INFO)->| RAN QUERY |
+2026-05-03 20:15:59,235 | (INFO)->| NO FETCHED RESULTS |
+2026-05-03 20:15:59,235 | (INFO)->| 
+CONNECTION CLOSED |
+2026-05-03 20:15:59,235 | (INFO)->| QUERY: 
+
+        SELECT items.id, items.name, items.price
+        FROM customer_favorites
+        JOIN items ON customer_favorites.item_id = items.id
+        WHERE customer_favorites.customer_id = ?
+    
+ RAN SUCCESSFULLY |
+2026-05-03 20:15:59,235 | (INFO)->| <bound method Customers.fullname of <classes.class_customers.Customers object at 0x000001AB6039A710>>'S ITEMS LIST MODIFIED |
+2026-05-03 20:15:59,235 | (INFO)->| ROW MAPPED TO CUSTOMER: <bound method Customers.fullname of <classes.class_customers.Customers object at 0x000001AB6039A710>> |
+2026-05-03 20:15:59,235 | (INFO)->| C:\Users\shlom\PycharmProjects\oop_project\classes\class_sysfacade.py: classes.class_sysfacade: TRYING: GET AMOUNT |
+2026-05-03 20:16:20,449 | (ERROR)->| PAYMENT DENIED: INVALID CARD NUMBER |
+2026-05-03 20:17:22,528 | (ERROR)->| PAYMENT DENIED: INVALID EXPIRATION DATE |
+2026-05-03 20:17:34,102 | (ERROR)->| PAYMENT DENIED: INVALID CARD NUMBER |
+2026-05-03 20:19:57,161 | (INFO)->| SOFTWARE START |
+2026-05-03 20:19:57,162 | (INFO)->| CONNECTION ESTABLISHED |
+2026-05-03 20:19:57,162 | (INFO)->| CURSOR APPLIED |
+2026-05-03 20:19:57,162 | (INFO)->| RAN QUERY |
+2026-05-03 20:19:57,162 | (INFO)->| CONNECTION CLOSED |
+2026-05-03 20:19:57,162 | (INFO)->| QUERY: 
+
+        CREATE TABLE IF NOT EXISTS items (
+            id          INTEGER PRIMARY KEY AUTOINCREMENT,
+            name        TEXT    NOT NULL,
+            price       REAL    NOT NULL        
+        );
+    
+ RAN SUCCESSFULLY |
+2026-05-03 20:19:57,162 | (INFO)->| TABLE items CREATED |
+2026-05-03 20:19:57,162 | (INFO)->| CONNECTION ESTABLISHED |
+2026-05-03 20:19:57,162 | (INFO)->| CURSOR APPLIED |
+2026-05-03 20:19:57,163 | (INFO)->| RAN QUERY |
+2026-05-03 20:19:57,163 | (INFO)->| CONNECTION CLOSED |
+2026-05-03 20:19:57,163 | (INFO)->| QUERY: 
+
+        CREATE TABLE IF NOT EXISTS customers (
+            id                  INTEGER PRIMARY KEY AUTOINCREMENT,
+            first_name          TEXT    NOT NULL,
+            last_name           TEXT    NOT NULL,
+            email               TEXT    NOT NULL UNIQUE,
+            delivery_address    TEXT    NOT NULL,
+            account_type        TEXT    NOT NULL DEFAULT 'reg',
+            discount            REAL             DEFAULT 0,
+            gifted              TEXT             DEFAULT '[]'  
+        );
+    
+ RAN SUCCESSFULLY |
+2026-05-03 20:19:57,163 | (INFO)->| TABLE customers CREATED |
+2026-05-03 20:19:57,163 | (INFO)->| CONNECTION ESTABLISHED |
+2026-05-03 20:19:57,163 | (INFO)->| CURSOR APPLIED |
+2026-05-03 20:19:57,163 | (INFO)->| RAN QUERY |
+2026-05-03 20:19:57,163 | (INFO)->| CONNECTION CLOSED |
+2026-05-03 20:19:57,163 | (INFO)->| QUERY: 
+
+        CREATE TABLE IF NOT EXISTS orders (
+            id                  INTEGER PRIMARY KEY AUTOINCREMENT,
+            name                TEXT    NOT NULL,
+            delivery_address    TEXT    NOT NULL,
+            items               TEXT    NOT NULL DEFAULT '[]',
+            customer_id         INTEGER NOT NULL,
+            total_price         REAL    NOT NULL,
+            payment_method      TEXT    NOT NULL,
+            date                TEXT    NOT NULL,
+            order_type          TEXT    NOT NULL DEFAULT 'reg',
+            FOREIGN KEY (customer_id) REFERENCES customers(id)
+        );
+    
+ RAN SUCCESSFULLY |
+2026-05-03 20:19:57,163 | (INFO)->| TABLE orders CREATED |
+2026-05-03 20:19:57,163 | (INFO)->| CONNECTION ESTABLISHED |
+2026-05-03 20:19:57,163 | (INFO)->| CURSOR APPLIED |
+2026-05-03 20:19:57,163 | (INFO)->| RAN QUERY |
+2026-05-03 20:19:57,163 | (INFO)->| CONNECTION CLOSED |
+2026-05-03 20:19:57,163 | (INFO)->| QUERY: 
+
+        CREATE TABLE IF NOT EXISTS customer_favorites (
+            id          INTEGER PRIMARY KEY AUTOINCREMENT,
+            customer_id INTEGER NOT NULL,
+            item_id     INTEGER NOT NULL,
+            UNIQUE(customer_id, item_id),           -- no duplicates
+            FOREIGN KEY (customer_id) REFERENCES customers(id),
+            FOREIGN KEY (item_id)     REFERENCES items(id)
+        );
+    
+ RAN SUCCESSFULLY |
+2026-05-03 20:19:57,163 | (INFO)->| TABLE customer_favorites CREATED |
+2026-05-03 20:19:57,163 | (INFO)->| DATABASE SETUP COMPLETE |
+2026-05-03 20:20:03,537 | (INFO)->| CHECKING NAME CONTEXT FOR shlomo |
+2026-05-03 20:20:03,537 | (INFO)->| CHECKING NAME CONTEXT FOR binyamin |
+2026-05-03 20:20:03,537 | (INFO)->| CHECKING NAME CONTEXT FOR shlomo |
+2026-05-03 20:20:03,537 | (INFO)->| CHECKING NAME CONTEXT FOR binyamin |
+2026-05-03 20:20:03,537 | (INFO)->| C:\Users\shlom\PycharmProjects\oop_project\db_actions\db_act.py,db_actions.db_act
+ TRYING: RETRIEVE CUSTOMER BY NAME |
+2026-05-03 20:20:03,539 | (INFO)->| CONNECTION ESTABLISHED |
+2026-05-03 20:20:03,539 | (INFO)->| APPLIED CURSOR |
+2026-05-03 20:20:03,539 | (INFO)->| RAN QUERY |
+2026-05-03 20:20:03,539 | (INFO)->| QUERY FETCHED RESULTS |
+2026-05-03 20:20:03,539 | (INFO)->| 
+CONNECTION CLOSED |
+2026-05-03 20:20:03,539 | (INFO)->| QUERY: 
+
+            SELECT * FROM customers WHERE first_name = ? AND last_name = ?
+            
+ RAN SUCCESSFULLY |
+2026-05-03 20:20:03,539 | (INFO)->| <bound method Customers.fullname of <classes.class_customers.Customers object at 0x00000212BDE65A90>>'S ID SET TO: None |
+2026-05-03 20:20:03,539 | (INFO)->| FIRST NAME SET TO: shlomo |
+2026-05-03 20:20:03,539 | (INFO)->| LAST NAME SET TO: binyamin |
+2026-05-03 20:20:03,539 | (INFO)->| <bound method Customers.fullname of <classes.class_customers.Customers object at 0x00000212BDE65A90>>'S EMAIL SET TO: shlomobinyamin2003@gmail.com |
+2026-05-03 20:20:03,539 | (INFO)->| <bound method Customers.fullname of <classes.class_customers.Customers object at 0x00000212BDE65A90>>'S ADDRESS SET TO: weizman12 |
+2026-05-03 20:20:03,539 | (INFO)->| <bound method Customers.fullname of <classes.class_customers.Customers object at 0x00000212BDE65A90>> TYPE SET TO: reg |
+2026-05-03 20:20:03,539 | (ERROR)->| CUSTOMER IS NOT VIP. CANNOT GIVE DISCOUNT |
+2026-05-03 20:20:03,540 | (INFO)->| <bound method Customers.fullname of <classes.class_customers.Customers object at 0x00000212BDE65A90>>'S ITEMS LIST MODIFIED |
+2026-05-03 20:20:03,540 | (INFO)->| <bound method Customers.fullname of <classes.class_customers.Customers object at 0x00000212BDE65A90>> WAS GIFTED |
+2026-05-03 20:20:03,540 | (INFO)->| <bound method Customers.fullname of <classes.class_customers.Customers object at 0x00000212BDE65A90>> SAVED PAYMENT PaymentMethod: None |
+2026-05-03 20:20:03,540 | (INFO)->| <bound method Customers.fullname of <classes.class_customers.Customers object at 0x00000212BDE65A90>>'S ID SET TO: 1 |
+2026-05-03 20:20:03,540 | (INFO)->| CONNECTION ESTABLISHED |
+2026-05-03 20:20:03,540 | (INFO)->| APPLIED CURSOR |
+2026-05-03 20:20:03,540 | (INFO)->| RAN QUERY |
+2026-05-03 20:20:03,540 | (INFO)->| NO FETCHED RESULTS |
+2026-05-03 20:20:03,540 | (INFO)->| 
+CONNECTION CLOSED |
+2026-05-03 20:20:03,540 | (INFO)->| QUERY: 
+
+        SELECT items.id, items.name, items.price
+        FROM customer_favorites
+        JOIN items ON customer_favorites.item_id = items.id
+        WHERE customer_favorites.customer_id = ?
+    
+ RAN SUCCESSFULLY |
+2026-05-03 20:20:03,540 | (INFO)->| <bound method Customers.fullname of <classes.class_customers.Customers object at 0x00000212BDE65A90>>'S ITEMS LIST MODIFIED |
+2026-05-03 20:20:03,540 | (INFO)->| ROW MAPPED TO CUSTOMER: <bound method Customers.fullname of <classes.class_customers.Customers object at 0x00000212BDE65A90>> |
+2026-05-03 20:20:03,540 | (INFO)->| MANAGED TO GET USER FROM DB |
+2026-05-03 20:20:03,541 | (INFO)->| SET NEW USER PREFERENCES |
+2026-05-03 20:20:03,543 | (INFO)->| Logged In: ————————> Customer Details:
+   id:1
+   name: <bound method Customers.fullname of <classes.class_customers.Customers object at 0x00000212BDE65A90>>
+   email: shlomobinyamin2003@gmail.com
+   address: weizman12
+   reg (0)
+   gifts: [<classes.class_gifts.CashGift object at 0x00000212BDE65BE0>, <classes.class_gifts.CashGift object at 0x00000212BDE29810>]
+   favorite list: [] |
+2026-05-03 20:20:03,543 | (INFO)->| preferences.ini loaded |
+2026-05-03 20:20:06,894 | (INFO)->| GIFTING STARTED |
+2026-05-03 20:20:09,499 | (INFO)->| GIFT MONEY SELECTED. |
+2026-05-03 20:20:09,500 | (INFO)->| C:\Users\shlom\PycharmProjects\oop_project\classes\class_sysfacade.py: classes.class_sysfacade: TRYING: GET CUSTOMER |
+2026-05-03 20:20:14,805 | (INFO)->| C:\Users\shlom\PycharmProjects\oop_project\db_actions\db_act.py,db_actions.db_act
+ TRYING: RETRIEVE CUSTOMER BY NAME |
+2026-05-03 20:20:14,807 | (INFO)->| CONNECTION ESTABLISHED |
+2026-05-03 20:20:14,807 | (INFO)->| APPLIED CURSOR |
+2026-05-03 20:20:14,808 | (INFO)->| RAN QUERY |
+2026-05-03 20:20:14,808 | (INFO)->| QUERY FETCHED RESULTS |
+2026-05-03 20:20:14,809 | (INFO)->| 
+CONNECTION CLOSED |
+2026-05-03 20:20:14,809 | (INFO)->| QUERY: 
+
+            SELECT * FROM customers WHERE first_name = ? AND last_name = ?
+            
+ RAN SUCCESSFULLY |
+2026-05-03 20:20:14,809 | (INFO)->| <bound method Customers.fullname of <classes.class_customers.Customers object at 0x00000212BDE2A710>>'S ID SET TO: None |
+2026-05-03 20:20:14,809 | (INFO)->| FIRST NAME SET TO: shlomo |
+2026-05-03 20:20:14,809 | (INFO)->| LAST NAME SET TO: binyamin |
+2026-05-03 20:20:14,809 | (INFO)->| <bound method Customers.fullname of <classes.class_customers.Customers object at 0x00000212BDE2A710>>'S EMAIL SET TO: shlomobinyamin2003@gmail.com |
+2026-05-03 20:20:14,809 | (INFO)->| <bound method Customers.fullname of <classes.class_customers.Customers object at 0x00000212BDE2A710>>'S ADDRESS SET TO: weizman12 |
+2026-05-03 20:20:14,809 | (INFO)->| <bound method Customers.fullname of <classes.class_customers.Customers object at 0x00000212BDE2A710>> TYPE SET TO: reg |
+2026-05-03 20:20:14,809 | (ERROR)->| CUSTOMER IS NOT VIP. CANNOT GIVE DISCOUNT |
+2026-05-03 20:20:14,809 | (INFO)->| <bound method Customers.fullname of <classes.class_customers.Customers object at 0x00000212BDE2A710>>'S ITEMS LIST MODIFIED |
+2026-05-03 20:20:14,809 | (INFO)->| <bound method Customers.fullname of <classes.class_customers.Customers object at 0x00000212BDE2A710>> WAS GIFTED |
+2026-05-03 20:20:14,809 | (INFO)->| <bound method Customers.fullname of <classes.class_customers.Customers object at 0x00000212BDE2A710>> SAVED PAYMENT PaymentMethod: None |
+2026-05-03 20:20:14,809 | (INFO)->| <bound method Customers.fullname of <classes.class_customers.Customers object at 0x00000212BDE2A710>>'S ID SET TO: 1 |
+2026-05-03 20:20:14,809 | (INFO)->| CONNECTION ESTABLISHED |
+2026-05-03 20:20:14,809 | (INFO)->| APPLIED CURSOR |
+2026-05-03 20:20:14,809 | (INFO)->| RAN QUERY |
+2026-05-03 20:20:14,809 | (INFO)->| NO FETCHED RESULTS |
+2026-05-03 20:20:14,809 | (INFO)->| 
+CONNECTION CLOSED |
+2026-05-03 20:20:14,809 | (INFO)->| QUERY: 
+
+        SELECT items.id, items.name, items.price
+        FROM customer_favorites
+        JOIN items ON customer_favorites.item_id = items.id
+        WHERE customer_favorites.customer_id = ?
+    
+ RAN SUCCESSFULLY |
+2026-05-03 20:20:14,809 | (INFO)->| <bound method Customers.fullname of <classes.class_customers.Customers object at 0x00000212BDE2A710>>'S ITEMS LIST MODIFIED |
+2026-05-03 20:20:14,809 | (INFO)->| ROW MAPPED TO CUSTOMER: <bound method Customers.fullname of <classes.class_customers.Customers object at 0x00000212BDE2A710>> |
+2026-05-03 20:20:14,809 | (INFO)->| C:\Users\shlom\PycharmProjects\oop_project\classes\class_sysfacade.py: classes.class_sysfacade: TRYING: GET AMOUNT |
+2026-05-03 20:20:34,793 | (ERROR)->| PAYMENT DENIED: INVALID CARD DETAILS |
+2026-05-03 20:20:54,116 | (ERROR)->| PAYMENT DENIED: INVALID CARD DETAILS |
+2026-05-03 20:25:25,234 | (INFO)->| SOFTWARE START |
+2026-05-03 20:25:25,235 | (INFO)->| CONNECTION ESTABLISHED |
+2026-05-03 20:25:25,235 | (INFO)->| CURSOR APPLIED |
+2026-05-03 20:25:25,235 | (INFO)->| RAN QUERY |
+2026-05-03 20:25:25,235 | (INFO)->| CONNECTION CLOSED |
+2026-05-03 20:25:25,235 | (INFO)->| QUERY: 
+
+        CREATE TABLE IF NOT EXISTS items (
+            id          INTEGER PRIMARY KEY AUTOINCREMENT,
+            name        TEXT    NOT NULL,
+            price       REAL    NOT NULL        
+        );
+    
+ RAN SUCCESSFULLY |
+2026-05-03 20:25:25,235 | (INFO)->| TABLE items CREATED |
+2026-05-03 20:25:25,235 | (INFO)->| CONNECTION ESTABLISHED |
+2026-05-03 20:25:25,235 | (INFO)->| CURSOR APPLIED |
+2026-05-03 20:25:25,236 | (INFO)->| RAN QUERY |
+2026-05-03 20:25:25,236 | (INFO)->| CONNECTION CLOSED |
+2026-05-03 20:25:25,236 | (INFO)->| QUERY: 
+
+        CREATE TABLE IF NOT EXISTS customers (
+            id                  INTEGER PRIMARY KEY AUTOINCREMENT,
+            first_name          TEXT    NOT NULL,
+            last_name           TEXT    NOT NULL,
+            email               TEXT    NOT NULL UNIQUE,
+            delivery_address    TEXT    NOT NULL,
+            account_type        TEXT    NOT NULL DEFAULT 'reg',
+            discount            REAL             DEFAULT 0,
+            gifted              TEXT             DEFAULT '[]'  
+        );
+    
+ RAN SUCCESSFULLY |
+2026-05-03 20:25:25,236 | (INFO)->| TABLE customers CREATED |
+2026-05-03 20:25:25,236 | (INFO)->| CONNECTION ESTABLISHED |
+2026-05-03 20:25:25,236 | (INFO)->| CURSOR APPLIED |
+2026-05-03 20:25:25,236 | (INFO)->| RAN QUERY |
+2026-05-03 20:25:25,236 | (INFO)->| CONNECTION CLOSED |
+2026-05-03 20:25:25,236 | (INFO)->| QUERY: 
+
+        CREATE TABLE IF NOT EXISTS orders (
+            id                  INTEGER PRIMARY KEY AUTOINCREMENT,
+            name                TEXT    NOT NULL,
+            delivery_address    TEXT    NOT NULL,
+            items               TEXT    NOT NULL DEFAULT '[]',
+            customer_id         INTEGER NOT NULL,
+            total_price         REAL    NOT NULL,
+            payment_method      TEXT    NOT NULL,
+            date                TEXT    NOT NULL,
+            order_type          TEXT    NOT NULL DEFAULT 'reg',
+            FOREIGN KEY (customer_id) REFERENCES customers(id)
+        );
+    
+ RAN SUCCESSFULLY |
+2026-05-03 20:25:25,236 | (INFO)->| TABLE orders CREATED |
+2026-05-03 20:25:25,237 | (INFO)->| CONNECTION ESTABLISHED |
+2026-05-03 20:25:25,237 | (INFO)->| CURSOR APPLIED |
+2026-05-03 20:25:25,237 | (INFO)->| RAN QUERY |
+2026-05-03 20:25:25,237 | (INFO)->| CONNECTION CLOSED |
+2026-05-03 20:25:25,237 | (INFO)->| QUERY: 
+
+        CREATE TABLE IF NOT EXISTS customer_favorites (
+            id          INTEGER PRIMARY KEY AUTOINCREMENT,
+            customer_id INTEGER NOT NULL,
+            item_id     INTEGER NOT NULL,
+            UNIQUE(customer_id, item_id),           -- no duplicates
+            FOREIGN KEY (customer_id) REFERENCES customers(id),
+            FOREIGN KEY (item_id)     REFERENCES items(id)
+        );
+    
+ RAN SUCCESSFULLY |
+2026-05-03 20:25:25,237 | (INFO)->| TABLE customer_favorites CREATED |
+2026-05-03 20:25:25,237 | (INFO)->| DATABASE SETUP COMPLETE |
+2026-05-03 20:25:32,607 | (INFO)->| CHECKING NAME CONTEXT FOR noam |
+2026-05-03 20:25:32,607 | (INFO)->| CHECKING NAME CONTEXT FOR binyamin |
+2026-05-03 20:25:32,607 | (INFO)->| C:\Users\shlom\PycharmProjects\oop_project\db_actions\db_act.py,db_actions.db_act
+ TRYING: RETRIEVE CUSTOMER BY NAME |
+2026-05-03 20:25:32,608 | (INFO)->| CONNECTION ESTABLISHED |
+2026-05-03 20:25:32,608 | (INFO)->| APPLIED CURSOR |
+2026-05-03 20:25:32,609 | (INFO)->| RAN QUERY |
+2026-05-03 20:25:32,609 | (INFO)->| NO FETCHED RESULTS |
+2026-05-03 20:25:32,609 | (INFO)->| 
+CONNECTION CLOSED |
+2026-05-03 20:25:32,609 | (INFO)->| QUERY: 
+
+            SELECT * FROM customers WHERE first_name = ? AND last_name = ?
+            
+ RAN SUCCESSFULLY |
+2026-05-03 20:25:32,609 | (INFO)->| NEW CUSTOMER'S NAME: noam binyamin |
+2026-05-03 20:25:38,114 | (INFO)->| CHECKING EMAIL CONTEXT FOR noam123@gmail.com |
+2026-05-03 20:25:38,115 | (INFO)->| NEW CUSTOMER'S EMAIL: noam123@gmail.com |
+2026-05-03 20:25:48,936 | (INFO)->| CHECKING ADDRESS CONTEXT FOR weizman 123 asdf |
+2026-05-03 20:25:48,937 | (INFO)->| NEW CUSTOMER'S ADDRESS: weizman 123 asdf |
+2026-05-03 20:25:48,937 | (INFO)->| NEW CUSTOMER'S DATA OBTAINED. REDIRECTING TO db_act |
+2026-05-03 20:25:48,938 | (INFO)->| CONNECTION ESTABLISHED |
+2026-05-03 20:25:48,938 | (INFO)->| CURSOR APPLIED |
+2026-05-03 20:25:48,968 | (INFO)->| RAN QUERY |
+2026-05-03 20:25:48,968 | (INFO)->| CONNECTION CLOSED |
+2026-05-03 20:25:48,968 | (INFO)->| QUERY: 
+INSERT INTO customers (first_name, last_name, email, delivery_address,
+               account_type, discount, gifted)
+               VALUES(?,?,?,?,'reg',0,'[]')
+ RAN SUCCESSFULLY |
+2026-05-03 20:26:00,655 | (INFO)->| CHECKING NAME CONTEXT FOR shlomo |
+2026-05-03 20:26:00,655 | (INFO)->| CHECKING NAME CONTEXT FOR binyamin |
+2026-05-03 20:26:00,655 | (INFO)->| CHECKING NAME CONTEXT FOR shlomo |
+2026-05-03 20:26:00,655 | (INFO)->| CHECKING NAME CONTEXT FOR binyamin |
+2026-05-03 20:26:00,655 | (INFO)->| C:\Users\shlom\PycharmProjects\oop_project\db_actions\db_act.py,db_actions.db_act
+ TRYING: RETRIEVE CUSTOMER BY NAME |
+2026-05-03 20:26:00,657 | (INFO)->| CONNECTION ESTABLISHED |
+2026-05-03 20:26:00,657 | (INFO)->| APPLIED CURSOR |
+2026-05-03 20:26:00,657 | (INFO)->| RAN QUERY |
+2026-05-03 20:26:00,657 | (INFO)->| QUERY FETCHED RESULTS |
+2026-05-03 20:26:00,657 | (INFO)->| 
+CONNECTION CLOSED |
+2026-05-03 20:26:00,657 | (INFO)->| QUERY: 
+
+            SELECT * FROM customers WHERE first_name = ? AND last_name = ?
+            
+ RAN SUCCESSFULLY |
+2026-05-03 20:26:00,657 | (INFO)->| <bound method Customers.fullname of <classes.class_customers.Customers object at 0x000001C530E55A90>>'S ID SET TO: None |
+2026-05-03 20:26:00,658 | (INFO)->| FIRST NAME SET TO: shlomo |
+2026-05-03 20:26:00,658 | (INFO)->| LAST NAME SET TO: binyamin |
+2026-05-03 20:26:00,658 | (INFO)->| <bound method Customers.fullname of <classes.class_customers.Customers object at 0x000001C530E55A90>>'S EMAIL SET TO: shlomobinyamin2003@gmail.com |
+2026-05-03 20:26:00,658 | (INFO)->| <bound method Customers.fullname of <classes.class_customers.Customers object at 0x000001C530E55A90>>'S ADDRESS SET TO: weizman12 |
+2026-05-03 20:26:00,658 | (INFO)->| <bound method Customers.fullname of <classes.class_customers.Customers object at 0x000001C530E55A90>> TYPE SET TO: reg |
+2026-05-03 20:26:00,658 | (ERROR)->| CUSTOMER IS NOT VIP. CANNOT GIVE DISCOUNT |
+2026-05-03 20:26:00,658 | (INFO)->| <bound method Customers.fullname of <classes.class_customers.Customers object at 0x000001C530E55A90>>'S ITEMS LIST MODIFIED |
+2026-05-03 20:26:00,658 | (INFO)->| <bound method Customers.fullname of <classes.class_customers.Customers object at 0x000001C530E55A90>> WAS GIFTED |
+2026-05-03 20:26:00,658 | (INFO)->| <bound method Customers.fullname of <classes.class_customers.Customers object at 0x000001C530E55A90>> SAVED PAYMENT PaymentMethod: None |
+2026-05-03 20:26:00,658 | (INFO)->| <bound method Customers.fullname of <classes.class_customers.Customers object at 0x000001C530E55A90>>'S ID SET TO: 1 |
+2026-05-03 20:26:00,658 | (INFO)->| CONNECTION ESTABLISHED |
+2026-05-03 20:26:00,658 | (INFO)->| APPLIED CURSOR |
+2026-05-03 20:26:00,658 | (INFO)->| RAN QUERY |
+2026-05-03 20:26:00,658 | (INFO)->| NO FETCHED RESULTS |
+2026-05-03 20:26:00,658 | (INFO)->| 
+CONNECTION CLOSED |
+2026-05-03 20:26:00,658 | (INFO)->| QUERY: 
+
+        SELECT items.id, items.name, items.price
+        FROM customer_favorites
+        JOIN items ON customer_favorites.item_id = items.id
+        WHERE customer_favorites.customer_id = ?
+    
+ RAN SUCCESSFULLY |
+2026-05-03 20:26:00,658 | (INFO)->| <bound method Customers.fullname of <classes.class_customers.Customers object at 0x000001C530E55A90>>'S ITEMS LIST MODIFIED |
+2026-05-03 20:26:00,659 | (INFO)->| ROW MAPPED TO CUSTOMER: <bound method Customers.fullname of <classes.class_customers.Customers object at 0x000001C530E55A90>> |
+2026-05-03 20:26:00,659 | (INFO)->| MANAGED TO GET USER FROM DB |
+2026-05-03 20:26:00,659 | (INFO)->| SET NEW USER PREFERENCES |
+2026-05-03 20:26:03,805 | (INFO)->| GIFTING STARTED |
+2026-05-03 20:26:06,113 | (INFO)->| GIFT MONEY SELECTED. |
+2026-05-03 20:26:06,114 | (INFO)->| C:\Users\shlom\PycharmProjects\oop_project\classes\class_sysfacade.py: classes.class_sysfacade: TRYING: GET CUSTOMER |
+2026-05-03 20:26:10,209 | (ERROR)->| C:\Users\shlom\PycharmProjects\oop_project\classes\class_sysfacade.py: classes.class_sysfacade: FAILED FINDING CUSTOMER. |
+2026-05-03 20:26:17,128 | (INFO)->| C:\Users\shlom\PycharmProjects\oop_project\classes\class_sysfacade.py: classes.class_sysfacade: TRYING: GET CUSTOMER |
+2026-05-03 20:26:20,830 | (INFO)->| C:\Users\shlom\PycharmProjects\oop_project\db_actions\db_act.py,db_actions.db_act
+ TRYING: RETRIEVE CUSTOMER BY NAME |
+2026-05-03 20:26:20,832 | (INFO)->| CONNECTION ESTABLISHED |
+2026-05-03 20:26:20,832 | (INFO)->| APPLIED CURSOR |
+2026-05-03 20:26:20,833 | (INFO)->| RAN QUERY |
+2026-05-03 20:26:20,834 | (INFO)->| QUERY FETCHED RESULTS |
+2026-05-03 20:26:20,834 | (INFO)->| 
+CONNECTION CLOSED |
+2026-05-03 20:26:20,834 | (INFO)->| QUERY: 
+
+            SELECT * FROM customers WHERE first_name = ? AND last_name = ?
+            
+ RAN SUCCESSFULLY |
+2026-05-03 20:26:20,834 | (INFO)->| <bound method Customers.fullname of <classes.class_customers.Customers object at 0x000001C530E1A710>>'S ID SET TO: None |
+2026-05-03 20:26:20,834 | (INFO)->| FIRST NAME SET TO: noam |
+2026-05-03 20:26:20,834 | (INFO)->| LAST NAME SET TO: binyamin |
+2026-05-03 20:26:20,834 | (INFO)->| <bound method Customers.fullname of <classes.class_customers.Customers object at 0x000001C530E1A710>>'S EMAIL SET TO: noam123@gmail.com |
+2026-05-03 20:26:20,834 | (INFO)->| <bound method Customers.fullname of <classes.class_customers.Customers object at 0x000001C530E1A710>>'S ADDRESS SET TO: weizman 123 asdf |
+2026-05-03 20:26:20,834 | (INFO)->| <bound method Customers.fullname of <classes.class_customers.Customers object at 0x000001C530E1A710>> TYPE SET TO: reg |
+2026-05-03 20:26:20,834 | (ERROR)->| CUSTOMER IS NOT VIP. CANNOT GIVE DISCOUNT |
+2026-05-03 20:26:20,834 | (INFO)->| <bound method Customers.fullname of <classes.class_customers.Customers object at 0x000001C530E1A710>>'S ITEMS LIST MODIFIED |
+2026-05-03 20:26:20,834 | (INFO)->| <bound method Customers.fullname of <classes.class_customers.Customers object at 0x000001C530E1A710>> WAS GIFTED |
+2026-05-03 20:26:20,834 | (INFO)->| <bound method Customers.fullname of <classes.class_customers.Customers object at 0x000001C530E1A710>> SAVED PAYMENT PaymentMethod: None |
+2026-05-03 20:26:20,834 | (INFO)->| <bound method Customers.fullname of <classes.class_customers.Customers object at 0x000001C530E1A710>>'S ID SET TO: 3 |
+2026-05-03 20:26:20,834 | (INFO)->| CONNECTION ESTABLISHED |
+2026-05-03 20:26:20,834 | (INFO)->| APPLIED CURSOR |
+2026-05-03 20:26:20,834 | (INFO)->| RAN QUERY |
+2026-05-03 20:26:20,834 | (INFO)->| NO FETCHED RESULTS |
+2026-05-03 20:26:20,834 | (INFO)->| 
+CONNECTION CLOSED |
+2026-05-03 20:26:20,834 | (INFO)->| QUERY: 
+
+        SELECT items.id, items.name, items.price
+        FROM customer_favorites
+        JOIN items ON customer_favorites.item_id = items.id
+        WHERE customer_favorites.customer_id = ?
+    
+ RAN SUCCESSFULLY |
+2026-05-03 20:26:20,834 | (INFO)->| <bound method Customers.fullname of <classes.class_customers.Customers object at 0x000001C530E1A710>>'S ITEMS LIST MODIFIED |
+2026-05-03 20:26:20,835 | (INFO)->| ROW MAPPED TO CUSTOMER: <bound method Customers.fullname of <classes.class_customers.Customers object at 0x000001C530E1A710>> |
+2026-05-03 20:26:20,835 | (INFO)->| C:\Users\shlom\PycharmProjects\oop_project\classes\class_sysfacade.py: classes.class_sysfacade: TRYING: GET AMOUNT |
+2026-05-03 20:26:38,264 | (ERROR)->| 1234 1234 1234 1234 is not valid |
+2026-05-03 20:26:49,269 | (ERROR)->| 2012-12-01 is not valid |
+2026-05-03 20:27:12,925 | (INFO)->| SOFTWARE START |
+2026-05-03 20:27:12,925 | (INFO)->| CONNECTION ESTABLISHED |
+2026-05-03 20:27:12,926 | (INFO)->| CURSOR APPLIED |
+2026-05-03 20:27:12,926 | (INFO)->| RAN QUERY |
+2026-05-03 20:27:12,926 | (INFO)->| CONNECTION CLOSED |
+2026-05-03 20:27:12,926 | (INFO)->| QUERY: 
+
+        CREATE TABLE IF NOT EXISTS items (
+            id          INTEGER PRIMARY KEY AUTOINCREMENT,
+            name        TEXT    NOT NULL,
+            price       REAL    NOT NULL        
+        );
+    
+ RAN SUCCESSFULLY |
+2026-05-03 20:27:12,926 | (INFO)->| TABLE items CREATED |
+2026-05-03 20:27:12,926 | (INFO)->| CONNECTION ESTABLISHED |
+2026-05-03 20:27:12,926 | (INFO)->| CURSOR APPLIED |
+2026-05-03 20:27:12,927 | (INFO)->| RAN QUERY |
+2026-05-03 20:27:12,927 | (INFO)->| CONNECTION CLOSED |
+2026-05-03 20:27:12,927 | (INFO)->| QUERY: 
+
+        CREATE TABLE IF NOT EXISTS customers (
+            id                  INTEGER PRIMARY KEY AUTOINCREMENT,
+            first_name          TEXT    NOT NULL,
+            last_name           TEXT    NOT NULL,
+            email               TEXT    NOT NULL UNIQUE,
+            delivery_address    TEXT    NOT NULL,
+            account_type        TEXT    NOT NULL DEFAULT 'reg',
+            discount            REAL             DEFAULT 0,
+            gifted              TEXT             DEFAULT '[]'  
+        );
+    
+ RAN SUCCESSFULLY |
+2026-05-03 20:27:12,927 | (INFO)->| TABLE customers CREATED |
+2026-05-03 20:27:12,927 | (INFO)->| CONNECTION ESTABLISHED |
+2026-05-03 20:27:12,927 | (INFO)->| CURSOR APPLIED |
+2026-05-03 20:27:12,927 | (INFO)->| RAN QUERY |
+2026-05-03 20:27:12,927 | (INFO)->| CONNECTION CLOSED |
+2026-05-03 20:27:12,927 | (INFO)->| QUERY: 
+
+        CREATE TABLE IF NOT EXISTS orders (
+            id                  INTEGER PRIMARY KEY AUTOINCREMENT,
+            name                TEXT    NOT NULL,
+            delivery_address    TEXT    NOT NULL,
+            items               TEXT    NOT NULL DEFAULT '[]',
+            customer_id         INTEGER NOT NULL,
+            total_price         REAL    NOT NULL,
+            payment_method      TEXT    NOT NULL,
+            date                TEXT    NOT NULL,
+            order_type          TEXT    NOT NULL DEFAULT 'reg',
+            FOREIGN KEY (customer_id) REFERENCES customers(id)
+        );
+    
+ RAN SUCCESSFULLY |
+2026-05-03 20:27:12,927 | (INFO)->| TABLE orders CREATED |
+2026-05-03 20:27:12,928 | (INFO)->| CONNECTION ESTABLISHED |
+2026-05-03 20:27:12,928 | (INFO)->| CURSOR APPLIED |
+2026-05-03 20:27:12,928 | (INFO)->| RAN QUERY |
+2026-05-03 20:27:12,928 | (INFO)->| CONNECTION CLOSED |
+2026-05-03 20:27:12,928 | (INFO)->| QUERY: 
+
+        CREATE TABLE IF NOT EXISTS customer_favorites (
+            id          INTEGER PRIMARY KEY AUTOINCREMENT,
+            customer_id INTEGER NOT NULL,
+            item_id     INTEGER NOT NULL,
+            UNIQUE(customer_id, item_id),           -- no duplicates
+            FOREIGN KEY (customer_id) REFERENCES customers(id),
+            FOREIGN KEY (item_id)     REFERENCES items(id)
+        );
+    
+ RAN SUCCESSFULLY |
+2026-05-03 20:27:12,928 | (INFO)->| TABLE customer_favorites CREATED |
+2026-05-03 20:27:12,928 | (INFO)->| DATABASE SETUP COMPLETE |
+2026-05-03 20:27:18,822 | (INFO)->| CHECKING NAME CONTEXT FOR shlomo |
+2026-05-03 20:27:18,822 | (INFO)->| CHECKING NAME CONTEXT FOR binyamin |
+2026-05-03 20:27:18,822 | (INFO)->| CHECKING NAME CONTEXT FOR shlomo |
+2026-05-03 20:27:18,822 | (INFO)->| CHECKING NAME CONTEXT FOR binyamin |
+2026-05-03 20:27:18,823 | (INFO)->| C:\Users\shlom\PycharmProjects\oop_project\db_actions\db_act.py,db_actions.db_act
+ TRYING: RETRIEVE CUSTOMER BY NAME |
+2026-05-03 20:27:18,824 | (INFO)->| CONNECTION ESTABLISHED |
+2026-05-03 20:27:18,824 | (INFO)->| APPLIED CURSOR |
+2026-05-03 20:27:18,824 | (INFO)->| RAN QUERY |
+2026-05-03 20:27:18,825 | (INFO)->| QUERY FETCHED RESULTS |
+2026-05-03 20:27:18,825 | (INFO)->| 
+CONNECTION CLOSED |
+2026-05-03 20:27:18,825 | (INFO)->| QUERY: 
+
+            SELECT * FROM customers WHERE first_name = ? AND last_name = ?
+            
+ RAN SUCCESSFULLY |
+2026-05-03 20:27:18,825 | (INFO)->| <bound method Customers.fullname of <classes.class_customers.Customers object at 0x000002594B845A90>>'S ID SET TO: None |
+2026-05-03 20:27:18,825 | (INFO)->| FIRST NAME SET TO: shlomo |
+2026-05-03 20:27:18,825 | (INFO)->| LAST NAME SET TO: binyamin |
+2026-05-03 20:27:18,825 | (INFO)->| <bound method Customers.fullname of <classes.class_customers.Customers object at 0x000002594B845A90>>'S EMAIL SET TO: shlomobinyamin2003@gmail.com |
+2026-05-03 20:27:18,825 | (INFO)->| <bound method Customers.fullname of <classes.class_customers.Customers object at 0x000002594B845A90>>'S ADDRESS SET TO: weizman12 |
+2026-05-03 20:27:18,825 | (INFO)->| <bound method Customers.fullname of <classes.class_customers.Customers object at 0x000002594B845A90>> TYPE SET TO: reg |
+2026-05-03 20:27:18,825 | (ERROR)->| CUSTOMER IS NOT VIP. CANNOT GIVE DISCOUNT |
+2026-05-03 20:27:18,825 | (INFO)->| <bound method Customers.fullname of <classes.class_customers.Customers object at 0x000002594B845A90>>'S ITEMS LIST MODIFIED |
+2026-05-03 20:27:18,825 | (INFO)->| <bound method Customers.fullname of <classes.class_customers.Customers object at 0x000002594B845A90>> WAS GIFTED |
+2026-05-03 20:27:18,825 | (INFO)->| <bound method Customers.fullname of <classes.class_customers.Customers object at 0x000002594B845A90>> SAVED PAYMENT PaymentMethod: None |
+2026-05-03 20:27:18,825 | (INFO)->| <bound method Customers.fullname of <classes.class_customers.Customers object at 0x000002594B845A90>>'S ID SET TO: 1 |
+2026-05-03 20:27:18,825 | (INFO)->| CONNECTION ESTABLISHED |
+2026-05-03 20:27:18,825 | (INFO)->| APPLIED CURSOR |
+2026-05-03 20:27:18,825 | (INFO)->| RAN QUERY |
+2026-05-03 20:27:18,825 | (INFO)->| NO FETCHED RESULTS |
+2026-05-03 20:27:18,825 | (INFO)->| 
+CONNECTION CLOSED |
+2026-05-03 20:27:18,825 | (INFO)->| QUERY: 
+
+        SELECT items.id, items.name, items.price
+        FROM customer_favorites
+        JOIN items ON customer_favorites.item_id = items.id
+        WHERE customer_favorites.customer_id = ?
+    
+ RAN SUCCESSFULLY |
+2026-05-03 20:27:18,825 | (INFO)->| <bound method Customers.fullname of <classes.class_customers.Customers object at 0x000002594B845A90>>'S ITEMS LIST MODIFIED |
+2026-05-03 20:27:18,826 | (INFO)->| ROW MAPPED TO CUSTOMER: <bound method Customers.fullname of <classes.class_customers.Customers object at 0x000002594B845A90>> |
+2026-05-03 20:27:18,826 | (INFO)->| MANAGED TO GET USER FROM DB |
+2026-05-03 20:27:18,826 | (INFO)->| SET NEW USER PREFERENCES |
+2026-05-03 20:27:18,828 | (INFO)->| Logged In: ————————> Customer Details:
+   id:1
+   name: <bound method Customers.fullname of <classes.class_customers.Customers object at 0x000002594B845A90>>
+   email: shlomobinyamin2003@gmail.com
+   address: weizman12
+   reg (0)
+   gifts: [<classes.class_gifts.CashGift object at 0x000002594B845BE0>, <classes.class_gifts.CashGift object at 0x000002594B809810>]
+   favorite list: [] |
+2026-05-03 20:27:18,828 | (INFO)->| preferences.ini loaded |
+2026-05-03 20:27:20,832 | (INFO)->| GIFTING STARTED |
+2026-05-03 20:27:23,223 | (INFO)->| GIFT MONEY SELECTED. |
+2026-05-03 20:27:23,224 | (INFO)->| C:\Users\shlom\PycharmProjects\oop_project\classes\class_sysfacade.py: classes.class_sysfacade: TRYING: GET CUSTOMER |
+2026-05-03 20:27:25,850 | (INFO)->| C:\Users\shlom\PycharmProjects\oop_project\db_actions\db_act.py,db_actions.db_act
+ TRYING: RETRIEVE CUSTOMER BY NAME |
+2026-05-03 20:27:25,852 | (INFO)->| CONNECTION ESTABLISHED |
+2026-05-03 20:27:25,852 | (INFO)->| APPLIED CURSOR |
+2026-05-03 20:27:25,853 | (INFO)->| RAN QUERY |
+2026-05-03 20:27:25,854 | (INFO)->| QUERY FETCHED RESULTS |
+2026-05-03 20:27:25,854 | (INFO)->| 
+CONNECTION CLOSED |
+2026-05-03 20:27:25,854 | (INFO)->| QUERY: 
+
+            SELECT * FROM customers WHERE first_name = ? AND last_name = ?
+            
+ RAN SUCCESSFULLY |
+2026-05-03 20:27:25,854 | (INFO)->| <bound method Customers.fullname of <classes.class_customers.Customers object at 0x000002594B80A710>>'S ID SET TO: None |
+2026-05-03 20:27:25,854 | (INFO)->| FIRST NAME SET TO: noam |
+2026-05-03 20:27:25,854 | (INFO)->| LAST NAME SET TO: binyamin |
+2026-05-03 20:27:25,854 | (INFO)->| <bound method Customers.fullname of <classes.class_customers.Customers object at 0x000002594B80A710>>'S EMAIL SET TO: noam123@gmail.com |
+2026-05-03 20:27:25,854 | (INFO)->| <bound method Customers.fullname of <classes.class_customers.Customers object at 0x000002594B80A710>>'S ADDRESS SET TO: weizman 123 asdf |
+2026-05-03 20:27:25,854 | (INFO)->| <bound method Customers.fullname of <classes.class_customers.Customers object at 0x000002594B80A710>> TYPE SET TO: reg |
+2026-05-03 20:27:25,854 | (ERROR)->| CUSTOMER IS NOT VIP. CANNOT GIVE DISCOUNT |
+2026-05-03 20:27:25,854 | (INFO)->| <bound method Customers.fullname of <classes.class_customers.Customers object at 0x000002594B80A710>>'S ITEMS LIST MODIFIED |
+2026-05-03 20:27:25,854 | (INFO)->| <bound method Customers.fullname of <classes.class_customers.Customers object at 0x000002594B80A710>> WAS GIFTED |
+2026-05-03 20:27:25,854 | (INFO)->| <bound method Customers.fullname of <classes.class_customers.Customers object at 0x000002594B80A710>> SAVED PAYMENT PaymentMethod: None |
+2026-05-03 20:27:25,854 | (INFO)->| <bound method Customers.fullname of <classes.class_customers.Customers object at 0x000002594B80A710>>'S ID SET TO: 3 |
+2026-05-03 20:27:25,855 | (INFO)->| CONNECTION ESTABLISHED |
+2026-05-03 20:27:25,855 | (INFO)->| APPLIED CURSOR |
+2026-05-03 20:27:25,855 | (INFO)->| RAN QUERY |
+2026-05-03 20:27:25,855 | (INFO)->| NO FETCHED RESULTS |
+2026-05-03 20:27:25,855 | (INFO)->| 
+CONNECTION CLOSED |
+2026-05-03 20:27:25,855 | (INFO)->| QUERY: 
+
+        SELECT items.id, items.name, items.price
+        FROM customer_favorites
+        JOIN items ON customer_favorites.item_id = items.id
+        WHERE customer_favorites.customer_id = ?
+    
+ RAN SUCCESSFULLY |
+2026-05-03 20:27:25,855 | (INFO)->| <bound method Customers.fullname of <classes.class_customers.Customers object at 0x000002594B80A710>>'S ITEMS LIST MODIFIED |
+2026-05-03 20:27:25,855 | (INFO)->| ROW MAPPED TO CUSTOMER: <bound method Customers.fullname of <classes.class_customers.Customers object at 0x000002594B80A710>> |
+2026-05-03 20:27:25,855 | (INFO)->| C:\Users\shlom\PycharmProjects\oop_project\classes\class_sysfacade.py: classes.class_sysfacade: TRYING: GET AMOUNT |
+2026-05-03 20:27:36,906 | (ERROR)->| 1234 1234 1234 1234 is not valid |
+2026-05-03 20:27:43,490 | (ERROR)->| 1234 is not valid |
+2026-05-03 20:27:52,628 | (ERROR)->| PAYMENT DENIED: INVALID CARD DETAILS |
+2026-05-03 20:28:09,754 | (ERROR)->| PAYMENT DENIED: INVALID CARD DETAILS |
+2026-05-03 20:28:20,051 | (ERROR)->| 2032-12-01 is not valid |
+2026-05-03 20:29:04,591 | (ERROR)->| 2029-08-01 is not valid |
+2026-05-03 20:29:17,789 | (INFO)->| SOFTWARE START |
+2026-05-03 20:29:17,790 | (INFO)->| CONNECTION ESTABLISHED |
+2026-05-03 20:29:17,790 | (INFO)->| CURSOR APPLIED |
+2026-05-03 20:29:17,790 | (INFO)->| RAN QUERY |
+2026-05-03 20:29:17,790 | (INFO)->| CONNECTION CLOSED |
+2026-05-03 20:29:17,790 | (INFO)->| QUERY: 
+
+        CREATE TABLE IF NOT EXISTS items (
+            id          INTEGER PRIMARY KEY AUTOINCREMENT,
+            name        TEXT    NOT NULL,
+            price       REAL    NOT NULL        
+        );
+    
+ RAN SUCCESSFULLY |
+2026-05-03 20:29:17,790 | (INFO)->| TABLE items CREATED |
+2026-05-03 20:29:17,790 | (INFO)->| CONNECTION ESTABLISHED |
+2026-05-03 20:29:17,790 | (INFO)->| CURSOR APPLIED |
+2026-05-03 20:29:17,791 | (INFO)->| RAN QUERY |
+2026-05-03 20:29:17,791 | (INFO)->| CONNECTION CLOSED |
+2026-05-03 20:29:17,791 | (INFO)->| QUERY: 
+
+        CREATE TABLE IF NOT EXISTS customers (
+            id                  INTEGER PRIMARY KEY AUTOINCREMENT,
+            first_name          TEXT    NOT NULL,
+            last_name           TEXT    NOT NULL,
+            email               TEXT    NOT NULL UNIQUE,
+            delivery_address    TEXT    NOT NULL,
+            account_type        TEXT    NOT NULL DEFAULT 'reg',
+            discount            REAL             DEFAULT 0,
+            gifted              TEXT             DEFAULT '[]'  
+        );
+    
+ RAN SUCCESSFULLY |
+2026-05-03 20:29:17,791 | (INFO)->| TABLE customers CREATED |
+2026-05-03 20:29:17,791 | (INFO)->| CONNECTION ESTABLISHED |
+2026-05-03 20:29:17,791 | (INFO)->| CURSOR APPLIED |
+2026-05-03 20:29:17,791 | (INFO)->| RAN QUERY |
+2026-05-03 20:29:17,791 | (INFO)->| CONNECTION CLOSED |
+2026-05-03 20:29:17,791 | (INFO)->| QUERY: 
+
+        CREATE TABLE IF NOT EXISTS orders (
+            id                  INTEGER PRIMARY KEY AUTOINCREMENT,
+            name                TEXT    NOT NULL,
+            delivery_address    TEXT    NOT NULL,
+            items               TEXT    NOT NULL DEFAULT '[]',
+            customer_id         INTEGER NOT NULL,
+            total_price         REAL    NOT NULL,
+            payment_method      TEXT    NOT NULL,
+            date                TEXT    NOT NULL,
+            order_type          TEXT    NOT NULL DEFAULT 'reg',
+            FOREIGN KEY (customer_id) REFERENCES customers(id)
+        );
+    
+ RAN SUCCESSFULLY |
+2026-05-03 20:29:17,791 | (INFO)->| TABLE orders CREATED |
+2026-05-03 20:29:17,791 | (INFO)->| CONNECTION ESTABLISHED |
+2026-05-03 20:29:17,791 | (INFO)->| CURSOR APPLIED |
+2026-05-03 20:29:17,791 | (INFO)->| RAN QUERY |
+2026-05-03 20:29:17,791 | (INFO)->| CONNECTION CLOSED |
+2026-05-03 20:29:17,791 | (INFO)->| QUERY: 
+
+        CREATE TABLE IF NOT EXISTS customer_favorites (
+            id          INTEGER PRIMARY KEY AUTOINCREMENT,
+            customer_id INTEGER NOT NULL,
+            item_id     INTEGER NOT NULL,
+            UNIQUE(customer_id, item_id),           -- no duplicates
+            FOREIGN KEY (customer_id) REFERENCES customers(id),
+            FOREIGN KEY (item_id)     REFERENCES items(id)
+        );
+    
+ RAN SUCCESSFULLY |
+2026-05-03 20:29:17,791 | (INFO)->| TABLE customer_favorites CREATED |
+2026-05-03 20:29:17,791 | (INFO)->| DATABASE SETUP COMPLETE |
+2026-05-03 20:29:24,335 | (INFO)->| CHECKING NAME CONTEXT FOR shlomo |
+2026-05-03 20:29:24,335 | (INFO)->| CHECKING NAME CONTEXT FOR binyamin |
+2026-05-03 20:29:24,335 | (INFO)->| CHECKING NAME CONTEXT FOR shlomo |
+2026-05-03 20:29:24,335 | (INFO)->| CHECKING NAME CONTEXT FOR binyamin |
+2026-05-03 20:29:24,335 | (INFO)->| C:\Users\shlom\PycharmProjects\oop_project\db_actions\db_act.py,db_actions.db_act
+ TRYING: RETRIEVE CUSTOMER BY NAME |
+2026-05-03 20:29:24,336 | (INFO)->| CONNECTION ESTABLISHED |
+2026-05-03 20:29:24,336 | (INFO)->| APPLIED CURSOR |
+2026-05-03 20:29:24,336 | (INFO)->| RAN QUERY |
+2026-05-03 20:29:24,336 | (INFO)->| QUERY FETCHED RESULTS |
+2026-05-03 20:29:24,336 | (INFO)->| 
+CONNECTION CLOSED |
+2026-05-03 20:29:24,336 | (INFO)->| QUERY: 
+
+            SELECT * FROM customers WHERE first_name = ? AND last_name = ?
+            
+ RAN SUCCESSFULLY |
+2026-05-03 20:29:24,336 | (INFO)->| <bound method Customers.fullname of <classes.class_customers.Customers object at 0x000001F5369E5A90>>'S ID SET TO: None |
+2026-05-03 20:29:24,336 | (INFO)->| FIRST NAME SET TO: shlomo |
+2026-05-03 20:29:24,336 | (INFO)->| LAST NAME SET TO: binyamin |
+2026-05-03 20:29:24,336 | (INFO)->| <bound method Customers.fullname of <classes.class_customers.Customers object at 0x000001F5369E5A90>>'S EMAIL SET TO: shlomobinyamin2003@gmail.com |
+2026-05-03 20:29:24,336 | (INFO)->| <bound method Customers.fullname of <classes.class_customers.Customers object at 0x000001F5369E5A90>>'S ADDRESS SET TO: weizman12 |
+2026-05-03 20:29:24,336 | (INFO)->| <bound method Customers.fullname of <classes.class_customers.Customers object at 0x000001F5369E5A90>> TYPE SET TO: reg |
+2026-05-03 20:29:24,336 | (ERROR)->| CUSTOMER IS NOT VIP. CANNOT GIVE DISCOUNT |
+2026-05-03 20:29:24,337 | (INFO)->| <bound method Customers.fullname of <classes.class_customers.Customers object at 0x000001F5369E5A90>>'S ITEMS LIST MODIFIED |
+2026-05-03 20:29:24,337 | (INFO)->| <bound method Customers.fullname of <classes.class_customers.Customers object at 0x000001F5369E5A90>> WAS GIFTED |
+2026-05-03 20:29:24,337 | (INFO)->| <bound method Customers.fullname of <classes.class_customers.Customers object at 0x000001F5369E5A90>> SAVED PAYMENT PaymentMethod: None |
+2026-05-03 20:29:24,337 | (INFO)->| <bound method Customers.fullname of <classes.class_customers.Customers object at 0x000001F5369E5A90>>'S ID SET TO: 1 |
+2026-05-03 20:29:24,337 | (INFO)->| CONNECTION ESTABLISHED |
+2026-05-03 20:29:24,337 | (INFO)->| APPLIED CURSOR |
+2026-05-03 20:29:24,337 | (INFO)->| RAN QUERY |
+2026-05-03 20:29:24,337 | (INFO)->| NO FETCHED RESULTS |
+2026-05-03 20:29:24,337 | (INFO)->| 
+CONNECTION CLOSED |
+2026-05-03 20:29:24,337 | (INFO)->| QUERY: 
+
+        SELECT items.id, items.name, items.price
+        FROM customer_favorites
+        JOIN items ON customer_favorites.item_id = items.id
+        WHERE customer_favorites.customer_id = ?
+    
+ RAN SUCCESSFULLY |
+2026-05-03 20:29:24,337 | (INFO)->| <bound method Customers.fullname of <classes.class_customers.Customers object at 0x000001F5369E5A90>>'S ITEMS LIST MODIFIED |
+2026-05-03 20:29:24,337 | (INFO)->| ROW MAPPED TO CUSTOMER: <bound method Customers.fullname of <classes.class_customers.Customers object at 0x000001F5369E5A90>> |
+2026-05-03 20:29:24,337 | (INFO)->| MANAGED TO GET USER FROM DB |
+2026-05-03 20:29:24,338 | (INFO)->| SET NEW USER PREFERENCES |
+2026-05-03 20:29:24,340 | (INFO)->| Logged In: ————————> Customer Details:
+   id:1
+   name: <bound method Customers.fullname of <classes.class_customers.Customers object at 0x000001F5369E5A90>>
+   email: shlomobinyamin2003@gmail.com
+   address: weizman12
+   reg (0)
+   gifts: [<classes.class_gifts.CashGift object at 0x000001F5369E5BE0>, <classes.class_gifts.CashGift object at 0x000001F5369A9810>]
+   favorite list: [] |
+2026-05-03 20:29:24,340 | (INFO)->| preferences.ini loaded |
+2026-05-03 20:29:26,545 | (INFO)->| GIFTING STARTED |
+2026-05-03 20:29:27,176 | (INFO)->| GIFT MONEY SELECTED. |
+2026-05-03 20:29:27,177 | (INFO)->| C:\Users\shlom\PycharmProjects\oop_project\classes\class_sysfacade.py: classes.class_sysfacade: TRYING: GET CUSTOMER |
+2026-05-03 20:29:31,749 | (INFO)->| C:\Users\shlom\PycharmProjects\oop_project\db_actions\db_act.py,db_actions.db_act
+ TRYING: RETRIEVE CUSTOMER BY NAME |
+2026-05-03 20:29:31,750 | (INFO)->| CONNECTION ESTABLISHED |
+2026-05-03 20:29:31,751 | (INFO)->| APPLIED CURSOR |
+2026-05-03 20:29:31,752 | (INFO)->| RAN QUERY |
+2026-05-03 20:29:31,752 | (INFO)->| QUERY FETCHED RESULTS |
+2026-05-03 20:29:31,752 | (INFO)->| 
+CONNECTION CLOSED |
+2026-05-03 20:29:31,752 | (INFO)->| QUERY: 
+
+            SELECT * FROM customers WHERE first_name = ? AND last_name = ?
+            
+ RAN SUCCESSFULLY |
+2026-05-03 20:29:31,752 | (INFO)->| <bound method Customers.fullname of <classes.class_customers.Customers object at 0x000001F5369AA710>>'S ID SET TO: None |
+2026-05-03 20:29:31,752 | (INFO)->| FIRST NAME SET TO: noam |
+2026-05-03 20:29:31,752 | (INFO)->| LAST NAME SET TO: binyamin |
+2026-05-03 20:29:31,752 | (INFO)->| <bound method Customers.fullname of <classes.class_customers.Customers object at 0x000001F5369AA710>>'S EMAIL SET TO: noam123@gmail.com |
+2026-05-03 20:29:31,752 | (INFO)->| <bound method Customers.fullname of <classes.class_customers.Customers object at 0x000001F5369AA710>>'S ADDRESS SET TO: weizman 123 asdf |
+2026-05-03 20:29:31,752 | (INFO)->| <bound method Customers.fullname of <classes.class_customers.Customers object at 0x000001F5369AA710>> TYPE SET TO: reg |
+2026-05-03 20:29:31,752 | (ERROR)->| CUSTOMER IS NOT VIP. CANNOT GIVE DISCOUNT |
+2026-05-03 20:29:31,752 | (INFO)->| <bound method Customers.fullname of <classes.class_customers.Customers object at 0x000001F5369AA710>>'S ITEMS LIST MODIFIED |
+2026-05-03 20:29:31,752 | (INFO)->| <bound method Customers.fullname of <classes.class_customers.Customers object at 0x000001F5369AA710>> WAS GIFTED |
+2026-05-03 20:29:31,753 | (INFO)->| <bound method Customers.fullname of <classes.class_customers.Customers object at 0x000001F5369AA710>> SAVED PAYMENT PaymentMethod: None |
+2026-05-03 20:29:31,753 | (INFO)->| <bound method Customers.fullname of <classes.class_customers.Customers object at 0x000001F5369AA710>>'S ID SET TO: 3 |
+2026-05-03 20:29:31,753 | (INFO)->| CONNECTION ESTABLISHED |
+2026-05-03 20:29:31,753 | (INFO)->| APPLIED CURSOR |
+2026-05-03 20:29:31,753 | (INFO)->| RAN QUERY |
+2026-05-03 20:29:31,753 | (INFO)->| NO FETCHED RESULTS |
+2026-05-03 20:29:31,753 | (INFO)->| 
+CONNECTION CLOSED |
+2026-05-03 20:29:31,753 | (INFO)->| QUERY: 
+
+        SELECT items.id, items.name, items.price
+        FROM customer_favorites
+        JOIN items ON customer_favorites.item_id = items.id
+        WHERE customer_favorites.customer_id = ?
+    
+ RAN SUCCESSFULLY |
+2026-05-03 20:29:31,753 | (INFO)->| <bound method Customers.fullname of <classes.class_customers.Customers object at 0x000001F5369AA710>>'S ITEMS LIST MODIFIED |
+2026-05-03 20:29:31,753 | (INFO)->| ROW MAPPED TO CUSTOMER: <bound method Customers.fullname of <classes.class_customers.Customers object at 0x000001F5369AA710>> |
+2026-05-03 20:29:31,753 | (INFO)->| C:\Users\shlom\PycharmProjects\oop_project\classes\class_sysfacade.py: classes.class_sysfacade: TRYING: GET AMOUNT |
+2026-05-03 20:29:43,343 | (ERROR)->| 123 is not valid |
+2026-05-03 20:29:54,622 | (INFO)->| SOFTWARE START |
+2026-05-03 20:29:54,622 | (INFO)->| CONNECTION ESTABLISHED |
+2026-05-03 20:29:54,622 | (INFO)->| CURSOR APPLIED |
+2026-05-03 20:29:54,623 | (INFO)->| RAN QUERY |
+2026-05-03 20:29:54,623 | (INFO)->| CONNECTION CLOSED |
+2026-05-03 20:29:54,623 | (INFO)->| QUERY: 
+
+        CREATE TABLE IF NOT EXISTS items (
+            id          INTEGER PRIMARY KEY AUTOINCREMENT,
+            name        TEXT    NOT NULL,
+            price       REAL    NOT NULL        
+        );
+    
+ RAN SUCCESSFULLY |
+2026-05-03 20:29:54,623 | (INFO)->| TABLE items CREATED |
+2026-05-03 20:29:54,623 | (INFO)->| CONNECTION ESTABLISHED |
+2026-05-03 20:29:54,623 | (INFO)->| CURSOR APPLIED |
+2026-05-03 20:29:54,624 | (INFO)->| RAN QUERY |
+2026-05-03 20:29:54,624 | (INFO)->| CONNECTION CLOSED |
+2026-05-03 20:29:54,624 | (INFO)->| QUERY: 
+
+        CREATE TABLE IF NOT EXISTS customers (
+            id                  INTEGER PRIMARY KEY AUTOINCREMENT,
+            first_name          TEXT    NOT NULL,
+            last_name           TEXT    NOT NULL,
+            email               TEXT    NOT NULL UNIQUE,
+            delivery_address    TEXT    NOT NULL,
+            account_type        TEXT    NOT NULL DEFAULT 'reg',
+            discount            REAL             DEFAULT 0,
+            gifted              TEXT             DEFAULT '[]'  
+        );
+    
+ RAN SUCCESSFULLY |
+2026-05-03 20:29:54,624 | (INFO)->| TABLE customers CREATED |
+2026-05-03 20:29:54,624 | (INFO)->| CONNECTION ESTABLISHED |
+2026-05-03 20:29:54,624 | (INFO)->| CURSOR APPLIED |
+2026-05-03 20:29:54,624 | (INFO)->| RAN QUERY |
+2026-05-03 20:29:54,624 | (INFO)->| CONNECTION CLOSED |
+2026-05-03 20:29:54,624 | (INFO)->| QUERY: 
+
+        CREATE TABLE IF NOT EXISTS orders (
+            id                  INTEGER PRIMARY KEY AUTOINCREMENT,
+            name                TEXT    NOT NULL,
+            delivery_address    TEXT    NOT NULL,
+            items               TEXT    NOT NULL DEFAULT '[]',
+            customer_id         INTEGER NOT NULL,
+            total_price         REAL    NOT NULL,
+            payment_method      TEXT    NOT NULL,
+            date                TEXT    NOT NULL,
+            order_type          TEXT    NOT NULL DEFAULT 'reg',
+            FOREIGN KEY (customer_id) REFERENCES customers(id)
+        );
+    
+ RAN SUCCESSFULLY |
+2026-05-03 20:29:54,624 | (INFO)->| TABLE orders CREATED |
+2026-05-03 20:29:54,624 | (INFO)->| CONNECTION ESTABLISHED |
+2026-05-03 20:29:54,624 | (INFO)->| CURSOR APPLIED |
+2026-05-03 20:29:54,625 | (INFO)->| RAN QUERY |
+2026-05-03 20:29:54,625 | (INFO)->| CONNECTION CLOSED |
+2026-05-03 20:29:54,625 | (INFO)->| QUERY: 
+
+        CREATE TABLE IF NOT EXISTS customer_favorites (
+            id          INTEGER PRIMARY KEY AUTOINCREMENT,
+            customer_id INTEGER NOT NULL,
+            item_id     INTEGER NOT NULL,
+            UNIQUE(customer_id, item_id),           -- no duplicates
+            FOREIGN KEY (customer_id) REFERENCES customers(id),
+            FOREIGN KEY (item_id)     REFERENCES items(id)
+        );
+    
+ RAN SUCCESSFULLY |
+2026-05-03 20:29:54,625 | (INFO)->| TABLE customer_favorites CREATED |
+2026-05-03 20:29:54,625 | (INFO)->| DATABASE SETUP COMPLETE |
+2026-05-03 20:30:00,382 | (INFO)->| CHECKING NAME CONTEXT FOR shlomo |
+2026-05-03 20:30:00,383 | (INFO)->| CHECKING NAME CONTEXT FOR binyamin |
+2026-05-03 20:30:00,383 | (INFO)->| CHECKING NAME CONTEXT FOR shlomo |
+2026-05-03 20:30:00,383 | (INFO)->| CHECKING NAME CONTEXT FOR binyamin |
+2026-05-03 20:30:00,383 | (INFO)->| C:\Users\shlom\PycharmProjects\oop_project\db_actions\db_act.py,db_actions.db_act
+ TRYING: RETRIEVE CUSTOMER BY NAME |
+2026-05-03 20:30:00,384 | (INFO)->| CONNECTION ESTABLISHED |
+2026-05-03 20:30:00,384 | (INFO)->| APPLIED CURSOR |
+2026-05-03 20:30:00,384 | (INFO)->| RAN QUERY |
+2026-05-03 20:30:00,384 | (INFO)->| QUERY FETCHED RESULTS |
+2026-05-03 20:30:00,384 | (INFO)->| 
+CONNECTION CLOSED |
+2026-05-03 20:30:00,384 | (INFO)->| QUERY: 
+
+            SELECT * FROM customers WHERE first_name = ? AND last_name = ?
+            
+ RAN SUCCESSFULLY |
+2026-05-03 20:30:00,384 | (INFO)->| <bound method Customers.fullname of <classes.class_customers.Customers object at 0x000001A0AA835A90>>'S ID SET TO: None |
+2026-05-03 20:30:00,384 | (INFO)->| FIRST NAME SET TO: shlomo |
+2026-05-03 20:30:00,385 | (INFO)->| LAST NAME SET TO: binyamin |
+2026-05-03 20:30:00,385 | (INFO)->| <bound method Customers.fullname of <classes.class_customers.Customers object at 0x000001A0AA835A90>>'S EMAIL SET TO: shlomobinyamin2003@gmail.com |
+2026-05-03 20:30:00,385 | (INFO)->| <bound method Customers.fullname of <classes.class_customers.Customers object at 0x000001A0AA835A90>>'S ADDRESS SET TO: weizman12 |
+2026-05-03 20:30:00,385 | (INFO)->| <bound method Customers.fullname of <classes.class_customers.Customers object at 0x000001A0AA835A90>> TYPE SET TO: reg |
+2026-05-03 20:30:00,385 | (ERROR)->| CUSTOMER IS NOT VIP. CANNOT GIVE DISCOUNT |
+2026-05-03 20:30:00,386 | (INFO)->| <bound method Customers.fullname of <classes.class_customers.Customers object at 0x000001A0AA835A90>>'S ITEMS LIST MODIFIED |
+2026-05-03 20:30:00,386 | (INFO)->| <bound method Customers.fullname of <classes.class_customers.Customers object at 0x000001A0AA835A90>> WAS GIFTED |
+2026-05-03 20:30:00,386 | (INFO)->| <bound method Customers.fullname of <classes.class_customers.Customers object at 0x000001A0AA835A90>> SAVED PAYMENT PaymentMethod: None |
+2026-05-03 20:30:00,386 | (INFO)->| <bound method Customers.fullname of <classes.class_customers.Customers object at 0x000001A0AA835A90>>'S ID SET TO: 1 |
+2026-05-03 20:30:00,386 | (INFO)->| CONNECTION ESTABLISHED |
+2026-05-03 20:30:00,386 | (INFO)->| APPLIED CURSOR |
+2026-05-03 20:30:00,386 | (INFO)->| RAN QUERY |
+2026-05-03 20:30:00,386 | (INFO)->| NO FETCHED RESULTS |
+2026-05-03 20:30:00,386 | (INFO)->| 
+CONNECTION CLOSED |
+2026-05-03 20:30:00,386 | (INFO)->| QUERY: 
+
+        SELECT items.id, items.name, items.price
+        FROM customer_favorites
+        JOIN items ON customer_favorites.item_id = items.id
+        WHERE customer_favorites.customer_id = ?
+    
+ RAN SUCCESSFULLY |
+2026-05-03 20:30:00,386 | (INFO)->| <bound method Customers.fullname of <classes.class_customers.Customers object at 0x000001A0AA835A90>>'S ITEMS LIST MODIFIED |
+2026-05-03 20:30:00,387 | (INFO)->| ROW MAPPED TO CUSTOMER: <bound method Customers.fullname of <classes.class_customers.Customers object at 0x000001A0AA835A90>> |
+2026-05-03 20:30:00,387 | (INFO)->| MANAGED TO GET USER FROM DB |
+2026-05-03 20:30:00,387 | (INFO)->| SET NEW USER PREFERENCES |
+2026-05-03 20:30:00,389 | (INFO)->| Logged In: ————————> Customer Details:
+   id:1
+   name: <bound method Customers.fullname of <classes.class_customers.Customers object at 0x000001A0AA835A90>>
+   email: shlomobinyamin2003@gmail.com
+   address: weizman12
+   reg (0)
+   gifts: [<classes.class_gifts.CashGift object at 0x000001A0AA835BE0>, <classes.class_gifts.CashGift object at 0x000001A0AA7F9810>]
+   favorite list: [] |
+2026-05-03 20:30:00,389 | (INFO)->| preferences.ini loaded |
+2026-05-03 20:30:01,959 | (INFO)->| GIFTING STARTED |
+2026-05-03 20:30:03,098 | (INFO)->| GIFT MONEY SELECTED. |
+2026-05-03 20:30:03,098 | (INFO)->| C:\Users\shlom\PycharmProjects\oop_project\classes\class_sysfacade.py: classes.class_sysfacade: TRYING: GET CUSTOMER |
+2026-05-03 20:30:06,432 | (ERROR)->| C:\Users\shlom\PycharmProjects\oop_project\classes\class_sysfacade.py: classes.class_sysfacade: FAILED FINDING CUSTOMER. |
+2026-05-03 20:30:09,570 | (INFO)->| C:\Users\shlom\PycharmProjects\oop_project\classes\class_sysfacade.py: classes.class_sysfacade: TRYING: GET CUSTOMER |
+2026-05-03 20:30:14,336 | (INFO)->| C:\Users\shlom\PycharmProjects\oop_project\db_actions\db_act.py,db_actions.db_act
+ TRYING: RETRIEVE CUSTOMER BY NAME |
+2026-05-03 20:30:14,338 | (INFO)->| CONNECTION ESTABLISHED |
+2026-05-03 20:30:14,338 | (INFO)->| APPLIED CURSOR |
+2026-05-03 20:30:14,339 | (INFO)->| RAN QUERY |
+2026-05-03 20:30:14,339 | (INFO)->| QUERY FETCHED RESULTS |
+2026-05-03 20:30:14,339 | (INFO)->| 
+CONNECTION CLOSED |
+2026-05-03 20:30:14,339 | (INFO)->| QUERY: 
+
+            SELECT * FROM customers WHERE first_name = ? AND last_name = ?
+            
+ RAN SUCCESSFULLY |
+2026-05-03 20:30:14,339 | (INFO)->| <bound method Customers.fullname of <classes.class_customers.Customers object at 0x000001A0AA7FA710>>'S ID SET TO: None |
+2026-05-03 20:30:14,339 | (INFO)->| FIRST NAME SET TO: noam |
+2026-05-03 20:30:14,339 | (INFO)->| LAST NAME SET TO: binyamin |
+2026-05-03 20:30:14,339 | (INFO)->| <bound method Customers.fullname of <classes.class_customers.Customers object at 0x000001A0AA7FA710>>'S EMAIL SET TO: noam123@gmail.com |
+2026-05-03 20:30:14,339 | (INFO)->| <bound method Customers.fullname of <classes.class_customers.Customers object at 0x000001A0AA7FA710>>'S ADDRESS SET TO: weizman 123 asdf |
+2026-05-03 20:30:14,339 | (INFO)->| <bound method Customers.fullname of <classes.class_customers.Customers object at 0x000001A0AA7FA710>> TYPE SET TO: reg |
+2026-05-03 20:30:14,339 | (ERROR)->| CUSTOMER IS NOT VIP. CANNOT GIVE DISCOUNT |
+2026-05-03 20:30:14,339 | (INFO)->| <bound method Customers.fullname of <classes.class_customers.Customers object at 0x000001A0AA7FA710>>'S ITEMS LIST MODIFIED |
+2026-05-03 20:30:14,339 | (INFO)->| <bound method Customers.fullname of <classes.class_customers.Customers object at 0x000001A0AA7FA710>> WAS GIFTED |
+2026-05-03 20:30:14,339 | (INFO)->| <bound method Customers.fullname of <classes.class_customers.Customers object at 0x000001A0AA7FA710>> SAVED PAYMENT PaymentMethod: None |
+2026-05-03 20:30:14,340 | (INFO)->| <bound method Customers.fullname of <classes.class_customers.Customers object at 0x000001A0AA7FA710>>'S ID SET TO: 3 |
+2026-05-03 20:30:14,340 | (INFO)->| CONNECTION ESTABLISHED |
+2026-05-03 20:30:14,340 | (INFO)->| APPLIED CURSOR |
+2026-05-03 20:30:14,340 | (INFO)->| RAN QUERY |
+2026-05-03 20:30:14,340 | (INFO)->| NO FETCHED RESULTS |
+2026-05-03 20:30:14,340 | (INFO)->| 
+CONNECTION CLOSED |
+2026-05-03 20:30:14,340 | (INFO)->| QUERY: 
+
+        SELECT items.id, items.name, items.price
+        FROM customer_favorites
+        JOIN items ON customer_favorites.item_id = items.id
+        WHERE customer_favorites.customer_id = ?
+    
+ RAN SUCCESSFULLY |
+2026-05-03 20:30:14,340 | (INFO)->| <bound method Customers.fullname of <classes.class_customers.Customers object at 0x000001A0AA7FA710>>'S ITEMS LIST MODIFIED |
+2026-05-03 20:30:14,340 | (INFO)->| ROW MAPPED TO CUSTOMER: <bound method Customers.fullname of <classes.class_customers.Customers object at 0x000001A0AA7FA710>> |
+2026-05-03 20:30:14,340 | (INFO)->| C:\Users\shlom\PycharmProjects\oop_project\classes\class_sysfacade.py: classes.class_sysfacade: TRYING: GET AMOUNT |
+2026-05-03 20:30:27,219 | (INFO)->| PaymentMethod SET: <classes.class_payments.CREDIT object at 0x000001A0AA7FBB10> |
+2026-05-03 20:30:27,219 | (INFO)->| <bound method Customers.fullname of <classes.class_customers.Customers object at 0x000001A0AA835A90>> SAVED PAYMENT PaymentMethod: credit |
+2026-05-03 20:30:27,219 | (INFO)->|  100.00 BY CREDIT, 1234 |
+2026-05-03 20:30:27,219 | (INFO)->| PAYMENT PAID: <classes.class_payments.CREDIT object at 0x000001A0AA7FBB10> |
+2026-05-03 20:30:27,219 | (INFO)->| <bound method Customers.fullname of <classes.class_customers.Customers object at 0x000001A0AA7FA710>> RECEIVED GIFT: ————————> Gift Includes -
+ 100.0 |
+2026-05-03 20:30:27,219 | (INFO)->| CONNECTION ESTABLISHED |
+2026-05-03 20:30:27,219 | (INFO)->| CURSOR APPLIED |
+2026-05-03 20:30:27,247 | (INFO)->| RAN QUERY |
+2026-05-03 20:30:27,247 | (INFO)->| CONNECTION CLOSED |
+2026-05-03 20:30:27,247 | (INFO)->| QUERY: 
+UPDATE customers SET gifted = ? WHERE id = ?
+ RAN SUCCESSFULLY |
+2026-05-03 20:30:27,247 | (INFO)->| GIFT TOY WAS SUCCESSFUL. |
+2026-05-03 20:30:57,834 | (INFO)->| USER EXITED |
+2026-05-03 20:30:57,834 | (INFO)->| SOFTWARE END |

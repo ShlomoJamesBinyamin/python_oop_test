@@ -1,5 +1,5 @@
-from log_files.logger import log, line,arrow,notify,success,failure
-class Items():
+from log_files.logger import log, arrow
+class Items:
     def __init__(self, name, price):
         self.__id = None
         self.__name = name

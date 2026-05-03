@@ -1,8 +1,7 @@
-# from class_payments import *
-from class_IPayment import IPayment
+from classes.class_IPayment import IPayment
 from log_files.logger import log
 
-class Payment_Method:
+class PaymentMethod:
     def __init__(self,method:IPayment):
         self.method = method
 
@@ -12,7 +11,7 @@ class Payment_Method:
     @method.setter
     def method(self,method):
         self.__method = method
-        log.info(f"Payment_Method SET: {self.method}")
+        log.info(f"PaymentMethod SET: {self.method}")
 
     def execute_payment(self, amount:float):
         """execute payment method"""

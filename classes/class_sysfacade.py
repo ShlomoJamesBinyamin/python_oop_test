@@ -1,15 +1,14 @@
 import datetime
 import time
-from class_customers import Customers
-from class_items import Items
-from class_orders import RegOrder, VIPIOrders
-from classes.class_IPayment import IPayment
+from classes.class_customers import Customers
+from classes.class_items import Items
+from classes.class_orders import RegOrder, VIPIOrders
 from classes.class_gifts import ToyGift, CashGift
-from classes.class_payment_context import Payment_Method
+from classes.class_payment_context import PaymentMethod
+from classes.class_payments import CHECK, CASH, CREDIT,OTHER, check_check,check_card_number
 from db_actions import  db_act
 from log_files.logger import log, line, notify, success, failure, arrow
 from main_functions.checkers import check_name
-from class_payments import CHECK, CASH, CREDIT, check_check,check_card_number
 
 def get_customer() -> Customers | None:
     """Method to pick a customer"""
@@ -19,11 +18,11 @@ def get_customer() -> Customers | None:
         try:
             choice = str(input(f"{line}| Your Choice: "))
             first, last = choice.lower().split(" ")
-            customer = db_act.db_search_customer(first, last)
+            customer = db_act.db_retrieve_customer(first, last)
         except ValueError:
             log.error(f"{__file__}: {__name__}: FAILED FINDING CUSTOMER.")
             print(f"{failure} {choice} Was Not Found")
-            return
+            return None
         return customer
 
 def get_item() -> Items | None:
@@ -31,7 +30,7 @@ def get_item() -> Items | None:
     log.info(f"{__file__}: {__name__}: TRYING: PICKING ITEM")
     item = None
 
-    choice = str(input("\n{line}| Would You Like To Search For A Certain Item? (y/n) "))
+    choice = str(input(f"\n{line}| Would You Like To Search For A Certain Item? (y/n) "))
     if choice == "Y" or choice == "y" or choice == "YES" or choice == "yes":
         print(f"{arrow} What Is The Item You're Looking For? ")
         choice = str(input(f"{line}| :"))
@@ -56,7 +55,7 @@ def get_item() -> Items | None:
 
     if not item:
         print(f"{failure} Item {choice} Not Found")
-        return
+        return None
 
     log.info(f"FOUND ITEM {choice}")
     print(f"{success}| Selected: {item.name} ")
@@ -65,12 +64,9 @@ def get_item() -> Items | None:
 def get_message() -> str | None:
     """method to pick a message, None also Valid."""
     log.info(f"{__file__}: {__name__}: TRYING: MESSAGE")
-    choice = None
-    message = None
     while True:
         print(f"{line}| You Can Add Any Message You Want To Your Gift, Nothing Also Fine!")
         message = str(input(f"{line}| : "))
-        choice = None
         print(f"{line}| Confirm The Message By Only Pressing The Button Enter: ")
         time.sleep(0.2)
         choice = str(input(f"{line}| : "))
@@ -79,7 +75,7 @@ def get_message() -> str | None:
         else:
             print(f"{failure} Message Was Canceled. Retrying")
 
-def get_amount(user: Customers) -> int | None:
+def get_amount() -> int | None:
     """Method to pick an amount"""
     log.info(f"{__file__}: {__name__}: TRYING: GET AMOUNT")
     amount = 0
@@ -94,30 +90,36 @@ def get_amount(user: Customers) -> int | None:
     return None
 
 
-def pick_payment(user: Customers) -> Payment_Method | None:
+def pick_payment(user: Customers) -> PaymentMethod | None:
     """Method to pick a payment"""
     choice = None
     payment = None
+
     try:
         choice = int(input(f"{line}| Your Choice: "))
         if choice == 1:
             method = CASH()
-            payment = Payment_Method(method)
-            user.saved_payment("cash")
+            payment = PaymentMethod(method)
+            user.saved_payment = "cash"
         if choice == 2:
             method = get_credit()
-            payment = Payment_Method(method)
-            user.saved_payment("credit")
+            payment = PaymentMethod(method)
+            user.saved_payment = "credit"
         if choice == 3:
             method = get_check()
-            payment = Payment_Method(method)
-            user.saved_payment("check")
+            payment = PaymentMethod(method)
+            user.saved_payment = "check"
+        if choice == 4:
+            desc = input(f"{line}| Describe Payment Method: ")
+            method = OTHER(desc)
+            payment = PaymentMethod(method)
+            user.saved_payment = "other"
     except ValueError:
         print(f"{notify}| {choice} Is Not A Valid Choice. (Should Be 1, 2 or 3)")
 
     if payment:
         return payment
-    return
+    return None
 
 def get_credit() -> CREDIT | None:
     """gets the credit card details"""
@@ -147,43 +149,43 @@ def get_credit() -> CREDIT | None:
         if not card_number and not card_cvv and not card_date:
             print(f"{notify} No Data Provided. Redirecting")
             return None
-        elif check_card_number(CREDIT(card_number, card_cvv, card_date)):
-            return CREDIT(card_number, card_cvv, card_date)
+        elif check_card_number(CREDIT(card_number,card_date, card_cvv)):
+            return CREDIT(card_number, card_date, card_cvv)
         else:
             print(f"{notify}  something Went Wrong, Lets Try Again")
 
 def get_check() -> CHECK | None:
     """gets the check details"""
-    card_number, card_cvv, card_date = None, None, None
+    check_number, bank,branch, account = None, None, None,None
     while True:
         while True:
             try:
                 check_number = str(input(f"{line}| Check Number: "))
                 break
             except ValueError:
-                print(f"{notify} {card_number} Is Not A Valid Check Number")
+                print(f"{notify} {check_number} Is Not A Valid Check Number")
         while True:
             try:
                 bank = str(input(f"{line}| Bank Code: "))
                 break
             except ValueError:
-                print(f"{notify} {card_number} Is Not A Valid Bank Code")
+                print(f"{notify} {bank} Is Not A Valid Bank Code")
         while True:
             try:
                 branch = str(input(f"{line}| Branch Number: "))
                 break
             except ValueError:
-                print(f"{notify} {card_number} Is Not A Valid Branch Number")
+                print(f"{notify} {branch} Is Not A Valid Branch Number")
         while True:
             try:
                 account = str(input(f"{line}| Account Number: "))
                 break
             except ValueError:
-                print(f"{notify} {card_number} Is Not A Valid Account Number")
+                print(f"{notify} {account} Is Not A Valid Account Number")
         if not check_number and not account and not bank and not branch:
             print(f"{notify} No Data Provided. Redirecting")
             return None
-        elif check_card_number(CHECK(bank, branch, check_number, account)):
+        elif check_check(CHECK(bank, branch, check_number, account)):
             return CHECK(bank, branch, check_number, account)
         else:
             print(f"{notify} something Went Wrong, Lets Try Again")
@@ -195,10 +197,6 @@ def gift_toy(user: Customers) -> bool| None:
     """give toy gift method"""
     log.info(f"{__file__}: {__name__}: TRYING: GIFTING TOY.")
     print(f"\n{line}| Let's Gift!\n{line}| Who Would You Like To Gift?")
-    customer = None
-    gift = None
-    item = None
-    message = None
     while True:
         customer = get_customer()
         if customer:
@@ -216,7 +214,7 @@ def gift_toy(user: Customers) -> bool| None:
 
         # if customer and customer.gifted:
         #     print(
-        #         f"{notify} We're Sorry, But {customer.fullname} Gift List Already Full.. Push Them To Open Their Gifts!!")
+        #         f"{notify} We're Sorry, But {customer.fullname} Gift List Already Full. Push Them To Open Their Gifts!!")
         #     return False
 
     while True:
@@ -236,6 +234,7 @@ def gift_toy(user: Customers) -> bool| None:
                 return None
 
     while True:
+        print(f"{line}| Pick Your Payment Method:\n{arrow} For Cash: Press 1\n{arrow} For Credit Card: Press 2\n{arrow} For Check: Press 3\n{arrow} For Other, Press 4")
         payment = pick_payment(user)
         if payment:
             payment.execute_payment(item.price)
@@ -264,10 +263,7 @@ def gift_toy(user: Customers) -> bool| None:
 def gift_money(user: Customers) -> bool | None:
     """give money as a gift"""
     print(f"\n{line}| Let's Gift!\n{line}| Who Would You Like To Gift?")
-    customer = None
     message = None
-    choice = None
-    amount = None
     while True:
         customer = get_customer()
         if customer:
@@ -284,7 +280,7 @@ def gift_money(user: Customers) -> bool | None:
                 return None
 
     while True:
-        amount = get_amount(user)
+        amount = get_amount()
         if amount:
             print(f"{success} Amount Set TO: {amount}")
             break
@@ -299,6 +295,7 @@ def gift_money(user: Customers) -> bool | None:
                 return None
 
     while True:
+        print(f"{line}| Pick Your Payment Method:\n{arrow} For Cash: Press 1\n{arrow} For Credit Card: Press 2\n{arrow} For Check: Press 3\n{arrow} For Other, Press 4")
         payment = pick_payment(user)
         if payment:
             payment.execute_payment(amount)
@@ -316,6 +313,7 @@ def gift_money(user: Customers) -> bool | None:
     if customer and payment:
         gift = CashGift(amount, message)
         customer.get_gift(gift)
+        db_act.db_update_gifts(customer)
         log.info(f"GIFT TOY WAS SUCCESSFUL.")
         print(f"{success} We Gifted {customer.fullname} Successfully. You're Awsome!!")
         return True
@@ -343,9 +341,7 @@ class SysFacade:
         order_name = str(input(f"{arrow} :"))
         address = self.user.delivery_address
         customer = self.user
-        item = None
         items =[]
-        payment = None
         total = 0
 
         while True:
@@ -370,8 +366,11 @@ class SysFacade:
             total += item.price
 
         while True:
+            print(f"{line}| Pick Your Payment Method:\n{arrow} For Cash: Press 1\n{arrow} For Credit Card: Press 2\n{arrow} For Check: Press 3\n{arrow} For Other, Press 4")
             payment = pick_payment(self.user)
-            if not payment:
+            if payment:
+                break
+            else:
                 print(f"{notify}| No Payment Method Chosen. To Cancel The Order Please Paste The Exact Message:")
                 print(f"{line}| 'CANCEL ORDER'\n To Try Again, Please Press The Enter Button")
                 choice = str(input(f"{line}| :"))
@@ -385,22 +384,22 @@ class SysFacade:
             return
 
         if self.user.account_type == 'vip':
-            payment.execute_payment(total)
-            log.info(f"ORDER PAYMENT SUCCESSFULLY")
-            order = VIPIOrders(order_name,customer,items,address,payment)
+            order = VIPIOrders(order_name,customer,items,address,customer.saved_payment)
             log.info(f"ORDER BUILD SUCCESSFULLY")
-            order.items_to_favorite()
-            log.info(f"ITEMS ADDED TO FAVORITE SUCCESSFULLY")
+            payment.execute_payment(order.total_price)
+            log.info(f"ORDER PAYMENT SUCCESSFULLY")
+            db_act.db_place_order(order)
+            db_act.db_sync_favorites(customer)
             print(f"{success}| {order.name} Was Placed Successfully!")
 
 
         if self.user.account_type == 'reg':
-            payment.execute_payment(total)
-            log.info(f"ORDER PAYMENT SUCCESSFULLY")
-            order = RegOrder(order_name,customer,items,address,payment)
+            order = RegOrder(order_name,customer,items,address,customer.saved_payment)
             log.info(f"ORDER BUILD SUCCESSFULLY")
-            order.items_to_favorite()
-            log.info(f"ITEMS ADDED TO FAVORITE SUCCESSFULLY")
+            payment.execute_payment(order.total_price)
+            log.info(f"ORDER PAYMENT SUCCESSFULLY")
+            db_act.db_place_order(order)
+            db_act.db_sync_favorites(customer)
             print(f"{success}| {order.name} Was Placed Successfully!")
 
     def pick_gift(self) :
@@ -426,6 +425,14 @@ class SysFacade:
     def open_gift(self):
         """implements the open_gift function of any customer"""
         self.user.open_gift()
+
+    def view_account(self):
+        print(self.user)
+
+
+    def open_all_gifts(self):
+        self.user.open_all_gifts()
+        db_act.db_update_gifts(self.user)
 
 
 

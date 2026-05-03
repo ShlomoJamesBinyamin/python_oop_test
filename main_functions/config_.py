@@ -1,5 +1,5 @@
 from classes.class_customers import Customers
-from log_files.logger import log, line, notify, success, failure, arrow
+from log_files.logger import log, line, failure
 import configparser
 import io
 from db_actions import db_act
@@ -16,7 +16,7 @@ def new_config(user):
         'saved_first_name': f'{user.first_name}' if user.first_name else None,
         'saved_last_name' : f'{user.last_name}' if user.last_name else None
     }
-    print(f"\n{line}| New Saved User {user.full_name}")
+    print(f"\n{line}| New Saved User {user.fullname}")
     with io.open('preferences.ini', 'w', encoding='utf-8') as configfile: config.write(configfile)
     log.info("SET NEW USER PREFERENCES")
 

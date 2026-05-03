@@ -1,7 +1,7 @@
 from abc import ABC, abstractmethod
 from log_files.logger import log
 
-class IQuerry(ABC):
+class IQuery(ABC):
     def __init__(self, db_name):
         self.db_name = db_name
         self.conn = None
@@ -20,6 +20,7 @@ class IQuerry(ABC):
         pass
     @abstractmethod
     def fetch_results(self):
+        """subclasses that returns data must store results in self.result"""
         pass
     @abstractmethod
     def close_connection(self):
@@ -33,4 +34,4 @@ class IQuerry(ABC):
         self.fetch_results()
         self.close_connection()
         log.info(f"QUERY: \n{query}\n RAN SUCCESSFULLY")
-        return self.result
+        return self.result if self.result else None

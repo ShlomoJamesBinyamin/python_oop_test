@@ -6,7 +6,8 @@ def check_name(input_str: str) -> bool:
     input_str = input_str.strip()
     log.info(f"CHECKING NAME CONTEXT FOR {input_str}")
     return 2 <= len(input_str) <= 12 and \
-            all( char.isalpha() or char == "-'" or not char.isspace() for char in input_str)
+        all(char.isalpha() or char in "-' " for char in input_str)
+
 # ——————————————————————————————————Address—————————————————————————————————————————
 def check_address(address:str) -> bool:
     """checks the address context."""
@@ -20,9 +21,9 @@ def check_email(email: str) -> bool:
     log.info(f"CHECKING EMAIL CONTEXT FOR {email}")
     valid_tlds = ["com", "org", "net", "edu", "gov", "mil", "int", "biz", "info", "pro", "name", "museum", "asia", "cat", "coop", "jobs", "mobi", "tel", "travel", "xxx"]
     pattern = r"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
-    if not re.match(pattern, email): return False
-    domain = email.split("@")[1]
-    domain_extension = domain.split(".")[-1].lower()
-    return bool(re.match(pattern, email)) and domain_extension in valid_tlds
+    match = re.match(pattern, email)
+    if not match: return False
+    domain_extension = email.split("@")[1].split(".")[-1].lower()
+    return domain_extension in valid_tlds
 
 # ————————————————————————————————————————————————————————————————————————————————————

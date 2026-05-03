@@ -1,5 +1,5 @@
 from classes.class_IOrders import IOrders
-from log_files.logger import log, line,arrow,notify,success,failure
+from log_files.logger import log, line
 
 class VIPIOrders(IOrders):
     def calc_total_price(self):

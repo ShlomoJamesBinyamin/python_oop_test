@@ -1,80 +1,42 @@
 import datetime
-from tkinter.messagebox import RETRY
-from traceback import print_tb
+import json
 
 from classes.class_IOrders import IOrders
+from classes.class_orders import VIPIOrders, RegOrder
 from classes.class_IPayment import IPayment
 from classes.class_items import Items
-from insert_query import InsertQuery
-from select_query import SelectQuery
-from create_query import CreateQuery
-from log_files.logger import log, notify, success, failure, arrow, line
+from classes.class_gifts import ToyGift, CashGift
 from classes.class_customers import Customers
+from log_files.logger import log, notify, failure, line
+from db_actions.write_query import WriteQuery
+from db_actions.select_query import SelectQuery
 
+
+db = "sys_db_file.db"
 
 def db_search_customer(first: str|None="", last: str|None="", has_id: str | None="") -> Customers|bool:
     """searches db for customer by fullname or id if mentioned. return true if exists"""
-    if first and last:
-        log.info(f"{__file__}: {__name__}: TRYING: SEARCH CUSTOMER BY NAME")
-        try:
-           return db_retrieve_customer(first, last)
-        except Exception as e:
-            log.error(f"{__file__},{__name__} ERROR: {e}")
-            print(f"{failure} Sorry, An Error Occurred. No Customer Found")
-            return False
-
-    elif has_id:
-        log.info(f"{__file__}: {__name__}: TRYING: SEARCH CUSTOMER BY ID")
-        try:
-            return db_retrieve_customer(None,None,has_id)
-        except Exception as e:
-            log.error(f"{__file__},{__name__} ERROR: {e}")
-            print(f"{failure} Sorry, An Error Occurred. No Customer Found")
-            return False
-
-    else:
-        log.error("NO FIRST, LAST NOR ID WERE GIVEN.")
-        print(f"{failure} Sorry, The Given Data Was Broken. Couldn't Find Customer")
-        return False
+    return db_retrieve_customer(first, last, has_id) is not None
 
 
 def db_search_item(name: str|None="", has_id:str|None="") -> Items | bool:
     """searches db for item by name or id if mentioned. return true if exists"""
-    if has_id:
-        log.info(f"{__file__},{__name__}\n TRYING: SEARCH ITEM BY ID")
-        try:
-            return db_retrieve_item(None,has_id)
-        except Exception as e:
-            log.error(f"{__file__},{__name__} ERROR: {e}")
-            print(f"{failure} Sorry, An Error Occurred. No Item Found")
-            return False
-
-    elif name:
-        log.info(f"{__file__},{__name__}\n TRYING: SEARCH ITEM BY NAME ")
-        try:
-            return db_retrieve_item(name)
-        except Exception as e:
-            log.error(f"{__file__},{__name__} ERROR: {e}")
-            print(f"{failure} Sorry, An Error Occurred. No Item Found")
-            return False
-    else:
-        log.error("NO NAME NOR ID WERE GIVEN.")
-        print(f"{failure} Sorry, The Given Data Was Broken. Couldn't Find Item")
-        return False
+    return db_retrieve_item(name, has_id) is not None
 
 
 def db_retrieve_customer(first:  str|None = "", last: str|None= "", has_id: str | None="") -> Customers | None:
     """searches db for customer by fullname or id if mentioned. return customer if exists"""
-    result = None
     if has_id:
         query = """
             SELECT * FROM customers WHERE id = ?
             """
         log.info(f"{__file__},{__name__}\n TRYING: RETRIEVE CUSTOMER BY ID ")
         try:
-            return SelectQuery("customers_file.db").run(query, (has_id,))
+            result =  SelectQuery(db).run(query, (has_id,))
+            if result and len(result) > 0:
+                return row_to_customer(result[0])
         except Exception as e:
-            log.error(f"{__file__},{__name__} ERROR: {e}")
+            log.error(f"ERROR: {e}")
             print(f"{failure} Sorry, An Error Occurred. No Customer Found")
             return None
 
@@ -84,9 +46,11 @@ def db_retrieve_customer(first:  str|None = "", last: str|None= "", has_id: str 
             """
         log.info(f"{__file__},{__name__}\n TRYING: RETRIEVE CUSTOMER BY NAME")
         try:
-            return SelectQuery("customers_file.db").run(query, (first, last))
+            result = SelectQuery(db).run(query, (first, last))
+            if result and len(result) > 0:
+                return row_to_customer(result[0])
         except Exception as e:
-            log.error(f"{__file__},{__name__} ERROR: {e}")
+            log.error(f"ERROR: {e}")
             print(f"{failure} Sorry, An Error Occurred. No Customer Found")
             return None
 
@@ -95,14 +59,16 @@ def db_retrieve_customer(first:  str|None = "", last: str|None= "", has_id: str 
         print(f"{failure} Sorry, The Given Data Was Broken. Couldn't Find Item")
         return None
 
+
 def db_retrieve_item(name:str|None = "", has_id:str|None = "")-> Items | None:
     """searches db for item by name or id if mentioned. return item if exists"""
-    result = None
     if has_id:
         query = """SELECT * FROM items WHERE id = ?"""
         log.info(f"{__file__},{__name__}\n TRYING: RETRIEVE ITEM BY ID ")
         try:
-            return SelectQuery("items_file.db").run(query, (has_id,))
+            result = SelectQuery(db).run(query, (has_id,))
+            if result and len(result) > 0:
+                return row_to_item(result[0])
         except Exception as e:
             log.error(f"{__file__},{__name__} ERROR: {e}")
             print(f"{failure} Sorry, An Error Occurred. No Item Found")
@@ -112,7 +78,9 @@ def db_retrieve_item(name:str|None = "", has_id:str|None = "")-> Items | None:
         query = """SELECT * FROM items WHERE name = ?"""
         log.info(f"{__file__},{__name__}\n TRYING: RETRIEVE ITEM BY NAME ")
         try:
-            return SelectQuery("items_file.db").run(query, (name,))
+            result = SelectQuery(db).run(query, (name,))
+            if result and len(result) > 0:
+                return row_to_item(result[0])
         except Exception as e:
             log.error(f"{__file__},{__name__} ERROR: {e}")
             print(f"{failure} Sorry, An Error Occurred. No Item Found")
@@ -123,13 +91,13 @@ def db_retrieve_item(name:str|None = "", has_id:str|None = "")-> Items | None:
         return None
 
 
-def db_add_new_customer(first_name_input: str, last_name_input: str, email_input: str, address_input: str, object: Customers | None = "") -> bool:
+def db_add_new_customer(first_name_input: str, last_name_input: str, email_input: str, address_input: str) -> bool:
     """inserting new customer into db"""
-    query = """INSERT INTO customers (first_name, last_name, email, address_input,account_type,discount,favorite_items,gifted)
-    VALUES(?,?,?,?,'REG',0,[],?)"""
-    log.info(f"{__file__},{__name__}\n TRYING: ADD NEW CUSTOMER ")
+    query = """INSERT INTO customers (first_name, last_name, email, delivery_address,
+               account_type, discount, gifted)
+               VALUES(?,?,?,?,'reg',0,'[]')"""
     try:
-        InsertQuery("customers_file.db").run(query,(first_name_input, last_name_input, email_input, address_input,False))
+        WriteQuery(db).run(query, (first_name_input, last_name_input, email_input, address_input))
         return True
     except Exception as e:
         log.error(f"{__file__},{__name__} ERROR: {e}")
@@ -141,7 +109,7 @@ def view_items():
     query = """SELECT * FROM items"""
     log.info(f"{__file__},{__name__}\n TRYING: VIEW ITEMS")
     try:
-        result = SelectQuery("items_file.db").run(query)
+        result = SelectQuery(db).run(query)
     except Exception as e:
         log.error(f"{__file__},{__name__} ERROR: {e}")
         return
@@ -151,32 +119,28 @@ def view_items():
             print(item)
 
 
-def  db_place_order(order : IOrders | None = "",
-                    name :str| None ="", delivery_address : str | None ="", items:list|None = "",
-                    customer : Customers| None="", payment:IPayment | None="",
-                    total:float|None = 0, date :datetime.datetime| None = datetime.datetime.now()) -> bool:
-    """sending order to db"""
-    if order:
-        query = """INSERT INTO orders (order_id, name, delivery_Address, items, customer_id,total_price, payment, date)
-        VALUES(?,?,?,?,?,?,?)"""
-        log.info(f"{__file__},{__name__}\n TRYING: PLACING ORDER ")
-        try:
-            InsertQuery('orders_file.db').run(query,(order.name,order.delivery_address,order.items,order.customer.id,order.total_price,order.payment_method,order.date))
-            return True
-        except Exception as e:
-            log.error(f"{__file__},{__name__} ERROR: {e}")
-            return False
-    elif name and delivery_address and items and customer and payment:
-        query = """INSERT INTO orders (order_id, name, delivery_Address, items, customer, payment, date)
-                VALUES(?,?,?,?,?,?,?)"""
-        log.info(f"{__file__},{__name__}\n TRYING: PLACING ORDER ")
-        try:
-            InsertQuery('orders_file.db').run(query,(name,delivery_address,items,customer.id,total,payment,date))
-            return True
-        except Exception as e:
-            log.error(f"{__file__},{__name__} ERROR: {e}")
-            return False
-    else: return False
+def db_place_order(order: IOrders) -> bool:
+    """write order to db"""
+    query = """
+        INSERT INTO orders (name, delivery_address, items, customer_id, total_price, payment_method, date)
+        VALUES (?,?,?,?,?,?,?)
+    """
+    try:
+        items_json = json.dumps([item.id for item in order.items])  # [1, 4, 7]
+        WriteQuery(db).run(query, (
+            order.name,
+            order.delivery_address,
+            items_json,              # stored as "[1, 4, 7]"
+            order.customer.id,
+            order.total_price,
+            order.payment_method,
+            order.date
+        ))
+        log.info(f"ORDER PLACED: {order.name}")
+        return True
+    except Exception as e:
+        log.error(f"ORDER INSERT FAILED: {e}")
+        return False
 
 
 def db_search_order(order : IOrders | None = "", has_id:str|None = "",
@@ -188,28 +152,28 @@ def db_search_order(order : IOrders | None = "", has_id:str|None = "",
         query = """SELECT * FROM orders WHERE id = ?"""
         log.info(f"{__file__},{__name__}\n TRYING: SEARCH ORDER ")
         try:
-            return SelectQuery("orders_file.db").run(query, (order.id,))
+            return SelectQuery(db).run(query, (order.id,))
         except Exception as e:
             log.error(f"{__file__},{__name__} ERROR: {e}")
     elif has_id:
         query = """SELECT * FROM orders WHERE id = ?"""
         log.info(f"{__file__},{__name__}\n TRYING: SEARCH ORDER ")
         try:
-            return SelectQuery("orders_file.db").run(query, (has_id,))
+            return SelectQuery(db).run(query, (has_id,))
         except Exception as e:
             log.error(f"{__file__},{__name__} ERROR: {e}")
     elif name:
         query = """SELECT * FROM orders WHERE name = ?"""
         log.info(f"{__file__},{__name__}\n TRYING: SEARCH ORDER ")
         try:
-            return SelectQuery("orders_file.db").run(query, (name,))
+            return SelectQuery(db).run(query, (name,))
         except Exception as e:
             log.error(f"{__file__},{__name__} ERROR: {e}")
     elif customer and date and payment:
         query = """SELECT * FROM orders WHERE customer_id = ? AND date = ? AND payment_method = ?"""
         log.info(f"{__file__},{__name__}\n TRYING: SEARCH ORDER ")
         try:
-            return SelectQuery("orders_file.db").run(query, (customer.id,date,payment))
+            return SelectQuery(db).run(query, (customer.id,date,payment))
         except Exception as e:
             log.error(f"{__file__},{__name__} ERROR: {e}")
     else:
@@ -218,6 +182,117 @@ def db_search_order(order : IOrders | None = "", has_id:str|None = "",
         return None
     return None
 
+def row_to_customer(row: tuple) -> Customers | None:
+    """maps the row tuple to Customers object"""
+    if not row:
+        return None
+    try:
+        customer = Customers(
+            first_name       = row[1],
+            last_name        = row[2],
+            email            = row[3],
+            delivery_address = row[4],
+            account_type     = row[5],
+            discount         = row[6],
+            favorite_items   = []
+        )
+        customer.id = row[0]
+        customer.favorite_items = db_load_favorites(customer)
+
+        if row[7] and row[7].strip():
+            gifts_raw = json.loads(row[7])
+            for g in gifts_raw:
+                if g["type"] == "cash":
+                    customer.gifted.append(CashGift(g["amount"], g.get("message")))
+                elif g["type"] == "toy":
+                    customer.gifted.append(ToyGift(g["item"], g.get("message")))
+
+        log.info(f"ROW MAPPED TO CUSTOMER: {customer.fullname}")
+        return customer
+
+    except Exception as e:
+        log.error(f"ROW TO CUSTOMER FAILED: {e}")
+        return None
 
 
+def row_to_item(row: tuple) -> Items | None:
+    """ maps the row tuple to Items object"""
+    if not row:
+        return None
+    try:
+        item = Items(
+            name  = row[1],
+            price = row[2]
+        )
+        item.id = row[0]
+        log.info(f"ROW MAPPED TO ITEM: {item.name} (ID:{item.id})")
+        return item
+    except Exception as e:
+        log.error(f"ROW TO ITEM FAILED: {e}")
+        return None
 
+
+def row_to_order(row: tuple, customer: Customers) -> IOrders | None:
+    items_ids = json.loads(row[3])
+    items = [db_retrieve_item(has_id=i) for i in items_ids]
+    order_type = row[8]
+    if order_type == 'vip':
+        order = VIPIOrders(row[1], customer, items, row[2], row[6])
+    else:
+        order = RegOrder(row[1], customer, items, row[2], row[6])
+    order.id = row[0]
+    return order
+
+
+def db_update_gifts(customer: Customers) -> bool:
+    """serialize gift list and save to db"""
+    gifts_data = []
+    for gift in customer.gifted:
+        if isinstance(gift, CashGift):
+            gifts_data.append({"type": "cash", "amount": gift.amount, "message": gift.message})
+        elif isinstance(gift, ToyGift):
+            gifts_data.append({"type": "toy", "item": gift.item, "message": gift.message})
+    gifts_json = json.dumps(gifts_data)
+
+    query = "UPDATE customers SET gifted = ? WHERE id = ?"
+    try:
+        WriteQuery(db).run(query, (gifts_json, customer.id))
+        return True
+    except Exception as e:
+        log.error(f"GIFT UPDATE FAILED: {e}")
+        return False
+
+
+def db_sync_favorites(customer: Customers) -> bool:
+    """sync customer's favorite_items list to junction table"""
+    # clear existing then re-insert
+    delete_query = "DELETE FROM customer_favorites WHERE customer_id = ?"
+    insert_query = "INSERT OR IGNORE INTO customer_favorites (customer_id, item_id) VALUES (?,?)"
+    try:
+        WriteQuery(db).run(delete_query, (customer.id,))
+        for item in customer.favorite_items:
+            if item.id:
+                WriteQuery(db).run(insert_query, (customer.id, item.id))
+        log.info(f"FAVORITES SYNCED FOR {customer.fullname}")
+        return True
+    except Exception as e:
+        log.error(f"FAVORITES SYNC FAILED: {e}")
+        return False
+
+
+def db_load_favorites(customer: Customers) -> list:
+    """load favorite items from junction table"""
+    query = """
+        SELECT items.id, items.name, items.price
+        FROM customer_favorites
+        JOIN items ON customer_favorites.item_id = items.id
+        WHERE customer_favorites.customer_id = ?
+    """
+    result = SelectQuery(db).run(query, (customer.id,))
+    items = []
+    if result:
+        for row in result:
+            item = Items(row[1], row[2])
+            item.id = row[0]
+            items.append(item)
+    return items

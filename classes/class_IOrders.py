@@ -1,6 +1,6 @@
 import datetime as dt
 from abc import ABC, abstractmethod
-from log_files.logger import log, line,arrow,notify,success,failure
+from log_files.logger import log, arrow
 
 class IOrders(ABC):
     def __init__(self, name, customer,items, delivery_address, payment_method):
@@ -11,6 +11,7 @@ class IOrders(ABC):
         self.customer = customer
         self.payment_method = payment_method
         self.date = dt.datetime.now().strftime('%Y|%m|%d %I:%M:%S %p')
+        self.items_to_favorite()
 
 
     def __str__(self):
@@ -27,11 +28,14 @@ class IOrders(ABC):
 
     def items_to_favorite(self):
         """conditions for adding an item to user.favourites"""
-        existing_items = [item.name for item in self.customer.favorite_items]
+        existing_items = {item.name for item in self.customer.favorite_items}
+        added = 0
         for item in self.items:
             if item.name not in existing_items:
                 self.customer.favorite_items.append(item)
-        log.info(f"{len(self.customer.favorite_items) - len(existing_items)} ITEMS ADDED TO {self.customer.fullname} FAV LIST. ")
+                existing_items.add(item.name)
+                added += 1
+        log.info(f"{added} ITEMS ADDED TO {self.customer.fullname} FAV LIST. ")
 
     @property
     def id(self):
