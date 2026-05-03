@@ -6,24 +6,25 @@ class SelectQuery(IQuerry):
 
     def create_connection(self):
         self.conn = sqlite3.connect(self.db_name)
-        log.info(f"connection specified.")
+        log.info(f"CONNECTION ESTABLISHED")
 
     def connect(self):
         self.cursor = self.conn.cursor()
-        log.info(f"connection cursor applied.")
+        log.info(f"APPLIED CURSOR")
 
     def commit(self, query, params=None):
-        log.info(f"running select query...")
         self.rows= self.cursor.execute(query, params)
+        log.info(f"RAN QUERY")
 
     def fetch_results(self):
-        log.info("\nresults:")
-        self.results = []
+        self.result = []
         for row in self.rows:
-            self.results.append(row)
+            self.result.append(row)
             print(row)
-        return self.results if self.results else None
+        log.info("QUERY FETCHED RESULTS") if self.result else log.info("NO FETCHED RESULTS")
+        return self.result if self.result else None
 
     def close_connection(self):
         self.cursor.close()
         self.conn.close()
+        log.info("\nCONNECTION CLOSED")

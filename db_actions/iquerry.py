@@ -26,10 +26,11 @@ class IQuerry(ABC):
         pass
 
     def run(self,query, params=None):
+        """orchestrates the query running procedure"""
         self.create_connection()
         self.connect()
         self.commit(query, params)
         self.fetch_results()
         self.close_connection()
-        log.info(f"query: \n{query}\n occurred successfully")
+        log.info(f"QUERY: \n{query}\n RAN SUCCESSFULLY")
         return self.result

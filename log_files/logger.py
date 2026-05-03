@@ -13,3 +13,9 @@ def handler(filename, level):
 log.addHandler(handler('app.logfile', logging.INFO))
 log.addHandler(handler('app.errorfile', logging.ERROR))
 # log.error('===============start of log stream')
+
+line = "————————"
+arrow = "————————>"
+notify= "————————|< !!! >"
+success = "————————|< V >"
+failure = "————————|< X >"

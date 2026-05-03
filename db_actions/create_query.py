@@ -6,16 +6,16 @@ class CreateQuery(IQuerry):
 
     def create_connection(self):
         self.conn = sqlite3.connect(self.db_name)
-        log.info("connection established")
+        log.info("CONNECTION ESTABLISHED")
 
     def connect(self):
         self.cursor = self.conn.cursor()
-        log.info("cursor established")
+        log.info("CURSOR APPLIED")
 
     def commit(self, query, params=None):
         self.cursor.execute(query , params)
         self.conn.commit()
-        log.info(f"running create query...")
+        log.info(f"RAN QUERY")
 
     def fetch_results(self):
         pass
@@ -23,4 +23,4 @@ class CreateQuery(IQuerry):
     def close_connection(self):
         self.cursor.close()
         self.conn.close()
-        log.info("connection closed")
+        log.info("CONNECTION CLOSED")

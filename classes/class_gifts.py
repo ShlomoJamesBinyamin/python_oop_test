@@ -1,6 +1,6 @@
 from class_IGift import IGift
 from class_items import Items
-from log_files.logger import log
+from log_files.logger import log, line,arrow,notify,success,failure
 
 class ToyGift(IGift):
     def __init__(self, item:Items, message):
@@ -9,10 +9,11 @@ class ToyGift(IGift):
 
     def __str__(self):
         if self.message:
-            return f"Gift Includes: {self.item}\n And A Message: {self.message}"
-        return f"Gift Includes: {self.item}"
+            return f"{arrow} Gift Includes - \n {self.item}\n Message: {self.message}"
+        return f"{arrow} Gift Includes -\n {self.item}"
 
     def open_gift(self):
+        """show the toy gift details"""
         print("Congratulations! you got a new gift! Enjoy!")
         print(self)
 
@@ -23,10 +24,11 @@ class CashGift(IGift):
 
     def __str__(self):
         if self.message:
-            return f"Gift Includes: {self.amount}\n And A Message: {self.message}"
-        return f"Gift Includes: {self.amount}"
+            return f"{arrow} Gift Includes -\n {self.amount}\n Message: {self.message}"
+        return f"{arrow} Gift Includes -\n {self.amount}"
 
     def open_gift(self):
+        """show the cash gift details"""
         print("Congratulations! you got a new gift! Enjoy!")
         print(self)
 

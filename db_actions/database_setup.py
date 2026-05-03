@@ -20,7 +20,7 @@ def table_customers_create():
         );
         """
         CreateQuery('customers_file.db').run(query)
-        log.info(f"{__file__}: {__name__}: Table customers created")
+        log.info(f"{__file__}: {__name__}: CUSTOMER'S TABLE CREATED")
     except Exception as e:
         log.error(f"{__file__}: {__name__}: {e}")
         print(e)
@@ -35,7 +35,7 @@ def table_items_create():
             );
             """
         CreateQuery("items_file.db").run(query)
-        log.info(f"{__file__}: {__name__}: Table items created")
+        log.info(f"{__file__}: {__name__}: ITEMS TABLE CREATED")
     except Exception as e:
         log.error(f"{__file__}: {__name__}: {e}")
         print(e)
@@ -55,7 +55,7 @@ def table_orders_create():
         );
         """
         CreateQuery("orders_file.db").run(query)
-        log.info(f"{__file__}: {__name__}: Table orders created")
+        log.info(f"{__file__}: {__name__}: ORDERS TABLE CREATED")
     except Exception as e:
         log.error(f"{__file__}: {__name__}: {e}")
         print(e)
@@ -67,6 +67,7 @@ def insert_customer():
                 VALUES ("sofi",'technologies',"sofi@gmail.com","address1","VIP","0","[1,14]",False)
                 """)
         InsertQuery('customers_file.db').run(query)
+        log.info(f"{__file__}: {__name__}: CUSTOMER INSERTED")
     except Exception as e:
         log.error(f"{__file__}: {__name__}: {e}")
         print(e)
@@ -78,7 +79,7 @@ def insert_item():
         VALUES ("item",1)
         """)
         InsertQuery('items_file.db').run(query)
-        log.info(f"{__file__}: {__name__}: Table items created")
+        log.info(f"{__file__}: {__name__}: ITEM INSERTED")
     except Exception as e:
         log.error(f"{__file__}: {__name__}: {e}")
         print(e)
@@ -90,7 +91,7 @@ def insert_order():
         VALUES("order","address","[1,2,3]",3,100,"cash","date")
         """)
         InsertQuery('orders_file.db').run(query)
-        log.info(f"{__file__}: {__name__}: Table orders created")
+        log.info(f"{__file__}: {__name__}: ORDER INSERTED")
     except Exception as e:
         log.error(f"{__file__}: {__name__}: {e}")
         print(e)
@@ -102,7 +103,7 @@ def select_customer():
         SELECT * FROM customers
         """
         SelectQuery('customers_file.db').run(query)
-        log.info(f"{__file__}: {__name__}: Table customers selected")
+        log.info(f"{__file__}: {__name__}: CUSTOMER SELECTED")
 
     except Exception as e:
         log.error(f"{__file__}: {__name__}: {e}")
@@ -113,7 +114,7 @@ def select_item():
         SELECT * FROM items
         """
         SelectQuery('items_file.db').run(query)
-        log.info(f"{__file__}: {__name__}: Table items selected")
+        log.info(f"{__file__}: {__name__}: ITEM SELECTED")
     except Exception as e:
         log.error(f"{__file__}: {__name__}: {e}")
         print(e)
@@ -124,7 +125,7 @@ def select_order():
         SELECT * FROM orders
         """
         SelectQuery('orders_file.db').run(query)
-        log.info(f"{__file__}: {__name__}: Table orders selected")
+        log.info(f"{__file__}: {__name__}: ORDER SELECTED")
     except Exception as e:
         log.error(f"{__file__}: {__name__}: {e}")
         print(e)
